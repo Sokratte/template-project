@@ -194,6 +194,11 @@ Every session, every agent, every time. Read in this order:
 3. `git status` and `git log --oneline -10` — what changed recently
 4. `changelog/session-logs/` — find the latest session log, read it
 5. `docs/plans/` — any active task plans still in progress
+6. `docs/research/` — skim the latest entry to refresh domain context
+7. GitHub Issues (current Milestone) — what is in progress
+
+If any of these are missing or stale, say so before starting work.
+If AGENTS.md has not been reviewed in 90+ days, flag it.
 
 
 ## Where Things Live
