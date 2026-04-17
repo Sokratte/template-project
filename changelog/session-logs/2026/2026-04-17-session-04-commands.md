@@ -1,0 +1,23 @@
+# Session Log: Claude Code Commands
+
+**Date:** 2026-04-17
+
+## What happened
+
+Added two Claude Code slash commands in `.claude/commands/`:
+
+1. **session-start.md** — 7-step orientation checklist. Reads global rules,
+   project rules, git state, session logs, plans, research, and GitHub Issues.
+2. **wrap-up.md** — 6-step end-of-session protocol. Updates session log,
+   changelog, plans, tribal knowledge, then commits and reports.
+
+## Design decisions
+
+- Commands are checked into git so they travel with the project.
+- session-start has 7 steps (more comprehensive than the 5-step checklist
+  in AGENTS.md — this may need alignment later).
+- wrap-up enforces the session log discipline from global AGENTS.md.
+
+## What's next
+
+Audit for consistency between AGENTS.md and the commands. Add bug fixes.
