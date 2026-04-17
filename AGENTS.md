@@ -170,3 +170,16 @@ Finally, delete everything from the top of this file down to and including
 the line below. The project is ready.
 
 --- END OF SETUP ---
+
+
+# TODO: Project Name — Agent Instructions
+
+TODO: What this project does and for whom. (one sentence)
+TODO: What kind of project it is and where it runs. (one sentence)
+
+**This project is NOT:**
+- TODO: anti-goal or scope boundary
+- TODO: another one
+
+Global rules: `~/workspace/AGENTS.md` — read before every session.
+Only project-specific additions and exceptions appear below.
