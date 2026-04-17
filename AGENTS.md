@@ -61,3 +61,43 @@ git remote add origin <URL>
 ```
 
 Do NOT commit yet — we need to fill in files first.
+
+---
+
+## Step 3 — Fill in the permanent sections
+
+Scroll down to "--- END OF SETUP ---". Below it is the permanent AGENTS.md.
+Fill in every `TODO:` field using the answers from Step 1:
+
+- Project name and description (2 sentences max)
+- What this project is NOT (from question 5)
+- Any project-specific git exceptions
+- Remove the `TODO:` markers when done
+
+---
+
+## Step 4 — Create ADR-001: Project Definition
+
+Open `docs/decisions/ADR-000-template.md`, copy it to `ADR-001-project-definition.md`.
+Fill it in. This is the project's founding document:
+
+- **Context:** Why does this project exist? What triggered it?
+- **Decision:** What are we building, with what stack, for what audience?
+- **Consequences:** What does this commit us to? What does it rule out?
+
+The user must review and approve this before you continue.
+
+---
+
+## Step 5 — Select optional sections
+
+Read the "OPTIONAL SECTIONS" block at the bottom of the permanent AGENTS.md.
+For each section, decide whether it applies based on what you learned in
+Step 1. Have a brief conversation — group obvious ones:
+
+> "This is a Python server project, so I'll include Environment, Testing,
+> Error Handling, and Services. I'll skip Before Writing Code since you're
+> using TypeScript with static types. Sound right?"
+
+Uncomment the sections you keep. Delete the ones you don't. Delete the
+menu header and instructions too — they are setup scaffolding.
