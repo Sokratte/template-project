@@ -222,6 +222,10 @@ If AGENTS.md has not been reviewed in 90+ days, flag it.
 One canonical repo. Check `.git/config` for the remote URL.
 All git discipline rules live in `~/workspace/AGENTS.md` — not repeated here.
 
+**Claude Code users:** If `CLAUDE.md` does not exist in the project root,
+create it as a symlink: `ln -s AGENTS.md CLAUDE.md`. Claude Code reads
+`CLAUDE.md` as its primary instruction file.
+
 Project-specific exceptions: TODO (delete this line if none)
 
 
