@@ -232,3 +232,107 @@ Each entry: date, category tag, the knowledge, and why it matters.
 -->
 
 - TODO: first entry goes here
+
+
+<!--
+====================================================================
+OPTIONAL SECTIONS — Setup agent: uncomment what applies, delete the rest.
+After setup, delete this instruction block too.
+
+Each section says when to include it. Read the condition, decide, act.
+====================================================================
+
+INCLUDE IF: code lives in more than one place, or runs on a server.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Environment
+
+| Location | Path | Access |
+|----------|------|--------|
+| Mac (dev) | `~/workspace/projects/TODO/` | python-container, editors |
+| Server    | `/srv/TODO/`                 | SSH, MCP                 |
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INCLUDE IF: any code that can be tested automatically.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Testing
+
+```
+TODO: the exact command to run tests (e.g. pytest, npm test, go test ./...)
+```
+
+"Green" means: all tests pass, no silent skips, no unhandled warnings.
+A skipped test must have a comment explaining why.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INCLUDE IF: project structure is non-obvious or has more than ~5 directories.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Project Structure
+
+```
+TODO: annotated directory tree
+```
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INCLUDE IF: multiple agents/contributors, or non-obvious style choices.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Conventions
+
+- Language: TODO (e.g. "English for code and docs, German OK in discussions")
+- TODO: naming, formatting, or style rules worth making explicit
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INCLUDE IF: certain directories or services must not be touched without care.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Write Boundaries
+
+| May edit freely | Requires caution | Never touch |
+|-----------------|------------------|-------------|
+| TODO            | TODO             | TODO        |
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INCLUDE IF: code project where wrong names/types cause real bugs
+(Python without static types, dynamic APIs, complex class hierarchies).
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Before Writing Code
+
+- Read the file you are about to edit. Verify function and attribute names
+  against the actual source — never assume from memory or convention.
+- Check return types of functions you call.
+- Run `python3 -m py_compile` (or equivalent) before committing.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INCLUDE IF: Python with threading, OS callbacks, or hardware I/O.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Error Handling
+
+Three zones require try/except without exception:
+
+1. **OS callbacks** — exceptions are silently swallowed; the callback
+   stops firing. (CGEventTap, audio, signals, filesystem watchers)
+2. **Thread entry points** — uncaught exceptions kill the thread silently.
+   (every `threading.Thread(target=...)` function)
+3. **System boundary calls** — hardware I/O, ML inference, external
+   processes, cross-framework calls. Wrap the boundary, not every line.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INCLUDE IF: deployed services that other things depend on.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Services and Live Operations
+
+| Service | Port | Path | Source |
+|---------|------|------|--------|
+| TODO    | TODO | TODO | TODO   |
+
+Before touching live infrastructure: read the relevant runbook in
+`docs/runbooks/`. After any change, run health checks for every service.
+
+====================================================================
+-->
