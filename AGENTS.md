@@ -216,6 +216,12 @@ If AGENTS.md has not been reviewed in 90+ days, flag it.
 | Claude Code commands | `.claude/commands/` (if using Claude Code) |
 | Human overview (Obsidian) | `~/workspace/vault/Projects/TODO.md` (generated) |
 
+**When to use which artifact:**
+Something is broken → **GitHub Issue** (label: bug).
+One-session task or change → **GitHub Issue** (label: enhancement).
+Needs design, multiple sessions, or architectural choices → **Spec** + **Milestone** + **ADR** if permanent.
+A bug that reveals a design flaw → promote to Spec. A task that grows → promote to Spec + Milestone.
+
 
 ## Git and GitHub
 
