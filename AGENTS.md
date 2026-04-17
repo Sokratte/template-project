@@ -101,3 +101,72 @@ Step 1. Have a brief conversation — group obvious ones:
 
 Uncomment the sections you keep. Delete the ones you don't. Delete the
 menu header and instructions too — they are setup scaffolding.
+
+---
+
+## Step 6 — Domain research (mandatory — do not skip)
+
+This is the most valuable thing you do at project start. Search the web.
+Your goal: become an expert on this kind of project as of today.
+
+Research:
+- What tools, frameworks, and libraries are industry-standard right now?
+- What do experienced practitioners consider the most common pitfalls?
+- Are there open-source projects or templates worth studying?
+- What standards, protocols, or specs apply?
+- What non-obvious decisions will the user face soon?
+
+Write the results to `docs/research/YYYY-MM-DD-initial-domain-research.md`.
+This file is for future agents — it prevents re-researching the same ground
+every session. Include sources and dates so future agents know when to
+refresh.
+
+Then brief the user:
+- What the standard approach looks like
+- 2–3 things worth doing from the start that save pain later
+- Trade-offs in any non-obvious choices ahead
+
+---
+
+## Step 7 — Tool-specific setup
+
+**If the user works with Claude Code:** Create a symlink so Claude Code
+finds the instructions:
+```
+ln -s AGENTS.md CLAUDE.md
+```
+The `.claude/commands/` directory already contains `session-start.md`,
+`wrap-up.md`, and `daily-digest.md`. Review them and adjust paths to
+match this project — especially the vault path in `daily-digest.md`
+(`~/workspace/vault/Projects/TODO.md`). Verify the commands work.
+
+**If the user works with Codex:** Codex reads AGENTS.md only. The session
+start checklist in the permanent section already covers the reading order.
+Delete the `.claude/` directory — it will not be used. The daily digest
+can still be run manually: ask the agent to read the project state and
+write a summary to `~/workspace/vault/Projects/<project-name>.md`.
+
+**If the user works with claude.ai or other agents:** Same as Codex — the
+AGENTS.md is self-sufficient. Delete `.claude/` if it will never be used.
+The daily digest can be triggered by asking the agent directly.
+
+---
+
+## Step 8 — First commit and first Milestone
+
+```
+git add -A
+git commit -m "chore: initial project scaffold from template"
+git push -u origin main
+```
+
+Then guide the user to create the first GitHub Milestone:
+
+> "What should the first milestone be? This is the first meaningful version
+> goal — something like 'v0.1.0 — basic working prototype' or
+> 'v0.1.0 — initial data pipeline'. I'll help you break it into Issues."
+
+Finally, delete everything from the top of this file down to and including
+the line below. The project is ready.
+
+--- END OF SETUP ---
