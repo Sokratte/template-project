@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-04-17
+
+### Added
+
+- ADR-001: founding decision — adopt industry standards for project structure
+- SPEC-001: template standard specification (the template as its own spec)
+- Domain research document on project structure standards (2026-04-17)
+- Runbooks README explaining what runbooks are and when to add them
+- Complete README with directory tree, standards table, and usage instructions
+- MIT LICENSE
+- Archive subdirectories for specs and plans
+
 ## [0.6.0] - 2026-04-17
 
 ### Added
