@@ -183,3 +183,14 @@ TODO: What kind of project it is and where it runs. (one sentence)
 
 Global rules: `~/workspace/AGENTS.md` — read before every session.
 Only project-specific additions and exceptions appear below.
+
+
+## Session Start Checklist
+
+Every session, every agent, every time. Read in this order:
+
+1. `~/workspace/AGENTS.md` — global rules (if not already loaded)
+2. This file — project-specific context
+3. `git status` and `git log --oneline -10` — what changed recently
+4. `changelog/session-logs/` — find the latest session log, read it
+5. `docs/plans/` — any active task plans still in progress
