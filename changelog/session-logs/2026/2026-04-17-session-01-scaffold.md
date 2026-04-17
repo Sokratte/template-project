@@ -1,0 +1,26 @@
+# Session Log: Project Scaffold
+
+**Date:** 2026-04-17
+
+## What happened
+
+Created the initial project directory structure:
+- `src/`, `tests/` for code
+- `docs/` with subdirectories for decisions (ADRs), specs, research, plans, runbooks
+- `changelog/session-logs/` for session narrative
+- `.claude/commands/` and `.claude/agents/` for Claude Code integration
+- `.github/ISSUE_TEMPLATE/` for GitHub issue templates
+- `.gitignore` covering Python, Node, macOS, secrets, and editors
+
+Added AGENTS.md as a placeholder — content will be built incrementally.
+
+## Decisions
+
+- Directory structure follows the pointer pattern: AGENTS.md tells agents
+  where to look, content lives in its own files.
+- Session logs use year-based subdirectories (`changelog/session-logs/2026/`).
+- `cp -r` is the creation mechanism — no CLI or generator script.
+
+## What's next
+
+Build the 8-step setup guide in AGENTS.md.
