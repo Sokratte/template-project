@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-04-17
+
+### Added
+
+- Permanent AGENTS.md sections: project identity, anti-goals, session start checklist
+- "Where Things Live" navigation table in AGENTS.md
+- Git and GitHub section in AGENTS.md
+- Tribal Knowledge section in AGENTS.md (date-tagged, category-tagged entries)
+- Optional sections menu with selection guidance (Environment, Testing, Conventions, etc.)
+- README skeleton
+- ADR-000 template for architecture decision records
+- SPEC-000 template for feature specifications
+- GitHub Issue templates for bug reports and feature requests
+
 ## [0.2.0] - 2026-04-17
 
 ### Added
