@@ -1,0 +1,23 @@
+# Session Log: Obsidian Integration
+
+**Date:** 2026-04-17
+
+## What happened
+
+Added the daily-digest slash command for Obsidian vault integration.
+The command reads project state (AGENTS.md, git log, session logs, ADRs,
+research, changelog) and writes a human-readable dashboard to the
+Obsidian vault at `~/workspace/vault/Projects/<project-name>.md`.
+
+## Design decisions
+
+- The digest is a snapshot, not a history — overwrites each time.
+- Kept under 100 lines for readability.
+- Works for all agent tools: Claude Code uses the slash command,
+  Codex and claude.ai users can ask the agent to run it manually.
+- No secrets or file contents in the digest — links only.
+
+## What's next
+
+Make the template its own showcase: add ADR-001, SPEC-001, research
+document, full README, and LICENSE.
