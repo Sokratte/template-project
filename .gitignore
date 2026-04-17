@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+.pytest_cache/
+
+# Node
+node_modules/
+.npm/
+
+# macOS
+.DS_Store
+
+# Secrets — never commit
+*.env
+.env.*
+secrets/
+*.key
+*.pem
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.code-workspace
+
+# Logs
+*.log
