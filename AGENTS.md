@@ -194,3 +194,19 @@ Every session, every agent, every time. Read in this order:
 3. `git status` and `git log --oneline -10` — what changed recently
 4. `changelog/session-logs/` — find the latest session log, read it
 5. `docs/plans/` — any active task plans still in progress
+
+
+## Where Things Live
+
+| Question | Location |
+|----------|----------|
+| What's been completed | `CHANGELOG.md` and `changelog/session-logs/` |
+| What's in progress now | GitHub Issues — open, current Milestone |
+| What's planned next | GitHub Milestones |
+| Architecture decisions | `docs/decisions/` (ADRs — immutable) |
+| Feature specs | `docs/specs/` |
+| Domain research | `docs/research/` (AI-maintained, dated) |
+| Task plans (short-lived) | `docs/plans/` (delete when task is done) |
+| Operations guides | `docs/runbooks/` |
+| Claude Code commands | `.claude/commands/` (if using Claude Code) |
+| Human overview (Obsidian) | `~/workspace/vault/Projects/TODO.md` (generated) |
