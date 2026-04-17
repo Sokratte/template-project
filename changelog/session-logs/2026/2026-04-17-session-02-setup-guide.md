@@ -1,0 +1,26 @@
+# Session Log: Setup Guide
+
+**Date:** 2026-04-17
+
+## What happened
+
+Built the 8-step setup guide in AGENTS.md across three commits:
+- Steps 0–2: verify location, interview user, create GitHub repo
+- Steps 3–5: fill permanent sections, create ADR-001, select optional sections
+- Steps 6–8: domain research, tool-specific setup, first commit + milestone
+
+## Design decisions
+
+- Step 1 is a conversation, not form-filling. The agent interviews the
+  user before touching any file.
+- Step 6 (domain research) is mandatory. Output is saved to docs/research/
+  for future agents. This prevents re-researching the same ground.
+- Step 7 handles three workflows: Claude Code (symlink + commands),
+  Codex (AGENTS.md only), and claude.ai (AGENTS.md only).
+- The setup guide self-destructs: Steps 0–8 get deleted after project
+  creation. What remains is the lean permanent section.
+
+## What's next
+
+Add the permanent sections below the setup guide: project identity,
+session checklist, navigation table, tribal knowledge, optional sections.
