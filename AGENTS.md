@@ -210,3 +210,25 @@ Every session, every agent, every time. Read in this order:
 | Operations guides | `docs/runbooks/` |
 | Claude Code commands | `.claude/commands/` (if using Claude Code) |
 | Human overview (Obsidian) | `~/workspace/vault/Projects/TODO.md` (generated) |
+
+
+## Git and GitHub
+
+One canonical repo. Check `.git/config` for the remote URL.
+All git discipline rules live in `~/workspace/AGENTS.md` — not repeated here.
+
+Project-specific exceptions: TODO (delete this line if none)
+
+
+## Tribal Knowledge
+
+Things every agent must know that aren't documented anywhere else.
+Each entry: date, category tag, the knowledge, and why it matters.
+
+<!-- Example:
+- [2026-04-17] [deploy] Never run `deploy.sh` without first checking
+  that the control directory ownership hasn't been overwritten by step 9b.
+  Root cause: `install -d` resets ownership on every run.
+-->
+
+- TODO: first entry goes here
