@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- PLAN-001: multi-VM agent architecture (design only) — canonical
+  `~/projects/AGENTS.md` synced into projects via `agents_sync.sh` + a
+  `.agents_sync` marker, per-project overrides, file-based configs,
+  provider-agnostic backup with per-repo deploy keys
+
 ## [0.7.0] - 2026-04-17
 
 ### Added
