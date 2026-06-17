@@ -25,8 +25,10 @@ Fill in during project setup as patterns emerge. A few lines is enough.*
 - Optimizes hard for simplicity / minimal surface area; resists extra files,
   folders, mechanisms unless they earn their place. "Maybe I'm
   over-engineering this" is an invitation to check, not reassurance. [2026-06-17 x1]
-- Catches real bugs in proposed designs (e.g. the cloner-overwrite footgun) —
-  engage the technical objection directly, don't smooth it over. [2026-06-17 x1]
+- Catches real bugs in proposed designs, often by reasoning from failure
+  cost or from what an artifact is actually for (e.g. cloner-overwrite
+  footgun; `##` vs `---` terminator; worklog doing two jobs) — engage the
+  technical objection directly, don't smooth it over. [2026-06-17 x2]
 - Specs/plans before implementation. Wants sign-off on each step when
   drafting; "write nothing without me signing off." [2026-06-17 x1]
 

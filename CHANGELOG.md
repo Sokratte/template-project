@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- PLAN-002: AGENTS.md authoring — startup flow, three-tier read model,
+  `##`-terminated greppable abstract convention, awk section-reading, and the
+  work-backlog / work-log rename that stops open TODOs being buried
 - PLAN-001: multi-VM agent architecture (design only) — canonical
   `~/projects/AGENTS.md` synced into projects via `agents_sync.sh` + a
   `.agents_sync` marker, per-project overrides, file-based configs,

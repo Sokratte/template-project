@@ -24,16 +24,15 @@ over, inform the operator — there may be stale content worth reviewing.
 
 *(≤15 lines — things to remember next session)*
 
-- PLAN-001 is the locked spec for the multi-VM agent architecture. Build
-  follows it. Read it first next session.
-- NEXT: draft the canonical `AGENTS.md`. Operator rule: **sign-off on every
-  step — write nothing without approval.**
-- First sub-decisions when drafting: autonomy level names
-  (autonomous/checkpoint/confirm) + the new-project default; the ~150-line
-  budget split (what stays vs. goes to machinery).
-- Separate deferred task: stale-doc cleanup (paths → on-disk names; remove
-  sweep-knowledge.py into session-end.md; drop daily-digest.md). Touches the
-  command files — do in one pass.
+- PLAN-001 (architecture) + PLAN-002 (AGENTS.md content) are both locked
+  specs. Read PLAN-002 first next session — it holds all content decisions.
+- **DECIDE FIRST:** rename worklog→work-backlog & worklog-archive→work-log
+  now, or after drafting AGENTS.md? (Leaning rename-first ~65%.)
+- THEN: draft canonical `AGENTS.md` prose. Operator rule: **sign-off on
+  every step — write nothing without approval.** Sub-decisions: autonomy
+  level names + default; persona placement (global vs override); line budget.
+- PLAN-002 has the full ripple-edit checklist (SPEC-003 contract, budgets,
+  session-start/end rewrite, README, sweep script). Group as separate commits.
 - Note: sandbox tools (str_replace/create_file/view) can't see the real FS;
   use the filesystem MCP tools for all project files.
 

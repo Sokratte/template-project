@@ -18,6 +18,7 @@
 # ---------------------------------------------------------------------------
 2026-06-17 | META       | [DONE]    | PLAN-001 multi-VM agent architecture finalized | docs/plans/PLAN-001-multi-vm-agent-architecture.md
 2026-06-17 | META       | [DONE]    | Session log written | docs/sessions/2026-06-17-session-08-multi-vm-architecture.md
-2026-06-17 | DESIGN     | [OPEN]    | Draft canonical AGENTS.md (sign-off each step); decide autonomy level names + default | -
-2026-06-17 | DOCS       | [OPEN]    | Cleanup task: reconcile stale doc paths to on-disk names; remove sweep-knowledge.py into session-end.md; drop daily-digest.md ref | agents/commands/, agents/README.md
-2026-06-17 | INFRA      | [FIND]    | Folder restructure is ON DISK but NOT COMMITTED. git status shows old paths (.claude/, root AGENTS.md, changelog/session-logs/, tests/) as deleted + new paths (agents/commands|memory|rules/, docs/sessions/, docs/specs/SPEC-002|003, tools/) untracked. Commit as moves next session; check what should be gitignored first. Same change that caused the stale-doc paths. Do NOT push until resolved. | -
+2026-06-17 | DESIGN     | [DONE]    | AGENTS.md content decisions locked in PLAN-002 (startup flow, 3-tier read, abstract convention, backlog/log split) | docs/plans/PLAN-002-agents-md-authoring.md
+2026-06-17 | DESIGN     | [OPEN]    | Execute PLAN-002: draft canonical AGENTS.md prose (sign-off each step); decide autonomy names+default, persona placement, line budget | docs/plans/PLAN-002-agents-md-authoring.md
+2026-06-17 | DOCS       | [OPEN]    | PLAN-002 ripple edits: rename worklog->work-backlog & worklog-archive->work-log; fix SPEC-003 append-only contract; CREATE_PROJECT budgets; rewrite session-start/end; README phantom ref; remove sweep script | -
+2026-06-17 | DOCS       | [DONE]    | Repo restructure committed as moves; tree clean | -

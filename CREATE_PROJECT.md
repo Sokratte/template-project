@@ -94,6 +94,16 @@ Uncomment what applies, delete the rest, delete the menu block itself.
 
 ---
 
+<!-- TODO (PLAN-001 rewrite): this setup guide predates the multi-VM
+     architecture. When rewriting, the config step must CREATE the
+     per-project `.project` file (key:value): autonomy, and — if backed up —
+     provider, remote_url, repo_name, push, key_path. `.project` is gitignored
+     and never committed, so a fresh clone won't have it; setup is where it is
+     generated. Also: root is now `~/projects/`, the `.agents_sync` marker
+     opts the project into canonical-AGENTS.md sync, and `AGENTS.override.md`
+     (not a forked AGENTS.md) holds project-specific rules. See
+     docs/plans/PLAN-001-multi-vm-agent-architecture.md. -->
+
 ## Step 6 — Git automation choices
 
 Decide with the user which git operations are automatic at session end.

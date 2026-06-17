@@ -29,7 +29,8 @@ not technical shorthand). When a plan is done, move the file to
 
 | Plan | Abstract |
 |------|---------|
-| [PLAN-001](docs/plans/PLAN-001-multi-vm-agent-architecture.md) | Architecture for deploying this template across many users' VMs: one canonical `~/projects/AGENTS.md` synced into each project via a visible `agents_sync.sh` (gated by a `.agents_sync` marker), small per-project overrides, file-based configs, provider-agnostic backup with per-repo deploy keys. Design locked; AGENTS.md drafting is next. |
+| [PLAN-001](docs/plans/PLAN-001-multi-vm-agent-architecture.md) | Architecture for deploying this template across many users' VMs: one canonical `~/projects/AGENTS.md` synced into each project via a visible `agents_sync.sh` (gated by a `.agents_sync` marker), small per-project overrides, file-based configs, provider-agnostic backup with per-repo deploy keys. Design locked; content drafting moved to PLAN-002. |
+| [PLAN-002](docs/plans/PLAN-002-agents-md-authoring.md) | Authors the AGENTS.md content PLAN-001 deferred: the two-call startup flow, a three-tier read model (whole / partial / on-demand), a `##`-terminated greppable abstract so large docs are sectioned by awk rather than split into files, and the work-backlog / work-log rename that stops open TODOs being buried under history. Carries the dependent doc renames and cleanup. |
 
 ## Registers
 
