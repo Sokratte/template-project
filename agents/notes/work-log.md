@@ -27,3 +27,6 @@
 2026-06-18 | DOCS       | [DONE]    | Trashed ADR-000 + SPEC-000 templates (canonical shapes now live in docs/README.md) | .trash/
 2026-06-18 | DESIGN     | [DONE]    | ADRs declared not-immutable: supersede-in-place (mark passage, set Status, dated Addendum), check blast radius, never silent rewrite | docs/README.md
 2026-06-18 | DESIGN     | [DONE]    | Spec status reduced to Draft/Active/Superseded; status tracks document not implementation; removed Move-to-archive-when-done; SPEC-001 Done->Active | docs/README.md, docs/specs/SPEC-001-template-standard.md
+2026-06-18 | INFRA      | [DONE]    | Moved agents_sync.sh + recent_sessions.sh to ~/projects/ root (VM-local, not committed into projects) | ~/projects/agents_sync.sh, ~/projects/recent_sessions.sh
+2026-06-18 | DOCS       | [DONE]    | Authored canonical ~/projects/AGENTS.md Part 1 (general orientation, ~473 tok): stripped explanatory prose, autonomy defs, git block, anecdotes; precised do-not-act rule to own-initiative only; removed duplicate memory section | ~/projects/AGENTS.md
+2026-06-18 | DOCS       | [DONE]    | Created template AGENTS.override.md (defaults Craftsman/checkpoint/Tinkerbuddy/push + override-wins header); added override-carries line to ~/projects/README.md | template-project/AGENTS.override.md, ~/projects/README.md
