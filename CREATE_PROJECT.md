@@ -5,7 +5,13 @@
      everything from the top of the file down to "--- END OF SETUP ---".
      What remains is the project's permanent AGENTS.md.
 
-     Do NOT work inside ~/workspace/template-project/.
+     NOTE (2026-06-18): the permanent-AGENTS.md body below is a holdover
+     skeleton. The canonical AGENTS.md is being authored separately
+     (PLAN-002 main deliverable). Until that lands, this guide carries the
+     session-10 architecture in its setup steps; the body skeleton will be
+     replaced by the synced canonical file + AGENTS.override.md.
+
+     Do NOT work inside ~/projects/template-project/.
      That folder is the template. You are working in the copy.
      ================================================================ -->
 
@@ -20,9 +26,10 @@ session that follows.
 
 copy it first:
 ```
-cp -r ~/workspace/template-project ~/workspace/projects/<name>
+cp -r ~/projects/template-project ~/projects/<name>
 ```
-Then `cd` into the copy and continue.
+The copy carries the `.agents_sync` marker, which opts it into canonical
+`AGENTS.md` sync. Then `cd` into the copy and continue.
 
 ---
 
@@ -40,33 +47,34 @@ Do not proceed until you have clear answers to at least 1, 3, and 5.
 
 ---
 
-## Step X — Create the GitHub repository (one of the last steps)
+## Step 2 — Choose the agent's persona and name
 
-Guide the user:
+The persona is prompt-tuning: it modifies every prompt the agent will ever
+process in this project, and it sets a default autonomy level. Offer the user
+these presets (default: **Craftsman**, named **Tinkerbuddy**):
 
-> I need you to create a GitHub repository for this project. You can do this
-> at github.com/new or by running `gh repo create`. Once created, tell me
-> the remote URL.
+| Persona | Default autonomy | Behavioral tuning |
+|---------|-----------------|-------------------|
+| ⚡ Operator | `autonomous` | Bias to action, terse, acts then reports. Fewer check-ins. |
+| 🛠️ Craftsman (default) | `checkpoint` | Correctness > speed, specs before code, pushes back on weak ideas, pauses before irreversible actions. |
+| 🔍 Reviewer | `confirm` | Proposes before acting, explains reasoning, you approve each step. |
+| ✍️ Custom | (ask) | You describe the persona in your own words; pick an autonomy level too. |
 
-Once you have the URL:
-```
-git init
-git remote add origin <URL>
-```
-
-Do NOT commit yet — fill in files first.
+- **Autonomy levels:** `autonomous` = acts and reports after; `checkpoint` =
+  acts on routine work, pauses for consequential/irreversible actions;
+  `confirm` = proposes before nearly every action.
+- The user may override the persona's default autonomy.
+- **Name:** ask what the agent should be called (default **Tinkerbuddy**).
+- Record persona, name, and `autonomy:` in `AGENTS.override.md`.
 
 ---
 
-## Step 3 — Fill in the permanent sections
+## Step 3 — Fill in AGENTS.override.md
 
-Scroll to "--- END OF SETUP ---". Fill in every `TODO:` field:
-
-- Project name and description (2 sentences max)
-- What this project is NOT
-- Tools section — which MCP servers this project uses
-- Git automation choices (Step 6 below)
-- Remove `TODO:` markers when done
+`AGENTS.override.md` holds everything project-specific: identity diffs from
+the canonical instructions, the persona + name + `autonomy` from Step 2, the
+`push:` toggle (Step 6), and any project-specific rule exceptions (override
+wins on conflict). Keep it small — it is an override, not a forked file.
 
 ---
 
@@ -87,34 +95,53 @@ everything else aims at.
 
 ---
 
-## Step 5 — Select optional sections
+## Step 5 — Ensure OPERATOR.md exists (once per VM, not per project)
 
-Read the "OPTIONAL SECTIONS" block at the bottom of the permanent AGENTS.md.
-Uncomment what applies, delete the rest, delete the menu block itself.
+The operator profile — who you are working with and how — lives in
+`~/projects/OPERATOR.md`. It is **per-operator and per-VM, never committed,
+never cloned** (it is personal observation about a named human: PII). It is
+created once per machine, so a second project on the same VM reuses it.
+
+If `~/projects/OPERATOR.md` does not exist yet, create it with the user:
+their name, communication style, how they like to work, the backup provider
+they use (`backup: none` or `backup: <provider>`), and the SSH key naming
+convention (`~/.ssh/<project>`). Do NOT put any of this in the project tree.
 
 ---
 
-<!-- TODO (PLAN-001 rewrite): this setup guide predates the multi-VM
-     architecture. When rewriting, the config step must CREATE the
-     per-project `.project` file (key:value): autonomy, and — if backed up —
-     provider, remote_url, repo_name, push, key_path. `.project` is gitignored
-     and never committed, so a fresh clone won't have it; setup is where it is
-     generated. Also: root is now `~/projects/`, the `.agents_sync` marker
-     opts the project into canonical-AGENTS.md sync, and `AGENTS.override.md`
-     (not a forked AGENTS.md) holds project-specific rules. See
-     docs/plans/PLAN-001-multi-vm-agent-architecture.md. -->
+## Step 6 — Git and backup
 
-## Step 6 — Git automation choices
+Backup behavior is keyed on `~/projects/OPERATOR.md` (`backup:`) and the
+per-project `push:` toggle in `AGENTS.override.md`. The remote URL is git's
+own (`.git/config`) — never store it separately.
 
-Decide with the user which git operations are automatic at session end.
-Record the choices in the permanent "Git" section.
+- `backup: none` → local-only git, auto-commit at session end, no push, git
+  never mentioned to the user.
+- `backup: <provider>` + `push: on` → auto-commit AND push.
+- `git add`: specific files only — **never** `git add -A`.
+- `git commit`: automatic at session end, Conventional Commits.
+- Never force-push. A non-fast-forward rejection is a safety net.
 
-- **`git add` (specific files):** automatic by default. The agent stages only
-  files it worked on — never blind `git add -A`.
-- **`git commit`:** automatic by default, at session end.
-- **`git push`:** **off by default — ask the user explicitly.** Recommended
-  on for solo work on one machine (protects against data loss). Whatever
-  they choose, record it so every future session behaves consistently.
+Record `push:` in the override.
+
+---
+
+## Step 7 — Create the repository (one of the last steps)
+
+If this project is backed up, guide the user:
+
+> Create the repository on your provider (e.g. github.com/new or
+> `gh repo create`). For deploy keys, generate the keypair
+> (`~/.ssh/<project>`), register the PUBLIC key on the provider, and ENABLE
+> WRITE ACCESS (deploy keys are read-only by default — forgetting this
+> silently blocks every push). Then give me the remote URL.
+
+Once you have the URL:
+```
+git init
+git remote add origin <URL>
+```
+From here git owns the remote. Do NOT commit yet — fill in files first.
 
 ---
 
@@ -146,13 +173,13 @@ Skip this step for projects where the domain is already well understood.
 ## Step 10 — First commit and first milestone
 
 ```
-git add -A
+git add <specific files>     # never -A; stage the scaffold files explicitly
 git commit -m "chore: initial project scaffold from template"
-git push -u origin main
+git push -u origin main       # if backed up and push: on
 ```
 
-Guide the user to create the first GitHub Milestone — the first meaningful
-version goal. Help break it into Issues.
+Guide the user to create the first Milestone — the first meaningful version
+goal. Help break it into Issues.
 
 Delete everything from the top of this file down to and including the line
 below. The project is ready.
@@ -169,14 +196,16 @@ TODO: What kind of project and where it runs. (one sentence)
 - TODO: anti-goal or scope boundary
 - TODO: another one
 
-Global rules: `~/workspace/..............` — read before every session.
-Only project-specific additions and exceptions appear below.
+Canonical instructions are synced into this project's `AGENTS.md` from
+`~/projects/AGENTS.md` (read-only artifact). Project-specific additions and
+exceptions — plus persona, name, `autonomy`, and `push` — live in
+`AGENTS.override.md`. Override wins on conflict.
 
 **This file is deliberately STABLE.** It orients every agent at every
 session start and changes only when something fundamental changes. It holds
 what never changes: identity, rules, tools, the memory system. Everything
-that changes regularly lives elsewhere — direction in `ROADMAP.md`, the
-work list in `agents/worklog.md`.
+that changes regularly lives elsewhere — direction in `ROADMAP.md`, the open
+work list in `agents/notes/work-backlog.md`.
 
 **AGENTS.md is not a scratchpad.** Do not log work, jot notes, or record
 findings here. If information has a home in another file, put it there.
@@ -222,31 +251,34 @@ the operator's explicit approval before implementation.
 Context persists across sessions through files in the repo — not through
 the AI platform's server-side memory, which is deliberately disabled (Step 8).
 Full specification: `docs/specs/SPEC-003-agent-memory-system.md`.
+The operator profile is NOT in this repo — it lives in `~/projects/OPERATOR.md`
+(per-VM, never committed; it is PII).
 
 **Session memory** — what is happening now:
 
-| File | Role | Size limits |
-|------|------|-------------|
-| `agents/worklog.md` | Append-only work ledger | Soft: 60 lines → cleanup; Hard: 100 lines → force cleanup |
-| `agents/scratchpad.md` | Carry-forward + working space | Soft: 30 lines → prune; Hard: 60 lines → must prune first |
+| File | Role | Size |
+|------|------|------|
+| `agents/notes/work-backlog.md` | Open items — pruned living list | Alarm at >20 open items |
+| `agents/notes/work-log.md` | Done items — append-only history | No limit; never auto-read |
+| `agents/notes/scratchpad.md` | Carry-forward + working space | Soft: 30 lines; Hard: 60 lines |
 
 **Long-term memory** — what has been learned over time:
 
 | File | Role | Loaded |
 |------|------|--------|
-| `agents/procedural-memory.md` | Rules + operator profile — what the agent IS | Fully, every session |
-| `agents/operational-memory.md` | Gotchas — what the agent KNOWS | Grep only when stuck |
-| `agents/historical-memory.md` | Retired — what the agent WAS | Never automatically |
+| `agents/memory/procedural.md` | Procedural rules — what the agent DOES | Fully, every session |
+| `agents/memory/operational.md` | Gotchas — what the agent KNOWS | Grep only when stuck |
+| `agents/memory/historical.md` | Retired — what the agent WAS | Never automatically |
 
-`operational-memory.md` soft limit: ~35 lines → flag to operator.
-Hard limit: 50 lines → offer decay sweep before adding new entries.
+`operational.md` soft limit: ~35 lines → flag to operator.
+Hard limit: 50 lines → run decay sweep before adding new entries.
 
 **Strengthen on recall:** when a memory entry prevents a mistake or solves a
 problem, bump its `[YYYY-MM-DD xN]` tag (today's date, counter +1).
 
-**Decay:** the sweep script (`tools/scripts/sweep-knowledge.py`) moves
-least-recalled entries from `operational-memory.md` to `historical-memory.md`.
-Operator-gated — dry-run shown first. Never touches `procedural-memory.md`.
+**Decay:** the session-end decay sweep (a deterministic agent procedure, no
+script) moves least-recalled entries from `operational.md` to `historical.md`.
+Operator-gated — the list is shown before moving. Never touches `procedural.md`.
 
 
 ## Where Things Live
@@ -254,14 +286,16 @@ Operator-gated — dry-run shown first. Never touches `procedural-memory.md`.
 | Question | Location |
 |----------|----------|
 | What this project builds (the goal) | `docs/specs/` |
-| What's happening now (work list) | `agents/worklog.md` |
+| Open work (TODOs, findings) | `agents/notes/work-backlog.md` |
+| Completed work history | `agents/notes/work-log.md` |
 | Where the project is going | `ROADMAP.md` |
-| What's been completed | `CHANGELOG.md` and `changelog/session-logs/` |
+| What's been completed (user-visible) | `CHANGELOG.md` and `docs/sessions/` |
 | What's in progress | GitHub Issues — open, current Milestone |
 | Architecture decisions | `docs/decisions/` (ADRs — immutable once ratified) |
 | Task plans (short-lived) | `docs/plans/` (archive when done) |
-| Research / domain knowledge | `docs/research/` (optional — if the project needs it) |
+| Research / domain knowledge | `docs/research/` (optional) |
 | Operations guides | `docs/runbooks/` (optional) |
+| Who the operator is | `~/projects/OPERATOR.md` (per-VM, never committed) |
 | How the agent works here | `agents/` — see `agents/README.md` |
 
 When to use which artifact:
@@ -274,38 +308,37 @@ When to use which artifact:
 
 ## Document Budgets
 
-Every document type has a soft and a hard limit. The agent monitors these
-and acts when thresholds are crossed.
-
 | Document | Soft limit | Hard limit |
 |----------|-----------|------------|
-| `agents/scratchpad.md` | 30 lines | 60 lines |
-| `agents/tribal-knowledge.md` | 35 lines | 50 lines |
-| `agents/worklog.md` | 60 lines | 100 lines |
+| `agents/notes/scratchpad.md` | 30 lines | 60 lines |
+| `agents/memory/operational.md` | 35 lines | 50 lines |
+| `agents/notes/work-backlog.md` | 15 items | 20 items |
+| `agents/notes/work-log.md` | — (append-only) | — |
 | `AGENTS.md` | 150 lines | 250 lines |
 | Session logs | 600 words | 1 000 words |
 | Plan files | 150 lines | 250 lines |
 
 **At soft limit:** the agent tries to reduce (prune resolved items, extract
 mature content to its proper home). If it cannot reduce without losing
-information, it informs the operator: "File X is over its soft limit — there
-may be old content worth reviewing."
+information, it informs the operator. For the backlog, >15 open items is a
+review prompt; >20 is an alarm (real backlog problem or mis-set preference).
 
 **At hard limit:** the agent must act before adding new content: prune,
 extract, or compress. For session logs over 1 000 words, findings must be
-extracted to a spec, tribal knowledge, or research doc — a session log is
+extracted to a spec, operational memory, or research doc — a session log is
 not a knowledge base.
 
 
 ## Git
 
-One canonical repo. Check `.git/config` for the remote URL.
-Core git discipline: `~/workspace/.................`.
+One canonical repo. Check `.git/config` for the remote URL (git owns it;
+never store it separately). Backup is keyed on `~/projects/OPERATOR.md`
+(`backup:`) and the `push:` toggle in `AGENTS.override.md`.
 
-**Automation (set during setup Step 6):**
-- `git add` (specific files only): TODO automatic / manual
-- `git commit` (session end): TODO automatic / manual
-- `git push` (session end): TODO enabled / disabled
+- `git add` (specific files only): never `git add -A`
+- `git commit` (session end): automatic, Conventional Commits
+- `git push` (session end): per `push:` and `autonomy`; requires
+  `backup` ≠ none and an `origin` remote
 
 Never force-push. A non-fast-forward rejection is a safety net —
 `git diff` against remote, merge by hand, then push.

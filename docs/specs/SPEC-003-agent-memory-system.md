@@ -53,33 +53,45 @@ if it's missing). Running both creates two diverging sources of truth.
 ## 3. File map
 
 ```
-agents/
-  commands/
-    session-start.md       ← orientation procedure — EXECUTE at session start
-    session-end.md         ← closing procedure — EXECUTE at session end
-    daily-digest.md        ← on-demand human overview (not part of lifecycle)
-  worklog.md               ← append-only work ledger
-  worklog-archive.md       ← aged-out worklog entries
-  scratchpad.md            ← carry-forward + working space
-  procedural-memory.md     ← rules + operator profile — what the agent IS
-  operational-memory.md    ← gotchas — what the agent KNOWS
-  historical-memory.md     ← retired — what the agent WAS
-  README.md                ← index of the above
-tools/scripts/
-  sweep-knowledge.py       ← deterministic decay sweep for operational-memory.md
-ROADMAP.md                 ← project direction, milestones, active plans
-AGENTS.md                  ← stable project identity, rules, tools, this system
-docs/specs/                ← what the project builds — the target
-docs/plans/                ← short-lived task plans
-docs/decisions/            ← architecture decision records (immutable once ratified)
-changelog/session-logs/    ← per-session technical record
+~/projects/
+  AGENTS.md                ← canonical agent instructions (synced; see PLAN-001)
+  OPERATOR.md              ← operator + VM identity (PII) — NEVER committed/cloned
+
+<project>/
+  AGENTS.md                ← synced copy of canonical (read-only artifact)
+  AGENTS.override.md       ← project instruction diffs + persona + name + push + autonomy
+  agents/
+    commands/
+      session-start.md     ← orientation procedure — EXECUTE at session start
+      session-end.md       ← closing procedure — EXECUTE at session end
+    notes/
+      work-backlog.md      ← open items: TODOs, findings, notes (pruned living list)
+      work-log.md          ← done items, append-only history
+      scratchpad.md        ← carry-forward + working space
+    memory/
+      procedural.md        ← procedural RULES — what the agent DOES (no operator profile)
+      operational.md       ← gotchas — what the agent KNOWS
+      historical.md        ← retired — what the agent WAS
+    README.md              ← index of the above
+  ROADMAP.md               ← project direction, milestones, active plans
+  docs/specs/              ← what the project builds — the target
+  docs/plans/              ← short-lived task plans
+  docs/decisions/          ← architecture decision records (immutable once ratified)
+  docs/sessions/           ← per-session technical record
 ```
 
 Optional (add if the project needs them):
 ```
-docs/research/             ← domain knowledge, market analysis, dated
-docs/runbooks/             ← operational guides for live services
+  docs/research/           ← domain knowledge, market analysis, dated
+  docs/runbooks/           ← operational guides for live services
 ```
+
+**Where the operator profile lives.** Not in this project tree. It is in
+`~/projects/OPERATOR.md` — a per-operator, per-VM file that is never committed
+and never cloned, because it contains personal observations about a named
+human (PII) that must not enter a backed-up, possibly public repo. See
+PLAN-001 for the full multi-VM file model. `procedural.md` holds procedural
+rules only.
 
 ---
 
@@ -87,6 +99,11 @@ docs/runbooks/             ← operational guides for live services
 
 Loaded first, every session. **Stable by design** — changes only when
 something fundamental changes. **Never a scratchpad.**
+
+> Architecture note: the project's `AGENTS.md` is a synced, read-only copy of
+> the canonical `~/projects/AGENTS.md`. Project-specific instruction
+> differences (and the persona / name / `autonomy` / `push` selections) go in
+> `AGENTS.override.md`, not here. See PLAN-001.
 
 ### What MUST be in AGENTS.md
 
@@ -110,10 +127,12 @@ something fundamental changes. **Never a scratchpad.**
 
 ### What must NOT be in AGENTS.md
 
-Work logs → `agents/worklog.md`.
-Loose notes → `agents/scratchpad.md`.
-Procedures and operator profile → `agents/procedural-memory.md`.
-Operational gotchas → `agents/operational-memory.md`.
+Open work items → `agents/notes/work-backlog.md`.
+Completed history → `agents/notes/work-log.md`.
+Loose notes → `agents/notes/scratchpad.md`.
+Procedural rules → `agents/memory/procedural.md`.
+Operator profile → `~/projects/OPERATOR.md` (never in the tree).
+Operational gotchas → `agents/memory/operational.md`.
 Project direction → `ROADMAP.md`.
 Founding reasoning → `docs/specs/SPEC-001-*`.
 
@@ -158,36 +177,53 @@ and defines the project's goal, scope, and success criteria.
 
 ## 7. Session memory
 
-### 7.1 worklog.md — the central ledger
+The old single `worklog.md` conflated two jobs — "what happened" and "what is
+still open" — which buried live TODOs under history. It is split into two
+files with opposite contracts: a **backlog** (open, pruned, living) and a
+**log** (done, append-only, terminal). Names map to tense: *backlog* is
+ahead, *log* is behind.
 
-The single live work list. **Append-only** — existing lines never edited.
-Updated the moment state changes, not batched at session end.
+### 7.1 work-backlog.md — the live open-items list
+
+The single list of open work: TODOs, findings, decisions pending. **Not
+append-only** — it is a pruned, living list. When an item is finished, its
+line **moves** to `work-log.md`; it is not left behind with a `[DONE]` tag.
+
+Read fully (`cat`) at session start — it is bounded by design.
 
 **Line format:**
 ```
-YYYY-MM-DD HH:MM | MODULE     | [TAG]    | Description | file-ref
+YYYY-MM-DD | MODULE     | [TAG]    | Description | file-ref
 ```
 
 - **MODULE** — project-relevant category (PROJECT, META, DOCS, CODE, TEST,
   INFRA, etc.). Keep the set small and stable.
-- **TAG** — `[OPEN]` not started · `[ACTIVE]` in progress · `[DONE]`
-  finished · `[NOTE]` context without action · `[FIND]` agent discovery
-  needing discussion.
+- **TAG** — `[OPEN]` not started · `[ACTIVE]` in progress · `[FIND]` agent
+  discovery needing discussion. (No `[DONE]` here — done items move to the
+  log.)
 - **file-ref** — path or `-`.
 
-**Size:** soft 60 lines → run `[DONE]`/`[NOTE]` cleanup at session start.
-Hard 100 lines → force cleanup before adding anything new.
+**Size: alarm at >20 open items.** Twenty open items means a real backlog
+problem or a mis-set preference, not a formatting issue — the agent alerts
+the operator rather than silently letting the list grow. There is no
+line-count limit; the item count is the meaningful signal.
 
-**Cleanup:** `[DONE]`/`[NOTE]` entries older than 30 days move to
-`worklog-archive.md`. `[OPEN]`/`[ACTIVE]` never age out.
+### 7.2 work-log.md — the append-only history
 
-### 7.2 scratchpad.md — carry-forward and working space
+Completed items, in the order they were finished. **Append-only** — existing
+lines are never edited or deleted; the past is auditable. **Never auto-read**
+at session start; grepped on demand when history is needed.
+
+Same line format as the backlog, with `[DONE]` and the completion date. No
+size limit — it grows monotonically and is never loaded wholesale.
+
+### 7.3 scratchpad.md — carry-forward and working space
 
 One file, two structured sections:
 
 **`## Carry-forward` (≤15 lines)** — things to remember at the next session
 start. Open threads, context not captured elsewhere. If an item matures into
-real work, it moves to the worklog. If this section grows past 15 lines,
+real work, it moves to the backlog. If this section grows past 15 lines,
 something belongs in a plan, spec, or operational memory instead.
 
 **`## Working space`** — current focus, half-formed thoughts, loose threads
@@ -209,25 +245,28 @@ by how it is used. The model is cognitive science's ACT-R distinction
 between procedural memory (skills applied automatically) and declarative
 memory (facts recalled when needed).
 
-### 8.1 procedural-memory.md — what the agent IS
+> The third member of the classic trio — the *operator profile* ("who I work
+> with and how") — deliberately does NOT live here. It is per-operator and
+> per-VM, not per-project, and it is PII, so it lives in the non-committed
+> `~/projects/OPERATOR.md` (PLAN-001 / §3). Keeping it out of the project tree
+> is both a privacy guarantee and a single-home guarantee.
 
-**Always loaded fully at session start.** Contains two sections:
+### 8.1 procedural.md — what the agent DOES
 
-**Operator profile** — who the operator is and how to work with them. A few
-stable lines written during setup and refined as patterns emerge. Examples:
-communication style, decision-making approach, when to push back vs execute.
-This is the "relationship memory" that makes collaboration increasingly
-effective over time.
+**Always loaded fully at session start.** Procedural rules: constraints
+applied proactively every session, regardless of topic. The admission bar is
+high — only things that apply to *every* session, every kind of work.
+Domain-specific how-to belongs in operational memory.
 
-**Procedural rules** — constraints applied proactively every session,
-regardless of topic. The admission bar is high: only things that apply to
-*every* session, every kind of work. Domain-specific how-to belongs in
-operational memory.
+This file is **procedural rules only.** It carries no operator profile (that
+is `~/projects/OPERATOR.md`). The separation matters: rules are project-bound
+and committed with the repo; the operator profile is person-bound, PII, and
+must never be committed.
 
 Never decays. Operator-only changes. Promotion of an operational fact to a
 procedural rule is a deliberate human act, never automatic.
 
-### 8.2 operational-memory.md — what the agent KNOWS
+### 8.2 operational.md — what the agent KNOWS
 
 Counter-intuitive gotchas. **Never loaded fully.** Grepped only when stuck.
 
@@ -236,10 +275,10 @@ message, not reachable by reading the nearby docs or config. If the fix is
 in the config or the code, it doesn't belong here. Decisions go in
 `docs/decisions/`.
 
-**Size:** soft 35 lines → flag to operator. Hard 50 lines → offer decay
-sweep before adding new entries.
+**Size:** soft 35 lines → flag to operator. Hard 50 lines → run the decay
+sweep (§8.5) before adding new entries.
 
-### 8.3 historical-memory.md — what the agent WAS
+### 8.3 historical.md — what the agent WAS
 
 Never loaded automatically. Two sections with exact headings the sweep uses:
 `## retired procedures` (operator decision) and `## stale operations` (sweep).
@@ -253,20 +292,21 @@ counter +1. Frequently-useful entries stay strong; unused ones fade.
 
 ### 8.5 Decay sweep
 
-When `operational-memory.md` exceeds 50 lines, `tools/scripts/sweep-knowledge.py`
-moves the least-recalled entries to the historical file. Deterministic —
-pure arithmetic on the tags, no LLM.
+When `operational.md` exceeds 50 lines, the least-recalled entries move to
+`historical.md` under `## stale operations`. This is a deterministic agent
+procedure — pure arithmetic on the tags, no separate script — carried out as
+a step in `session-end.md`:
 
-Metric: `recall_rate = counter / age_in_days`. Lowest rate first; whole
-tie-groups move together; entries younger than 30 days protected.
+1. Parse each entry's `[YYYY-MM-DD xN]` tag.
+2. Compute `recall_rate = counter / age_in_days`. Entries younger than 30
+   days are protected (never swept).
+3. Sort by lowest rate first; whole tie-groups move together.
+4. Move the lowest-rate entries until the file is back under 50 lines,
+   appending them under `## stale operations` in `historical.md`.
 
-**Operator-gated.** Dry-run shown first; applies only on explicit yes.
-`procedural-memory.md` is never touched.
-
-```
-python3 tools/scripts/sweep-knowledge.py            # dry-run
-python3 tools/scripts/sweep-knowledge.py --apply    # apply
-```
+**Operator-gated.** The agent shows the operator the list it intends to move
+and applies the move only on an explicit yes. `procedural.md` is never
+touched by the sweep.
 
 ---
 
@@ -274,28 +314,46 @@ python3 tools/scripts/sweep-knowledge.py --apply    # apply
 
 ### 9.1 session-start.md — orientation
 
-1. Greet operator; identify speaker if unclear.
-2. Load: global AGENTS.md → project AGENTS.md → ROADMAP.md →
-   `procedural-memory.md` (full). Do NOT load `operational-memory.md`.
+Two-call startup (full detail in PLAN-001 / PLAN-002). Exec-1 is VM-level;
+exec-2 is project-level; the steps below run after exec-2 has loaded the
+guaranteed set.
+
+**Exec-1 (VM level, before a project is chosen):** run the sync script, then
+`cat ~/projects/AGENTS.md ~/projects/OPERATOR.md`, list project folders, and
+print the 3 newest session-log head lines across all projects. `OPERATOR.md`
+carries the operator profile + VM facts; if it is absent (fresh clone / new
+VM), prompt to create one. Select the project.
+
+**Exec-2 (project level):** `cat` the guaranteed set — `AGENTS.override.md`,
+`agents/memory/procedural.md` (full), `agents/commands/session-start.md` —
+plus the ROADMAP abstract+active section and the full `work-backlog.md`. Do
+NOT load `operational.md`.
+
+**Then execute:**
+1. Greet operator; identify speaker if unclear (use OPERATOR.md).
+2. Confirm platform memory is disabled for this project (remind if missing).
 3. Check `scratchpad.md`; flag or prune if over limits.
-4. Scan `worklog.md`; run cleanup if over soft limit.
+4. Confirm `work-backlog.md` was read; alert the operator if over 20 items.
 5. `git status`, `git log --oneline -10`, `git pull`. On divergence,
    report before editing anything.
 6. Read newest session log first ~10 lines (full only if continuing it).
 7. Check `docs/specs/` for a spec covering the planned work.
-8. Create the empty session log scaffold for today.
+8. Create the empty session log scaffold for today (line 1:
+   `date | project | one-line-summary`).
 9. Report: last session's result, open items, carried-forward blockers
    and spec gaps.
 
 ### 9.2 session-end.md — closing
 
 1. Fill the session log (≤600 words target, ≤1 000 hard — extract if over).
-2. Append to worklog (append-only).
+2. Update the work ledger: append finished items to `work-log.md`
+   (append-only) and remove their lines from `work-backlog.md`; add any new
+   open items to the backlog.
 3. Reconcile scratchpad (carry-forward ≤15 lines; prune working space).
 4. Update long-term memory: strengthen-on-recall; new gotchas to operational
-   memory; operator observations to procedural profile; promotions to
-   procedural rules are operator decisions only.
-5. Decay sweep if operational memory is over hard limit.
+   memory; new procedural rules are operator decisions only. Operator-profile
+   observations go to `~/projects/OPERATOR.md`, never into the project tree.
+5. Decay sweep (§8.5) if operational memory is over its hard limit.
 6. Verify specs are accurate against what was actually built.
 7. Update CHANGELOG.md for user-visible changes.
 8. Commit specific files + push per project settings. Never force-push.
@@ -314,9 +372,10 @@ note them briefly.
 
 | Document | Soft limit | Hard limit | At soft | At hard |
 |----------|-----------|------------|---------|---------|
-| `agents/scratchpad.md` | 30 lines | 60 lines | Prune; inform operator if still over | Must prune before adding |
-| `agents/operational-memory.md` | 35 lines | 50 lines | Flag to operator | Offer sweep before adding |
-| `agents/worklog.md` | 60 lines | 100 lines | Cleanup at session start | Force cleanup first |
+| `agents/notes/scratchpad.md` | 30 lines | 60 lines | Prune; inform operator if still over | Must prune before adding |
+| `agents/memory/operational.md` | 35 lines | 50 lines | Flag to operator | Run decay sweep before adding |
+| `agents/notes/work-backlog.md` | 15 items | 20 items | Review for staleness | Alert operator — backlog problem |
+| `agents/notes/work-log.md` | — | — | Append-only; never auto-read | — |
 | `AGENTS.md` | 150 lines | 250 lines | Review for duplication | Extract to appropriate files |
 | Session logs | 600 words | 1 000 words | Compress | Extract findings; leave pointer |
 | Plan files | 150 lines | 250 lines | Review and compress | Extract to spec or session log |
@@ -325,42 +384,28 @@ note them briefly.
 
 ## 11. Git automation
 
-Set during project setup, recorded in AGENTS.md, applied by session-end:
+Set during project setup, recorded in `AGENTS.override.md` (`push`) and
+`~/projects/OPERATOR.md` (`backup`), applied by session-end. Remote URL and
+provider come from `.git/config`, not from any config file of ours.
 
 | Operation | Default | Notes |
 |-----------|---------|-------|
 | `git add` (specific files) | Automatic | Only files worked on — never blind `-A`. |
 | `git commit` | Automatic | Session end, Conventional Commits message. |
-| `git push` | **Off — ask at setup** | Recommended on for solo/one-machine work. |
+| `git push` | **Off — set per project (`push:` in override)** | On for solo/one-machine work; requires `OPERATOR.md backup` ≠ none and an `origin` remote. |
 
 Never force-push. A non-fast-forward rejection is a safety net.
 
 ---
 
-## 12. Tool compatibility (model-agnostic + Claude Code)
-
-The canonical location for all agent machinery is `agents/commands/`. For
-Claude Code compatibility, create symlinks during project setup:
-
-```bash
-ln -s AGENTS.md CLAUDE.md
-mkdir -p .claude
-ln -s ../agents/commands .claude/commands
-```
-
-This gives Claude Code its expected file locations while keeping the
-canonical files model-agnostic.
-
----
-
-## 13. Adapting to a new project
+## 12. Adapting to a new project
 
 1. Files ship with the template — already in place.
-2. Fill AGENTS.md: identity, anti-goals, Tools, git automation choices.
+2. Fill AGENTS.override.md: identity diffs, persona + name, `autonomy`, `push`.
 3. Create the founding spec (`SPEC-001-<name>.md`) and get operator approval.
-4. Fill `procedural-memory.md` operator profile section (brief, a few lines).
-5. Choose the worklog MODULE set for the project.
+4. Ensure `~/projects/OPERATOR.md` exists (operator profile + VM facts); it is
+   per-VM, not per-project, so it is created once per machine, not per project.
+5. Choose the work-ledger MODULE set for the project.
 6. Set the platform-memory-disable edit in the AI client.
-7. Decide `git push` automation.
-8. Optionally create `.claude/` symlinks for Claude Code (setup Step 7).
-9. Leave `operational-memory.md` empty — it fills as you learn.
+7. Set `push:` in the override; ensure the `origin` remote and key exist.
+8. Leave `operational.md` empty — it fills as you learn.
