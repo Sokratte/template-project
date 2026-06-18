@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `docs/README.md` — the single source of truth for the document format: the three read moves (`head -qn1` index, `awk` abstract, `grep` section map), the line-1 convention, the abstract rule, the two document classes, and a canonical template block for all five doc types. The format previously lived only in a chat widget
 - ADR-002: document size governance — two document classes by load behaviour (skeleton vs. content), a language-level yellow/red traffic-light for skeleton files, and the principle that no algorithm deletes or moves content automatically
 - Per-directory READMEs for the `agents/` machinery (memory, notes, commands, rules) plus an `agents/` index README — the documentation that explains each skeleton file now lives in the README, not in the file
 - `~/projects/README.md` — workspace-level orientation: what lives at the workspace root, the two-call startup bootstrap (exec-1), and a note that these files are machine-specific
@@ -23,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Document head unified for ADR / SPEC / PLAN: `**Status:**`, then `**Created:** · **Updated:**`, in that order. `**Date:**` replaced by Created/Updated; PLAN gained a Status field; the Created/Updated dates carelessly dropped from ADR-001/002 in the prior pass were restored
+- Spec status reduced to `Draft | Active | Superseded`. Status now tracks the document, not the implementation — "Done" was ambiguous (document-finished vs. code-built), and implementation progress belongs in ROADMAP / work-backlog. SPEC-001 moved Done → Active
+- ADRs are no longer described as immutable: a real change is made by supersede-in-place (mark the old passage, set Status, append a dated `## Addendum`), never a silent rewrite, and the blast radius is checked first
+- SPEC-001, SPEC-003, and the project-structure research doc converted to the line-1 index + abstract format; `Related ADR` / `Related` fields dropped to prose
 - Document convention settled for all five doc types: line 1 is `filename | keywords` (read as a lexicon index via `head -qn1`), the abstract runs to the first `##`. Relationships between documents are carried by keywords, not by `Related:` fields (which were removed)
 - SPEC-003 updated to the size-governance model: §10 "Document Budgets" became "Document System" (two classes + traffic-light); the operational-memory decay sweep was replaced by operator-decided pruning; the recall counter is retained as a human reading-aid
 - `session-start.md` / `session-end.md`: hard size limits replaced by traffic-light checks; the automatic sweep step replaced by operator-decided pruning at a red signal; session-log line 1 now uses the `filename | keywords` format
@@ -35,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- ADR-000 and SPEC-000 template files (moved to `.trash`) — the canonical shape of each document type now lives in `docs/README.md`, not in standalone template files
+- "Move to `specs/archive/` when done" for specs — a spec is the living reference and is not archived for being implemented; a superseded spec stays in place with `Status: Superseded`
 - The deterministic operational-memory decay sweep (recall-rate scoring, auto-move to historical) — superseded by ADR-002's operator-decided pruning
 - `SPEC-002-dev-mcp-server.md` moved out of the template (project-foreign) to `~/projects/SPEC-XXX-dev-mcp-server.md`; it was linked nowhere
 

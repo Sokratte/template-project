@@ -3,6 +3,7 @@ ADR-002-document-size-governance.md | document size, traffic-light, yellow red a
 # ADR-002: Document size governance — traffic-light, human-decided
 
 **Status:** Accepted
+**Created:** 2026-06-18 · **Updated:** 2026-06-18
 
 We split project documents into two classes by load behaviour and govern
 their size differently. **Skeleton files** (loaded in full at every session

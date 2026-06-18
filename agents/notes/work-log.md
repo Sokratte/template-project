@@ -20,3 +20,10 @@
 2026-06-18 | DOCS       | [DONE]    | Updated session-start/session-end for traffic-light + operator-decided pruning + line-1 format | agents/commands/
 2026-06-18 | DOCS       | [DONE]    | Converted ADR-001 to new line-1 index + abstract format | docs/decisions/ADR-001-project-standard.md
 2026-06-18 | INFRA      | [DONE]    | Rewrote recent_sessions.sh to print project name from path (3 newest sessions) for selection, not head-1 prose | recent_sessions.sh
+2026-06-18 | DOCS       | [DONE]    | Wrote docs/README.md: source of truth for the doc format (read moves, line-1 convention, abstract rule, two classes, canonical template block for all 5 types) | docs/README.md
+2026-06-18 | DOCS       | [DONE]    | Restored Created/Updated dates on ADR-001/002 (carelessly dropped session 12); unified head order Status->Created->Updated for ADR/SPEC/PLAN; PLAN gained a Status field | docs/decisions/, docs/README.md
+2026-06-18 | DOCS       | [DONE]    | Converted SPEC-001 + SPEC-003 to spec format (line-1 index, Status-only head corrected from wrong first attempt, goal folded into abstract, Related dropped) | docs/specs/
+2026-06-18 | DOCS       | [DONE]    | Converted research doc to new format (# Research:, Scope only, abstract as short answer) | docs/research/2026-04-17-project-structure-standards.md
+2026-06-18 | DOCS       | [DONE]    | Trashed ADR-000 + SPEC-000 templates (canonical shapes now live in docs/README.md) | .trash/
+2026-06-18 | DESIGN     | [DONE]    | ADRs declared not-immutable: supersede-in-place (mark passage, set Status, dated Addendum), check blast radius, never silent rewrite | docs/README.md
+2026-06-18 | DESIGN     | [DONE]    | Spec status reduced to Draft/Active/Superseded; status tracks document not implementation; removed Move-to-archive-when-done; SPEC-001 Done->Active | docs/README.md, docs/specs/SPEC-001-template-standard.md

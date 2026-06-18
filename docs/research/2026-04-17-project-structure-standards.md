@@ -1,10 +1,18 @@
-# Domain Research: Project Structure Standards for AI-Agent Workflows
+2026-04-17-project-structure-standards.md | AGENTS.md, conventional commits, keep a changelog, semver, spec-driven development, ADR, pointer pattern, context window, tribal knowledge, agentic coding
 
-**Date:** 2026-04-17
-**Scope:** How to structure projects where humans and AI agents collaborate on files
-**Refresh when:** Major new tools launch, or new conventions emerge (check quarterly)
+# Research: Project Structure Standards for AI-Agent Workflows
 
----
+**Scope:** How to structure projects where humans and AI agents collaborate on files.
+
+The field has converged on a reusable set of standards — AGENTS.md as the
+single cross-tool instruction file (kept under ~300 lines, pointer pattern,
+just-in-time loading), Conventional Commits + Keep a Changelog + SemVer for
+versioning, ADRs for immutable decisions, and spec-driven development (specs
+before code). The 2026 agentic-coding practices that matter most: treat the
+context window as the scarcest resource, write specs first (measured ~67%
+lower rollback), plan before coding, and assume the session can be
+interrupted at any moment — so record state continuously and re-read it at
+start. This is the background ADR-001 and SPEC-001 build on.
 
 ## Standards adopted
 

@@ -3,6 +3,7 @@ ADR-001-project-standard.md | workspace template, industry standards, convention
 # ADR-001: Adopt industry standards for workspace project structure
 
 **Status:** Accepted
+**Created:** 2026-04-17 · **Updated:** 2026-04-17
 
 Every project in the workspace used to reinvent its own structure for
 tracking work, recording decisions, and orienting AI agents, leaving nothing

@@ -1,3 +1,5 @@
+ADR-000-template.md | ADR template, decision record, status, date, context, consequences, alternatives
+
 # ADR-000: Title
 
 **Status:** Draft | Accepted | Superseded by ADR-NNN | Deprecated

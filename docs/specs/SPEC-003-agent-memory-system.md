@@ -1,12 +1,15 @@
+SPEC-003-agent-memory-system.md | agent memory, session lifecycle, file-based memory, procedural, operational, historical, work-backlog, work-log, scratchpad, session-start, session-end, traffic-light, PLAN-001, PLAN-002
+
 # SPEC-003 — Agent Memory & Session System
 
-> A file-based memory and session-lifecycle system that lets an AI agent
-> work across many sessions without losing context — and without relying on
-> the AI platform's server-side memory. Every mechanism is a file in the
-> repo. The repo is the single source of truth.
-
 **Status:** Active
-**Applies to:** any project copied from the workspace template
+**Created:** 2026-06-17 · **Updated:** 2026-06-18
+
+Defines a file-based memory and session-lifecycle system that lets an AI agent
+work across many sessions without losing context — and without relying on the
+AI platform's server-side memory. Every mechanism is a file in the repo; the
+repo is the single source of truth. Architecture locked by PLAN-001; content
+conventions by PLAN-002.
 
 ---
 
