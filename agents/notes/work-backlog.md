@@ -1,24 +1,8 @@
-# Worklog — Central Work Ledger
+<!-- Open work, read fully every session — see README. One line per item: `YYYY-MM-DD | MODULE | [TAG] | description | file-ref`; TAG is [OPEN]/[ACTIVE]/[FIND]. When an item is done, MOVE its line to work-log.md (no [DONE] left here). Alarm if over 20 items. -->
 
-# Append-only. Never edit or delete existing lines — only add new ones.
-# Scanned at session start. Line format:
-#   YYYY-MM-DD HH:MM | MODULE     | [TAG]     | Description | file-ref
-#
-# MODULE (col 2, ~9 chars): a category that fits this project. Suggested
-#   starting set — adapt per project: PROJECT, META, DOCS, CODE, TEST,
-#   INFRA, DESIGN, RESEARCH. Keep the set small and stable.
-# TAG (col 3): [OPEN]=not started, [ACTIVE]=in progress, [DONE]=finished,
-#   [NOTE]=context without an action, [FIND]=agent discovery needing
-#   discussion or a decision.
-# file-ref (col 5): path to the relevant file, or "-".
-#
-# Cleanup (run at session start): if this file is > ~60 lines or > ~4 KB,
-#   move [DONE]/[NOTE] entries older than 30 days to worklog-archive.md.
-#   [OPEN]/[ACTIVE] entries NEVER age out.
-# ---------------------------------------------------------------------------
-2026-06-17 | META       | [DONE]    | PLAN-001 multi-VM agent architecture finalized | docs/plans/PLAN-001-multi-vm-agent-architecture.md
-2026-06-17 | META       | [DONE]    | Session log written | docs/sessions/2026-06-17-session-08-multi-vm-architecture.md
-2026-06-17 | DESIGN     | [DONE]    | AGENTS.md content decisions locked in PLAN-002 (startup flow, 3-tier read, abstract convention, backlog/log split) | docs/plans/PLAN-002-agents-md-authoring.md
-2026-06-17 | DESIGN     | [OPEN]    | Execute PLAN-002: draft canonical AGENTS.md prose (sign-off each step); decide autonomy names+default, persona placement, line budget | docs/plans/PLAN-002-agents-md-authoring.md
-2026-06-17 | DOCS       | [OPEN]    | PLAN-002 ripple edits: rename worklog->work-backlog & worklog-archive->work-log; fix SPEC-003 append-only contract; CREATE_PROJECT budgets; rewrite session-start/end; README phantom ref; remove sweep script | -
-2026-06-17 | DOCS       | [DONE]    | Repo restructure committed as moves; tree clean | -
+2026-06-18 | DOCS       | [OPEN]    | Finish README documentation pass: docs/* READMEs (specs, plans, sessions, decisions, research — structure/convention only, NOT per-file listings) and bare-scaffold READMEs (src/, docs/tests/, tools/). agents/ is done. | docs/, src/, tools/
+2026-06-18 | INFRA      | [OPEN]    | Move agents_sync.sh + recent_sessions.sh to ~/projects/ root (staged in template-project/ root; VM-local, NOT committed into projects). Paths inside already formed for ~/projects/. | agents_sync.sh, recent_sessions.sh
+2026-06-18 | DOCS       | [OPEN]    | Author canonical ~/projects/AGENTS.md (main PLAN-002 deliverable; sign-off each step); hold under line budget. Canonical header now drafted above a separator; prune brainstorm half as elements are promoted. | ~/projects/AGENTS.md, docs/plans/PLAN-002-agents-md-authoring.md
+2026-06-18 | DOCS       | [FIND]    | Duplication risk: architecture now described across SPEC-003, ~/projects/README.md, several agents/*/README.md, AND the new AGENTS.md header overlaps global.md (git rules, quality standards). Decide canonical homes vs pointers during PLAN-002 authoring. | -
+2026-06-18 | DOCS       | [FIND]    | Want a system spec under template-project/docs/specs/; SPEC-003 already largely is it. Reconcile/extend rather than write fresh. | docs/specs/SPEC-003-agent-memory-system.md
+2026-06-18 | DOCS       | [FIND]    | global.md still references AGENTS.md content overlap; broader: AGENTS.md brainstorm half (below separator) still holds tbh-era refs (/srv/mcp/tbh paths, hash-check rule). Reconcile during authoring. | ~/projects/AGENTS.md
