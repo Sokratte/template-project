@@ -1,7 +1,17 @@
+ADR-001-project-standard.md | workspace template, industry standards, conventional commits, semver, AGENTS.md, ADR, spec-driven development, pointer pattern, cp -r, agent orientation
+
 # ADR-001: Adopt industry standards for workspace project structure
 
 **Status:** Accepted
-**Date:** 2026-04-17
+
+Every project in the workspace used to reinvent its own structure for
+tracking work, recording decisions, and orienting AI agents, leaving nothing
+to copy and no standard path for an agent arriving cold. We adopt the
+converged industry standards — Conventional Commits, Keep a Changelog,
+Semantic Versioning, AGENTS.md, Architecture Decision Records, and
+spec-driven development — and ship them as a reusable template that new
+projects create by `cp -r`. AGENTS.md is the single entry point and follows
+a pointer pattern: it tells an agent where to look, not what is there.
 
 ## Context
 

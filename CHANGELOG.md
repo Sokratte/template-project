@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- ADR-002: document size governance — two document classes by load behaviour (skeleton vs. content), a language-level yellow/red traffic-light for skeleton files, and the principle that no algorithm deletes or moves content automatically
 - Per-directory READMEs for the `agents/` machinery (memory, notes, commands, rules) plus an `agents/` index README — the documentation that explains each skeleton file now lives in the README, not in the file
 - `~/projects/README.md` — workspace-level orientation: what lives at the workspace root, the two-call startup bootstrap (exec-1), and a note that these files are machine-specific
 - Canonical header in `~/projects/AGENTS.md` (identity, startup with exec-2, override loading, autonomy levels, git behaviour), separated from the existing brainstorming material by a visible separator
@@ -22,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Document convention settled for all five doc types: line 1 is `filename | keywords` (read as a lexicon index via `head -qn1`), the abstract runs to the first `##`. Relationships between documents are carried by keywords, not by `Related:` fields (which were removed)
+- SPEC-003 updated to the size-governance model: §10 "Document Budgets" became "Document System" (two classes + traffic-light); the operational-memory decay sweep was replaced by operator-decided pruning; the recall counter is retained as a human reading-aid
+- `session-start.md` / `session-end.md`: hard size limits replaced by traffic-light checks; the automatic sweep step replaced by operator-decided pruning at a red signal; session-log line 1 now uses the `filename | keywords` format
+- `recent_sessions.sh`: prints the project name (from the path) of the three newest session logs for project selection, instead of the first line of each
+- ADR-001 converted to the new line-1 index + abstract format
 - Skeleton files (`procedural.md`, `operational.md`, `historical.md`, `scratchpad.md`, `work-backlog.md`, `work-log.md`) slimmed to a single self-explanatory comment line; all explanatory prose moved to the per-directory READMEs to cut per-session token cost
 - `session-start.md` no longer carries the exec-1/exec-2 preamble (it cannot describe its own loading); it now begins at the first orientation step. The bootstrap lives in `~/projects/README.md` and `AGENTS.md`
 - Applied soft-wrap (one line per paragraph) across session-authored docs, per the standing personal convention; data lines remain one-per-record
@@ -29,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- The deterministic operational-memory decay sweep (recall-rate scoring, auto-move to historical) — superseded by ADR-002's operator-decided pruning
 - `SPEC-002-dev-mcp-server.md` moved out of the template (project-foreign) to `~/projects/SPEC-XXX-dev-mcp-server.md`; it was linked nowhere
 
 ## [0.7.0] - 2026-04-17

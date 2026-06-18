@@ -111,16 +111,16 @@ something fundamental changes. **Never a scratchpad.**
    and where it runs. The *full* reasoning lives in the founding spec.
 2. "This project is NOT" — explicit anti-goals and scope boundaries.
 3. Stability + scratchpad discipline — a statement that the file is stable
-   and never used as a scratchpad. Its own size limits.
+   and never used as a scratchpad. Its governance under the traffic-light.
 4. Session lifecycle — EXECUTE (not merely read) session-start and
    session-end. The closing-signal behaviour.
 5. Specifications — the instruction to check for a spec before any
    non-trivial work.
 6. Tools — every MCP server / tool and what it is for.
-7. Memory system — the file tables, limits, strengthen-on-recall, decay,
-   pointer to this spec.
+7. Memory system — the file tables, the traffic-light governance,
+   strengthen-on-recall, pointer to this spec.
 8. Where Things Live — the index: one row per kind of question, one answer.
-9. Document Budgets — the soft and hard limits for every document type.
+9. Document system — the two size classes and the traffic-light (§10).
 10. Git — the automation choices and the never-force-push rule.
 11. Optional sections — environment, testing, structure, conventions, write
     boundaries, error handling, services — only when they apply.
@@ -138,8 +138,10 @@ Founding reasoning → `docs/specs/SPEC-001-*`.
 
 The test: if the information has a home in another file, it goes there.
 
-**Size limits:** soft 150 lines → review for duplication.
-Hard 250 lines → something is wrong; extract to appropriate files.
+**Size:** governed by the traffic-light (§10, ADR-002). The synced project
+`AGENTS.md` is generated; its size is managed at the canonical source
+(`~/projects/AGENTS.md`, PLAN-001/002), where duplication is reviewed and
+content extracted to the files below.
 
 ---
 
@@ -221,10 +223,11 @@ size limit — it grows monotonically and is never loaded wholesale.
 
 One file, two structured sections:
 
-**`## Carry-forward` (≤15 lines)** — things to remember at the next session
-start. Open threads, context not captured elsewhere. If an item matures into
-real work, it moves to the backlog. If this section grows past 15 lines,
-something belongs in a plan, spec, or operational memory instead.
+**`## Carry-forward`** — things to remember at the next session start. Open
+threads, context not captured elsewhere. Kept tight: if an item matures into
+real work, it moves to the backlog; if it would persist, it belongs in a
+plan, spec, or operational memory instead. The carry-forward section is the
+part that must stay short — it is re-read every start.
 
 **`## Working space`** — current focus, half-formed thoughts, loose threads
 being actively worked. Pruned at every session end — resolved threads removed
@@ -233,8 +236,10 @@ entirely, not struck through.
 The distinction is *timescale*, not origin: carry-forward survives to the
 next session; working space is cleaned at the end of this one.
 
-**Size:** soft 30 lines → prune at session end; if still over, inform
-operator. Hard 60 lines → must prune before adding anything new.
+**Size:** governed by the traffic-light (§10). Because the scratchpad is
+loaded in full at every start, it is a skeleton file — yellow informs, red
+forces a prune-or-defer decision at session start. Working space is pruned at
+every session end regardless.
 
 ---
 
@@ -275,38 +280,42 @@ message, not reachable by reading the nearby docs or config. If the fix is
 in the config or the code, it doesn't belong here. Decisions go in
 `docs/decisions/`.
 
-**Size:** soft 35 lines → flag to operator. Hard 50 lines → run the decay
-sweep (§8.5) before adding new entries.
+**Size:** governed by the traffic-light (§10, ADR-002), not a hard cap.
+`operational.md` is read by grep, never loaded whole, so its size does not
+cost tokens at session start — but it is kept reviewable so grep hits stay
+relevant. Yellow → the agent flags it; red → the agent forces a clean-up-or-
+defer decision at the next session start. Pruning is a human act (move stale
+entries to `historical.md` by hand); no algorithm moves them automatically.
 
 ### 8.3 historical.md — what the agent WAS
 
-Never loaded automatically. Two sections with exact headings the sweep uses:
-`## retired procedures` (operator decision) and `## stale operations` (sweep).
-Append-only, never deleted — the past is auditable.
+Never loaded automatically. Two sections with stable headings:
+`## retired procedures` (procedural rules the operator retired) and
+`## stale operations` (operational gotchas pruned by hand when a file hit its
+red signal). Append-only, never deleted — the past is auditable.
 
 ### 8.4 Strengthen on recall
 
 Every memory entry carries `[YYYY-MM-DD xN]` — date last used, recall
 counter. When an entry helps, the agent patches the tag: today's date,
-counter +1. Frequently-useful entries stay strong; unused ones fade.
+counter +1. The counter is a **reading aid for the human**: when the operator
+prunes a file by hand (§8.5), "used 8× / never used" is the signal that shows
+what is safe to retire. It is no longer the input to any automatic procedure.
 
-### 8.5 Decay sweep
+### 8.5 Pruning — human-decided (ADR-002)
 
-When `operational.md` exceeds 50 lines, the least-recalled entries move to
-`historical.md` under `## stale operations`. This is a deterministic agent
-procedure — pure arithmetic on the tags, no separate script — carried out as
-a step in `session-end.md`:
+There is no automatic decay sweep. Operational memory is governed by the
+same yellow/red traffic-light as every skeleton file (§10, ADR-002), but
+because it is grepped rather than loaded whole, its size is about keeping
+grep hits relevant, not about start-up token cost.
 
-1. Parse each entry's `[YYYY-MM-DD xN]` tag.
-2. Compute `recall_rate = counter / age_in_days`. Entries younger than 30
-   days are protected (never swept).
-3. Sort by lowest rate first; whole tie-groups move together.
-4. Move the lowest-rate entries until the file is back under 50 lines,
-   appending them under `## stale operations` in `historical.md`.
-
-**Operator-gated.** The agent shows the operator the list it intends to move
-and applies the move only on an explicit yes. `procedural.md` is never
-touched by the sweep.
+When `operational.md` reaches its red signal, the agent stops at session
+start and forces a decision: prune now, or defer to the next session (where
+the question returns). Pruning is a **human act** — the operator decides which
+entries are stale, using the recall counters as a guide, and the agent moves
+the chosen lines to `historical.md` under `## stale operations`. Nothing is
+moved without an explicit operator yes. `procedural.md` is never pruned this
+way — retiring a procedural rule is a separate, deliberate operator decision.
 
 ---
 
@@ -320,9 +329,13 @@ guaranteed set.
 
 **Exec-1 (VM level, before a project is chosen):** run the sync script, then
 `cat ~/projects/AGENTS.md ~/projects/OPERATOR.md`, list project folders, and
-print the 3 newest session-log head lines across all projects. `OPERATOR.md`
-carries the operator profile + VM facts; if it is absent (fresh clone / new
-VM), prompt to create one. Select the project.
+run `recent_sessions.sh` — which prints the *project name* (from the path) of
+the 3 most-recently-touched session logs across all projects. If all three
+name the same project, that is the obvious resume target; otherwise ask the
+operator or take the project from the prompt. ("What happened last" is not
+derived here — the agent reads the newest session log itself once a project
+is chosen.) `OPERATOR.md` carries the operator profile + VM facts; if it is
+absent (fresh clone / new VM), prompt to create one. Select the project.
 
 **Exec-2 (project level):** `cat` the guaranteed set — `AGENTS.override.md`,
 `agents/memory/procedural.md` (full), `agents/commands/session-start.md` —
@@ -332,28 +345,33 @@ NOT load `operational.md`.
 **Then execute:**
 1. Greet operator; identify speaker if unclear (use OPERATOR.md).
 2. Confirm platform memory is disabled for this project (remind if missing).
-3. Check `scratchpad.md`; flag or prune if over limits.
+3. Check `scratchpad.md` against the traffic-light; on yellow inform, on red
+   force a prune-or-defer decision before proceeding.
 4. Confirm `work-backlog.md` was read; alert the operator if over 20 items.
-5. `git status`, `git log --oneline -10`, `git pull`. On divergence,
+5. Check every skeleton file against the traffic-light (§10); surface any
+   yellow/red signals here so the operator can act at the top of the session.
+6. `git status`, `git log --oneline -10`, `git pull`. On divergence,
    report before editing anything.
-6. Read newest session log first ~10 lines (full only if continuing it).
-7. Check `docs/specs/` for a spec covering the planned work.
-8. Create the empty session log scaffold for today (line 1:
-   `date | project | one-line-summary`).
-9. Report: last session's result, open items, carried-forward blockers
+7. Read newest session log first ~10 lines (full only if continuing it).
+8. Check `docs/specs/` for a spec covering the planned work.
+9. Create the empty session log scaffold for today (line 1:
+   `filename | keywords`).
+10. Report: last session's result, open items, carried-forward blockers
    and spec gaps.
 
 ### 9.2 session-end.md — closing
 
-1. Fill the session log (≤600 words target, ≤1 000 hard — extract if over).
+1. Fill the session log (line 1: `filename | keywords`). No word limit —
+   extract durable findings to their permanent home and leave a pointer.
 2. Update the work ledger: append finished items to `work-log.md`
    (append-only) and remove their lines from `work-backlog.md`; add any new
    open items to the backlog.
-3. Reconcile scratchpad (carry-forward ≤15 lines; prune working space).
+3. Reconcile scratchpad (keep carry-forward tight; prune working space).
 4. Update long-term memory: strengthen-on-recall; new gotchas to operational
    memory; new procedural rules are operator decisions only. Operator-profile
    observations go to `~/projects/OPERATOR.md`, never into the project tree.
-5. Decay sweep (§8.5) if operational memory is over its hard limit.
+5. If any skeleton file is at its red signal, prune it with the operator
+   (human-decided, §8.5) — no automatic sweep.
 6. Verify specs are accurate against what was actually built.
 7. Update CHANGELOG.md for user-visible changes.
 8. Commit specific files + push per project settings. Never force-push.
@@ -368,17 +386,47 @@ note them briefly.
 
 ---
 
-## 10. Document budgets
+## 10. Document system (size governance)
 
-| Document | Soft limit | Hard limit | At soft | At hard |
-|----------|-----------|------------|---------|---------|
-| `agents/notes/scratchpad.md` | 30 lines | 60 lines | Prune; inform operator if still over | Must prune before adding |
-| `agents/memory/operational.md` | 35 lines | 50 lines | Flag to operator | Run decay sweep before adding |
-| `agents/notes/work-backlog.md` | 15 items | 20 items | Review for staleness | Alert operator — backlog problem |
-| `agents/notes/work-log.md` | — | — | Append-only; never auto-read | — |
-| `AGENTS.md` | 150 lines | 250 lines | Review for duplication | Extract to appropriate files |
-| Session logs | 600 words | 1 000 words | Compress | Extract findings; leave pointer |
-| Plan files | 150 lines | 250 lines | Review and compress | Extract to spec or session log |
+Size is governed by **load behaviour**, not document type (ADR-002). The
+metric is tokens — the honest unit for start-up cost. Concrete per-file
+thresholds are deferred to each file's own tuning; this section fixes the
+model.
+
+**Two classes:**
+
+- **Skeleton** — loaded in full at every session start. Size costs tokens on
+  every start, forever, so it is governed by a traffic-light. The five
+  content document types are NOT here.
+- **Content** — read by index (`head -qn1`), abstract (`awk`), or section
+  (`grep '^#'`), never loaded whole. **No size limit** — a cap would force
+  cutting content the read mechanism already handles section by section.
+
+**The traffic-light (skeleton files only) — language-level, never automatic:**
+
+- **Green** — no action.
+- **Yellow** — the agent informs the operator at session start; work
+  continues, no decision forced.
+- **Red** — the agent halts at session start and forces a conscious decision:
+  deal with it now, or defer (the question returns next session, and the one
+  after, until resolved). Pressure rises with size because the prompt recurs.
+
+No script deletes or moves content. Pruning is always a human act; the recall
+counters (§8.4) are the operator's guide to what is safe to retire.
+
+| Document | Class | Governance |
+|----------|-------|------------|
+| `agents/memory/procedural.md` | skeleton | traffic-light |
+| `agents/notes/scratchpad.md` | skeleton | traffic-light (carry-forward stays tight) |
+| `agents/notes/work-backlog.md` | skeleton | traffic-light + item-count alarm (>20 = backlog problem, not size) |
+| `AGENTS.override.md` | skeleton | traffic-light |
+| `agents/memory/operational.md` | grepped | traffic-light — keeps grep hits relevant, not a token concern (§8.5) |
+| `agents/memory/historical.md` | never loaded | none |
+| `agents/notes/work-log.md` | never loaded | none (append-only) |
+| Session / Research / Decision / Plan / Spec | content | none — as long as needed |
+
+The synced `AGENTS.md` is a generated artifact; its size is managed where it
+is authored (the canonical `~/projects/AGENTS.md`, PLAN-001/002), not here.
 
 ---
 
