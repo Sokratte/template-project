@@ -34,3 +34,4 @@
 2026-06-19 | AGENTS     | [DONE]    | Slimmed AGENTS.override.md to four settings; moved conventions/anti-patterns to OPERATOR.md; added platform line | template-project/AGENTS.override.md, ~/projects/OPERATOR.md
 2026-06-19 | INFRA      | [DONE]    | Wrote MCP file-tool design research doc (4 tools, git-diff guard, atomic temp+rename, diff-in-result) | docs/research/2026-06-19-mcp-file-tool-design.md
 2026-06-19 | AGENTS     | [DONE]    | session-start.md: removed git-state + last-session-log steps, added Abschluss-Signal trigger; operational.md: added Git recovery section | agents/commands/session-start.md, agents/memory/operational.md
+2026-06-19 | DOCS       | [DONE]    | Defined skeleton-file token thresholds (green/yellow/red); ADR-002 deferred numbers now set in OPERATOR.md, derivation recorded in research doc | OPERATOR.md, docs/research/2026-06-19-context-budget-and-file-limits.md
