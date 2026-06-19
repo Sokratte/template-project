@@ -2,11 +2,12 @@
 
 ## Carry-forward
 
-- README documentation pass: `agents/` fully complete; `docs/README.md` now written (the doc-format source of truth). NEXT: the remaining `docs/*` per-directory READMEs (specs, plans, sessions, decisions, research — structure/convention each file must follow, NOT individual-file listings) and bare-scaffold READMEs (src/, docs/tests/, tools/).
-- Established pattern to follow: loaded/skeleton files keep ONE self-explanatory comment line; all explanation lives in the per-directory README (READMEs may be long). Soft-wrap everywhere (one line per paragraph); data lines stay one-per-record.
-- Document format is now fully settled and written in `docs/README.md` (sessions 12–13): line 1 = `filename | keywords`, abstract to first `##`, no Related: fields, head order Status->Created->Updated for ADR/SPEC/PLAN, spec status Draft/Active/Superseded, ADRs supersede-in-place. The remaining docs/* READMEs must follow and point to it — do not restate the format.
-- PLAN-001/PLAN-002 are still in the old doc format (now a backlog item). Aligning them is mechanical; not urgent.
-- Operator prunes the AGENTS.md brainstorm half (below the separator) himself — do not touch it.
+- Git rules + universal craft now live ONLY in canonical `~/projects/AGENTS.md` (global.md was merged in and trashed). The file read/write protocol and the MCP-server design are settled — see docs/research/2026-06-19-mcp-file-tool-design.md. Do not restate the protocol elsewhere; point to it.
+- NEXT (filed in backlog): reconcile session-start.md + session-end.md against session-14 decisions. session-start is partly done (git-step and last-log-step removed, Abschluss-Signal added) but session-end.md still references the old git-check flow and needs the same alignment. This is the natural next task.
+- Also open (backlog): AGENTS.md redundancy review — the merged content works but was not yet tightened for overlap. And `template-project/README.md` is stale (describes .claude/, ~/workspace/, Obsidian, ADR-000 templates) — a real bug, not yet filed as a backlog line; file it when picked up.
+- README documentation pass: `agents/` fully complete; `docs/README.md` written (doc-format source of truth). Remaining: `docs/*` per-directory READMEs (structure/convention only, NOT per-file listings) and bare-scaffold READMEs (src/, docs/tests/, tools/).
+- Pattern to follow: skeleton files keep ONE self-explanatory comment line; explanation lives in the per-directory README (READMEs may be long). Soft-wrap everywhere; data lines one-per-record.
+- PLAN-001/PLAN-002 still in the old doc format (backlog item). Mechanical, not urgent.
 
 ---
 

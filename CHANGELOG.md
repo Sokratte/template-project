@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- File read/write protocol in `AGENTS.md`: read-before-write, anchor-edit as the default (the anchor is the integrity check), `overwrite_file` only with a git-diff guard, verify-via-returned-diff, never hard-delete (move to `.trash/`)
+- Git section in `AGENTS.md`: explicit `git add` paths (never `-A`), Conventional Commits, push governed by `push:` (on/confirm/off), no force-push, mid-session `git status` timing, index-lock handling
+- `docs/research/2026-06-19-mcp-file-tool-design.md` — design of the ideal MCP file server: four tools (read with hash, create, anchor-edit, guarded overwrite), atomic temp+rename write, diff-in-result with size cap, with rejected alternatives recorded
+- `## Git recovery` in `operational.md` (`git bisect`, `git checkout <file>`)
+- Abschluss-Signal trigger in `session-start.md`: a closing word from the operator prompts one question before running session-end
 - `docs/README.md` — the single source of truth for the document format: the three read moves (`head -qn1` index, `awk` abstract, `grep` section map), the line-1 convention, the abstract rule, the two document classes, and a canonical template block for all five doc types. The format previously lived only in a chat widget
 - ADR-002: document size governance — two document classes by load behaviour (skeleton vs. content), a language-level yellow/red traffic-light for skeleton files, and the principle that no algorithm deletes or moves content automatically
 - Per-directory READMEs for the `agents/` machinery (memory, notes, commands, rules) plus an `agents/` index README — the documentation that explains each skeleton file now lives in the README, not in the file
@@ -24,6 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Git rules and universal craft consolidated into canonical `~/projects/AGENTS.md`; `agents/rules/global.md` merged in and moved to `.trash`. The earlier thin-pointer stance for AGENTS.md was reversed: craft rules load every session regardless, so a pointer saved nothing
+- `AGENTS.override.md` slimmed to the four settings (name, persona, autonomy, push); conventions and anti-patterns moved to `OPERATOR.md` (per-VM, private), which also gained a platform line
+- `session-start.md`: removed the git-state check and the last-session-log read (both now lazy / on-demand, not startup steps)
 - Document head unified for ADR / SPEC / PLAN: `**Status:**`, then `**Created:** · **Updated:**`, in that order. `**Date:**` replaced by Created/Updated; PLAN gained a Status field; the Created/Updated dates carelessly dropped from ADR-001/002 in the prior pass were restored
 - Spec status reduced to `Draft | Active | Superseded`. Status now tracks the document, not the implementation — "Done" was ambiguous (document-finished vs. code-built), and implementation progress belongs in ROADMAP / work-backlog. SPEC-001 moved Done → Active
 - ADRs are no longer described as immutable: a real change is made by supersede-in-place (mark the old passage, set Status, append a dated `## Addendum`), never a silent rewrite, and the blast radius is checked first
@@ -40,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- `agents/rules/global.md` (merged into `AGENTS.md`, moved to `.trash`)
 - ADR-000 and SPEC-000 template files (moved to `.trash`) — the canonical shape of each document type now lives in `docs/README.md`, not in standalone template files
 - "Move to `specs/archive/` when done" for specs — a spec is the living reference and is not archived for being implemented; a superseded spec stays in place with `Status: Superseded`
 - The deterministic operational-memory decay sweep (recall-rate scoring, auto-move to historical) — superseded by ADR-002's operator-decided pruning
