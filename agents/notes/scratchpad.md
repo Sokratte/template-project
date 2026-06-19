@@ -2,12 +2,12 @@
 
 ## Carry-forward
 
-- Git rules + universal craft now live ONLY in canonical `~/projects/AGENTS.md` (global.md was merged in and trashed). The file read/write protocol and the MCP-server design are settled — see docs/research/2026-06-19-mcp-file-tool-design.md. Do not restate the protocol elsewhere; point to it.
-- NEXT (filed in backlog): reconcile session-start.md + session-end.md against session-14 decisions. session-start is partly done (git-step and last-log-step removed, Abschluss-Signal added) but session-end.md still references the old git-check flow and needs the same alignment. This is the natural next task.
-- Also open (backlog): AGENTS.md redundancy review — the merged content works but was not yet tightened for overlap. And `template-project/README.md` is stale (describes .claude/, ~/workspace/, Obsidian, ADR-000 templates) — a real bug, not yet filed as a backlog line; file it when picked up.
-- README documentation pass: `agents/` fully complete; `docs/README.md` written (doc-format source of truth). Remaining: `docs/*` per-directory READMEs (structure/convention only, NOT per-file listings) and bare-scaffold READMEs (src/, docs/tests/, tools/).
-- Pattern to follow: skeleton files keep ONE self-explanatory comment line; explanation lives in the per-directory README (READMEs may be long). Soft-wrap everywhere; data lines one-per-record.
-- PLAN-001/PLAN-002 still in the old doc format (backlog item). Mechanical, not urgent.
+- AGENTS.md overhaul is drafted as `~/projects/AGENTS-v2.md` (NOT yet promoted to canonical — operator reviews first, then session 16 applies it). Same for `agents/commands/session-start-v2.md`. Originals untouched on purpose. NEXT SESSION = promote v2 → canonical.
+- File-size governance was redesigned this session: limit lives in **line 1** of each governed file, in **words**, as `soft limit: N · hard limit: M`. Check happens on every read (MCP returns word count), not as a startup scan. No file list, no "skeleton" vocabulary. Defined in AGENTS-v2 `## File limits` — but NOT yet applied to any real file's line 1. Apply when v2 goes live.
+- Startup index added to session-start-v2 as the LAST step (recency position; see research doc `## Startup index budget`). Caps: all decisions/specs/plans, last 10 research, last 5 sessions.
+- Git rules + universal craft live ONLY in canonical `~/projects/AGENTS.md`. File read/write protocol + MCP-server design settled — see docs/research/2026-06-19-mcp-file-tool-design.md. Point to it, don't restate.
+- Still open (backlog): session-end.md reconcile against session-14 decisions (it was executed this session but not yet rewritten); `template-project/README.md` is stale (.claude/, ~/workspace/, Obsidian, ADR-000) — still not filed as its own backlog line; README doc pass (docs/* per-dir READMEs, bare-scaffold READMEs); PLAN-001/002 still old format.
+- Pattern: skeleton files keep ONE self-explanatory comment line; explanation lives in the per-directory README. Soft-wrap everywhere; data lines one-per-record.
 
 ---
 

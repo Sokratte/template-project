@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `## Startup index budget` section in `docs/research/2026-06-19-context-budget-and-file-limits.md`: per-doc-type caps for the session-start index (all decisions/specs/plans, last 10 research, last 5 sessions; ~660 tokens) and the recency-position rationale
 - File read/write protocol in `AGENTS.md`: read-before-write, anchor-edit as the default (the anchor is the integrity check), `overwrite_file` only with a git-diff guard, verify-via-returned-diff, never hard-delete (move to `.trash/`)
 - Git section in `AGENTS.md`: explicit `git add` paths (never `-A`), Conventional Commits, push governed by `push:` (on/confirm/off), no force-push, mid-session `git status` timing, index-lock handling
 - `docs/research/2026-06-19-mcp-file-tool-design.md` — design of the ideal MCP file server: four tools (read with hash, create, anchor-edit, guarded overwrite), atomic temp+rename write, diff-in-result with size cap, with rejected alternatives recorded
@@ -29,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- *(drafted, not yet promoted)* `AGENTS-v2.md` and `session-start-v2.md`: four principles pulled to the top, task workflow reduced to Spec/Plan/Build/Test, `## Skeleton` replaced by `## File limits` (line-1 word-based soft/hard limits checked on read, no file list), startup index added as final session-start step
 - Git rules and universal craft consolidated into canonical `~/projects/AGENTS.md`; `agents/rules/global.md` merged in and moved to `.trash`. The earlier thin-pointer stance for AGENTS.md was reversed: craft rules load every session regardless, so a pointer saved nothing
 - `AGENTS.override.md` slimmed to the four settings (name, persona, autonomy, push); conventions and anti-patterns moved to `OPERATOR.md` (per-VM, private), which also gained a platform line
 - `session-start.md`: removed the git-state check and the last-session-log read (both now lazy / on-demand, not startup steps)

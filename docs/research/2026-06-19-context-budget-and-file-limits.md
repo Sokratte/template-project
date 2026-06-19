@@ -97,3 +97,25 @@ repeatedly nagging at yellow, the threshold is wrong, not the file.
 - Anthropic, *Introducing Claude Sonnet 4.6* and Claude Help Center, context
   window sizes per plan.
 - Surveys on "context rot" / context-length degradation, 2025.
+
+## Startup index budget (session-15 addition)
+
+The session-start index (line 1 of every doc) must fit inside the ~600-token
+buffer remaining after the skeleton-file red-sum of ~9400 tokens. Line 1 is
+roughly 15-20 tokens per document. Budget per doc type:
+
+| Type | Cap | Sort | ~Tokens | Rationale |
+|------|----:|------|--------:|-----------|
+| decisions | all | alpha | ~170 | Slow-growing, always relevant |
+| specs | all | alpha | ~135 | Manageable, always relevant |
+| plans | all | alpha | ~100 | Manageable, always relevant |
+| research | last 10 | date desc | ~170 | Older docs rarely needed at startup |
+| sessions | last 5 | date desc | ~85 | Continuity only, not archive |
+| **Total** | | | **~660** | Fits inside the ~600-token buffer (+-10%) |
+
+The caps are for the automatic startup scan only. Older documents remain
+accessible via targeted reads at any point during the session.
+
+The index is loaded as the final step of session-start, so it sits at the
+recency end of the primacy zone: captured reliably, and the operator's first
+instruction still lands in the recency slot at the very end of the context.
