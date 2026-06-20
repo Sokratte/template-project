@@ -32,3 +32,4 @@
 - [ ] Soft-wrap fix (option A): skeleton files done this session — templates/ still pending
 
 ## Git
+cec11a5 · Status: clean
