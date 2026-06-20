@@ -10,8 +10,8 @@ document types — sessions, research, decisions, plans, specs.
 
 **Index a directory** (one line per file, no full reads):
 ```bash
-head -qn1 docs/sessions/*.md
-head -qn1 docs/decisions/*.md
+for f in docs/sessions/*.md; do head -1 "$f"; done
+for f in docs/decisions/*.md; do head -1 "$f"; done
 ```
 
 **Read a file's abstract** (everything before the first `##`):
@@ -30,7 +30,8 @@ awk '/^## Design/{f=1;print;next} f&&/^## /{exit} f' FILE.md
 ```
 
 These three moves — index, abstract, section — cover every read pattern.
-Large documents are not split into files; they are sectioned at read-time.
+Documents are never split into files for size; they are sectioned at read-time
+and grow as large as they need to.
 
 ## Line-1 format
 
@@ -47,14 +48,14 @@ as prose where it belongs.
 ## Abstract
 
 The abstract is everything from line 1 down to (not including) the first `##`
-heading. ADRs, specs, and plans open with the same three-field block in this
-order — `**Status:**`, then `**Created:** · **Updated:**` — followed by a
-standalone summary of what the document decides, describes, or records, long
-enough to stand on its own in the index (one sentence is too little for a
-1,000-line spec). Sessions and research use their own lighter heads (see the
-templates below). The terminator is the first `##` — a forgotten `##` is
-essentially impossible in a structured document, whereas a forgotten `---`
-delimiter would silently make awk read the whole file.
+heading. ADRs, specs, and plans open with the same head block in this order —
+`**Status:**`, then `**Created:** · **Updated:**` — followed by a standalone
+summary in plain language of what the document decides, describes, or records, long enough to
+stand on its own in the index (one sentence is too little for a 1,000-line
+spec). Sessions and research use their own lighter heads (see the templates
+below). The terminator is the first `##` — a forgotten `##` is essentially
+impossible in a structured document, whereas a forgotten `---` delimiter would
+silently make awk read the whole file.
 
 Do not put a `##` heading inside an abstract.
 
@@ -72,101 +73,59 @@ Size governance for skeleton files is defined in ADR-002.
 
 ## Document types
 
-| Type | Location | Naming | Line 1 | Notes |
-|------|----------|--------|--------|-------|
-| Session log | `docs/sessions/` | `YYYY-MM-DD-topic-slug.md` | `filename \| keywords` | Created at session start, filled during work |
-| Research | `docs/research/` | `YYYY-MM-DD-topic-slug.md` | `filename \| keywords` | `**Scope:**` + short answer in abstract |
-| Decision (ADR) | `docs/decisions/` | `ADR-NNN-topic-slug.md` | `filename \| keywords` | Changed by supersede-in-place, not rewrite (see below) |
-| Plan | `docs/plans/` | `PLAN-NNN-topic-slug.md` | `filename \| keywords` | Move to `plans/archive/` when done |
-| Spec | `docs/specs/` | `SPEC-NNN-topic-slug.md` | `filename \| keywords` | Status Draft/Active/Superseded; stays in place |
+| Type | Location | Naming | Line 1 |
+|------|----------|--------|--------|
+| Session log | `docs/sessions/` | `YYYY-MM-DD-topic-slug.md` | `filename \| keywords` |
+| Research | `docs/research/` | `YYYY-MM-DD-topic-slug.md` | `filename \| keywords` |
+| Decision (ADR) | `docs/decisions/` | `ADR-NNN-topic-slug.md` | `filename \| keywords` |
+| Plan | `docs/plans/` | `PLAN-NNN-topic-slug.md` | `filename \| keywords` |
+| Spec | `docs/specs/` | `SPEC-NNN-topic-slug.md` | `filename \| keywords` |
+
+## Lifecycle notes
+
+How each type changes over time and where its status values come from. The
+status field tracks the *document*, never the implementation — implementation
+progress lives in ROADMAP / work-backlog (one fact, one home).
+
+**Session log** — created at session start, filled during the work.
+
+**Research** — archive when stale.
+
+**Decision (ADR)** — a durable record, not a frozen one. Typo or small
+clarification: fix in place, check the blast radius first (what cites this?).
+Real change of substance: do not rewrite the old text away — mark the
+superseded passage (`~~SUPERSEDED~~`), set `**Status:** Superseded`, append a
+dated `## Addendum` explaining what changed and why. The old reasoning stays
+visible as the record of what was true before. (Legal texts amend this way:
+strike, don't delete; append.) Status: `Draft | Accepted | Superseded by
+ADR-NNN | Deprecated`.
+
+**Plan** — a living reference, not a disposable checklist. When implementation
+is finished, move it to `docs/plans/archive/`. Status: `Draft plan` (still
+being written) → `Plan ready` (ratified, not yet started) → `Implementation in
+progress` → `Implementation completed`.
+
+**Spec** — the target; defines what "done" looks like. Code that contradicts a
+spec is a bug. A spec is the living reference and is not archived for being
+implemented. Status: `Draft` (still being written) → `Active` (ratified, code
+is judged against it) → `Superseded` (replaced by a newer spec; left in place,
+not deleted).
 
 ## Templates
 
-The canonical shape of each document type. Copy the block, keep the structure.
-In every case the abstract is everything between line 1 and the first `##`.
-
-### Session log
-
-`docs/sessions/YYYY-MM-DD-slug.md` — line 1 is the index, read via
-`head -qn1 docs/sessions/*.md`. Abstract = the Goal block, down to `## What was done`.
-Target ~600 words, hard limit 1,000. Over → extract a finding to its permanent
-home and leave a pointer.
-
-```
-2026-06-18-readme-pass.md | readme, docs convention, skeleton slimming, soft-wrap
-
-# Session NN — Topic
-
-**Goal:** What we set out to do.
-
-## What was done
-
-Narrative of the work. Extract durable findings to their permanent home
-(spec, research, operational memory) and leave a pointer here, not the full
-finding.
-
-## Open / carry-forward
-
-- [ ] still open
-- [x] resolved this session
-
-## Git
-
-Commits: abc1234 · Status: clean / pending push
-```
-
-### Research
-
-`docs/research/YYYY-MM-DD-slug.md` — line 1 is this file's entry in the
-directory index; grep across the index before re-researching. Abstract = Scope
-+ the short answer, down to `## Question`. Not loaded at startup; found via the
-keyword index. Archive when stale.
-
-```
-2026-04-17-project-structure-standards.md | AGENTS.md, conventional commits, semver, ADR, spec-driven, context budget
-
-# Research: Topic title
-
-**Scope:** What question this answers.
-
-Abstract: the short answer to the question, in plain language, enough to be
-useful straight from the index. Ends at the first ##.
-
-## Question
-
-What was asked.
-
-## Answer
-
-The findings, structured to fit.
-
-## Sources
-
-- URL / citation
-```
+The canonical shape of each document type — copy the block, keep the structure.
 
 ### Decision (ADR)
-
-`docs/decisions/ADR-NNN-slug.md` — line 1 is this file's entry in the
-directory index. Abstract = Status + the decision paragraph, down to
-`## Context`. An ADR is a durable record, not a frozen one: fix typos and
-small clarifications in place (check the blast radius first — what cites this?).
-For a real change of substance, do **not** rewrite the old text away —
-mark the superseded passage (strike it through or label it `~~SUPERSEDED~~`),
-set `**Status:** Superseded`, and append a dated `## Addendum` explaining what
-changed and why. The old reasoning stays visible as the record of what was
-true before. (Legal texts amend this way: strike, don't delete; append.)
 
 ```
 ADR-001-project-standard.md | workspace template, industry standards, pointer pattern, cp -r, agent orientation
 
-# ADR-NNN: Title
+# Decision NNN: Title
 
-**Status:** Draft | Accepted | Superseded by ADR-NNN | Deprecated
+**Status:** Draft | Accepted | Superseded by Decision NNN | Deprecated
 **Created:** YYYY-MM-DD · **Updated:** YYYY-MM-DD
 
-One-paragraph abstract: the decision in plain language and why, so the index
-hit is self-explanatory. Ends at first ##.
+Abstract: the decision and why.
 
 ## Context
 
@@ -190,24 +149,20 @@ We will use X because Y.
 
 ### Plan
 
-`docs/plans/PLAN-NNN-slug.md` — line 1 is this file's entry in the directory
-index. Abstract = Created/Updated + the abstract paragraph, down to `## Goal`.
-A living reference, not a disposable checklist. Done → move to `docs/plans/archive/`.
-
 ```
 PLAN-001-multi-vm-agent-architecture.md | canonical AGENTS.md, agents_sync.sh, OPERATOR.md, deploy keys, override, marker file
 
-# PLAN-NNN: Topic
+# PLAN NNN: Title
 
-**Status:** Draft | Active | Done | Superseded
+**Status:** Draft plan | Plan ready | Implementation in progress | Implementation completed
 **Created:** YYYY-MM-DD · **Updated:** YYYY-MM-DD
 
-Abstract (plain language): what's missing, what this achieves, why it matters
-now. Ends at first ##.
+Abstract: what's missing, what this achieves, why it matters
+now.
 
 ## Goal
 
-One sentence.
+Short Description
 
 ## Non-goals
 
@@ -229,25 +184,15 @@ The decision, 2–4 lines. Add more as they're made.
 
 ### Spec
 
-`docs/specs/SPEC-NNN-slug.md` — line 1 is this file's entry in the directory
-index. Abstract = Status + the standalone summary, down to `## Non-goals`. The
-target — defines what "done" looks like. Code that contradicts a spec is a bug.
-Status tracks the *document*, not the implementation: `Draft` (still being
-written), `Active` (ratified, the reference code is judged against), or
-`Superseded` (replaced by a newer spec; left in place, not deleted). How far
-the code has caught up lives in ROADMAP / work-backlog, not here.
-
 ```
 SPEC-003-agent-memory-system.md | file-based memory, procedural, operational, work-backlog, session lifecycle, decay sweep
 
-# SPEC-NNN: Feature name
+# Specification NNN: Title
 
 **Status:** Draft | Active | Superseded
 **Created:** YYYY-MM-DD · **Updated:** YYYY-MM-DD
 
-Abstract: what this builds and why, enough to stand alone in the index — a
-spec can run 1,000+ lines, so one sentence is too little. As long as it needs,
-ends at first ##.
+Abstract: what this builds and why.
 
 ## Non-goals
 
@@ -265,4 +210,53 @@ What to build — modules, data flow, interfaces. Not line-by-line instructions.
 ## Open questions
 
 - [ ] …
+```
+
+### Research
+
+```
+2026-04-17-project-structure-standards.md | AGENTS.md, conventional commits, semver, ADR, spec-driven, context budget
+
+# Research: Topic title
+
+**Scope:** the question.
+
+Abstract: short summary of findings & answer.
+
+## Question
+
+What was asked.
+
+## Answer
+
+The findings, structured to fit.
+
+## Sources
+
+- URL / citation
+```
+
+### Session log
+
+```
+2026-06-18-NNN-readme-pass.md | readme, docs convention, skeleton slimming, soft-wrap
+
+# Session NNN — Title
+
+**Goal:** What we set out to do.
+
+## What was done
+
+Narrative of the work. Extract durable findings to their permanent home
+(spec, research, operational memory) and leave a pointer here, not the full
+finding.
+
+## Open / carry-forward
+
+- [ ] still open
+- [x] resolved this session
+
+## Git
+
+Commits: abc1234 · Status: clean / pending push
 ```
