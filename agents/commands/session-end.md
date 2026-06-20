@@ -24,14 +24,7 @@ Closing procedure. Do all of it before you say "done." No step is optional; none
 
 6. **CHANGELOG.md** — add entries under `[Unreleased]` for any user-visible changes: Added, Changed, Fixed, Removed, Deprecated, Security.
 
-7. **Commit and push:**
-   ```
-   git status                  # check first — parallel edits?
-   git add <specific files>    # only the files you worked on — never -A
-   git commit -m "<type>(scope): <description>"
-   git push                    # if push: on for this project and origin is set
-   ```
-   Never force-push. If rejected, diff against remote, merge by hand, then push. Confirm with `git status` afterward — tree must be clean.
+7. **Commit and push:** Stage only the files you worked on, commit with a Conventional Commit message, push if enabled. Verify with `git status` afterward — tree must be clean.
 
 8. **Report** — one sentence each: what was accomplished, what is open, what the next session should open first.
 
