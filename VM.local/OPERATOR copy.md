@@ -1,46 +1,22 @@
 # OPERATOR.md
 
-*VM-local. Not committed. Not synced. PII — stays on this machine only.*
-*One file per VM. Edit freely; the agent reads this at every session start.*
-
----
-
-## Identity
+## Operator identity
 
 **Operator handle:** Martin
-**VM:** MacBook2
-**Platform:** MacBook Pro, macOS, Apple Silicon
-**Timezone:** Europe/Berlin
-**Primary language:** German (conversation); English (all file content)
+**Languages:** German (conversation); English (all file content)
 
----
+## Agent behaviour
 
-## Operator profile
-
-- Iterative and critical: pushes back on complexity, redundancy, anything that adds files
-  or mechanisms without clear demonstrated value.
-- Hard preference for simplicity and anti-extra-files.
-- Catches design problems via failure-cost reasoning.
-- Specs before non-trivial implementation; sign-off on every step.
-- Strong signal phrases: *"this is really, really bad"* = duplication found;
-  *"Go!"* = proceed without further deliberation.
-
----
+**Push:** governed by `push:` in each project's `AGENTS.override.md` (on / confirm / off).
+**Autonomy:** Craftsman / checkpoint (sign-off each non-trivial step).
+**Persona:** Tinkerbuddy.
 
 ## VM facts
 
+**Timezone:** Europe/Berlin
+**Platform:** MacBook Pro, macOS, Apple Silicon
 **Workspace root:** ~/projects/
 **Projects:** /Users/martin/projects/[project-name]/
-**Filesystem MCP allowed:** /Users/martin/projects, /Users/martin/recovery
-
-**Active projects:**
-- template-project — canonical pattern / infra work
-- WhisperDog — TODO
-- TradingBot — TODO
-- maisig — TODO
-- tbh — TODO
-
----
 
 ## Conventions on this VM
 
@@ -61,19 +37,16 @@
 - Building from scratch without checking if the prototype already solved it.
 - Guessing instead of asking — a question costs 30 seconds, a wrong build costs hours.
 
----
+## Operator profile
 
-## Agent behaviour on this VM
+- Iterative and critical: pushes back on complexity, redundancy, anything that adds files or mechanisms without clear demonstrated value.
+- Hard preference for simplicity and anti-extra-files.
+- Catches design problems via failure-cost reasoning.
+- Specs before non-trivial implementation; sign-off on every step.
+- Strong signal phrases: *"this is really, really bad"* = duplication found; *"Go!"* = proceed without further deliberation.
 
-**Push:** governed by `push:` in each project's `AGENTS.override.md` (on / confirm / off).
-**Autonomy:** Craftsman / checkpoint (sign-off each non-trivial step).
-**Persona:** Tinkerbuddy.
+## Notes (belongs to scratchpad!!?)
 
----
-
-## Notes
-
-*(Observations about this operator that don't fit above — working style, recurring
-preferences, things to remember. Append; do not overwrite.)*
-
-- TODO: fill in as sessions accumulate.
+- Treats token economy as a first-class design constraint, not an afterthought: aware that every turn re-sends the full transcript (quadratic cost growth), so prefers short sessions and hard cuts over sprawling ones. Keep sessions tight; propose a cut when a topic is done rather than rolling on.
+- Strong preference for structural fixes over procedural rules: when an error is possible, change the structure so it cannot occur, rather than adding a "remember to..." instruction. Reaches for general+robust over specific+listed every time.
+- Stress-tests ideas by floating a hypothesis and asking for the evidence/probability — wants pushback and a real literature check, not agreement. Give probability estimates and at least one alternative.
