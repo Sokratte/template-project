@@ -71,7 +71,6 @@ A 2,000-line spec costs the same to orient as a 200-line one. Big specs/plans st
 | `work-log.md` | `worklog-archive.md` | done items, append-only history | terminal | never auto-read; grep on demand |
 
 - "Append-only" belongs to `work-log.md`, not the backlog. The backlog is a pruned living list.
-- The >20-item alarm is the meaningful signal for the backlog, replacing the old 60/100-line limits.
 - Names: "backlog" = ahead (open), "log" = behind (done).
 - **Done on disk (session 10):** both `git mv`s committed (`4a00939`), history preserved 100%.
 

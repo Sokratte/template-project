@@ -9,7 +9,6 @@ Closing procedure. Do all of it before you say "done." No step is optional; none
 2. **Work ledger** — `agents/notes/work-backlog.md` + `agents/notes/work-log.md`
    - Finished items: **move** the line from `work-backlog.md` to `work-log.md` (append-only) with `[DONE]` and today's date. Do not leave a `[DONE]` line behind in the backlog.
    - New open items found this session: add to `work-backlog.md` as `[OPEN]`/`[ACTIVE]`/`[FIND]`.
-   - If `work-backlog.md` is over 20 open items: alert the operator.
 
 3. **Scratchpad** — `agents/notes/scratchpad.md`
    - **Carry-forward:** remove items that are resolved or captured elsewhere; add anything the next session must know. Keep it tight — it is re-read at every start.
@@ -34,7 +33,4 @@ Checklist (tick before "done"):
 - [ ] Session log filled (line 1: `filename | keywords`; durable findings extracted with pointers)
 - [ ] Finished items moved backlog → log; new open items in backlog
 - [ ] Scratchpad reconciled (carry-forward kept tight)
-- [ ] Memory updated (strengthen on recall; new gotchas → operational; operator observations → OPERATOR.md, never the tree)
-- [ ] Specs verified accurate
-- [ ] CHANGELOG updated (if user-visible changes)
 - [ ] Committed + pushed if enabled; tree clean
