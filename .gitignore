@@ -33,3 +33,6 @@ secrets/
 
 # Logs
 *.log
+
+# Person-bound — never commit
+agents/rules/personal.md

@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `agents/rules/README.md` rewritten: documents `project.md` (committed) and `personal.md` (person-bound, gitignored); removes stale `global.md` reference
+- `agents/rules/project.md` stripped to skeleton: H1 + `## Rules` placeholder only
+- All skeleton files (`AGENTS.override.md`, `agents/rules/personal.md`, `agents/memory/procedural.md`, `agents/notes/scratchpad.md`, `agents/notes/work-backlog.md`, `agents/commands/session-start.md`): new H1 headers with word limits where applicable, HTML comments removed, hard line breaks fixed
+- `agents/commands/session-start.md`: `OPERATOR.md` reference updated to `LOCAL.md`
+- `~/projects/AGENTS.md` (global): hard line breaks removed in principles 1–3, Documents and Git Staging
+
+### Added
+
+- `agents/rules/personal.md` added to `.gitignore` (person-bound, never committed)
+
+
 ### Added
 
 - `## Startup index budget` section in `docs/research/2026-06-19-context-budget-and-file-limits.md`: per-doc-type caps for the session-start index (all decisions/specs/plans, last 10 research, last 5 sessions; ~660 tokens) and the recency-position rationale

@@ -1,4 +1,6 @@
-<!-- Open work, read fully every session — see README. One line per item: `YYYY-MM-DD | MODULE | [TAG] | description | file-ref`; TAG is [OPEN]/[ACTIVE]/[FIND]. When an item is done, MOVE its line to work-log.md (no [DONE] left here). Alarm if over 20 items. -->
+# Work Backlog · soft: 500 · hard: 1000
+
+One line per item: `YYYY-MM-DD | MODULE | [TAG] | description | file-ref`; TAG is `[OPEN]`, `[ACTIVE]`, or `[FIND]`. When done, move the line to `work-log.md`. Alarm if over 20 items.
 
 2026-06-20 | INFRA      | [OPEN]    | MCP server tool ordering: order exec first in registry response (primary tool), then git, then read/write/search/list (convenience wrappers). Ensures exec loads on generic tool_search, avoids second search when operator provides argv. | MCP server
 2026-06-18 | DOCS       | [OPEN]    | Finish README documentation pass: docs/* READMEs (specs, plans, sessions, decisions, research — structure/convention only, NOT per-file listings) and bare-scaffold READMEs (src/, docs/tests/, tools/). agents/ is done. | docs/, src/, tools/
@@ -8,3 +10,4 @@
 2026-06-19 | DOCS       | [OPEN]    | Skeleton-file token thresholds are a derived baseline (research 2026-06-19-context-budget); revisit after ~1 week — if a file sits green with huge headroom or nags at yellow, the threshold is wrong, not the file. | OPERATOR.md
 2026-06-19 | DOCS       | [OPEN]    | Soft-wrap fix (option A): convert all templates + skeleton files to genuine soft-wrap (no hard line breaks mid-paragraph), so the agent imitates the right pattern. Root cause of the never-working soft-wrap rule is hard-wrapped examples, not weak wording. Option B (MCP rejects mid-paragraph \n) deferred. | templates/, agents/, docs/
 2026-06-19 | INFRA      | [OPEN]    | MCP file tools return word count on every read/write (len(content.split())) — feeds the soft/hard line-1 file-limit check in AGENTS.md. Cheap: content is already in hand. Words chosen over bytes (closer to tokens, model-independent). | MCP server
+2026-06-20 | DOCS       | [OPEN]    | session-end.md step 5 still references OPERATOR.md — update to LOCAL.md. | agents/commands/session-end.md

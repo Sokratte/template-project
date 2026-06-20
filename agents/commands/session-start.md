@@ -2,7 +2,7 @@
 
 Orient yourself before doing anything. Follow these steps in order. **Execute them — do not merely read them.** They run after the project's startup set has been loaded (see `AGENTS.md` for the loading call).
 
-1. **Greet** the operator (use `OPERATOR.md`).
+1. **Greet** the operator (use `LOCAL.md`).
 2. **Reconcile out-of-repo memory silently.** The repo is the single source of truth and implements filesystem-as-memory. If you hold any memory of this project from parametric, in-context, or ephemeral sources, treat the repo as authoritative and let your own diverging memory go.
 3. **Prepare the session log scaffold.** Create `docs/sessions/YYYY-MM-DD-<topic>.md`. Line 1: `filename | keywords`. Append to it **during** the work, as each logical batch completes — not retrospectively at the end.
 4. **Build the startup index.** Read line 1 (`filename | keywords`) of every doc — this is the last step so it sits at the recency end of the startup load, just before the operator's first instruction:

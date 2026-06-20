@@ -1,25 +1,16 @@
 # agents/rules/ — working rules
 
-Rules for *how the agent works* — project-specific conventions, workspace craft rules.
-Two files, two scopes:
+Two files, two scopes. Both loaded at every session start.
 
-| File | Scope | Loaded |
-|------|-------|--------|
-| `project.md` | This project only — tech stack, naming conventions, local workflow rules | Every session start (in the startup call) |
-| `global.md` | *(merged into `~/projects/AGENTS.md`; moved to `.trash`)* | n/a |
+| File | Scope | Committed |
+|------|-------|-----------|
+| `project.md` | This project — tech stack, naming conventions, local workflow rules | ✅ Yes |
+| `personal.md` | Operator preferences, working style, signal phrases, anti-patterns | ❌ No (person-bound) |
 
-## Where rules live
+## `project.md`
 
-- **`agents/rules/project.md`** — rules specific to *this project*. Anything the agent
-  must know about how to work here that is not a memory entry and not an operator
-  preference. Committed; travels with the clone.
-- **`~/projects/AGENTS.md`** — workspace-wide craft rules (workflow, editing laws, quality
-  standards). Fixed; not changed per-project.
-- **`agents/memory/procedural.md`** — learned lessons and gotchas for this project.
-  Grows over time; pruned when stale.
-- **`~/projects/OPERATOR.md`** — who the operator is and how they like to work.
-  Person-bound; never committed.
+Rules specific to this project. Anything the agent must know about how to work here that is not a learned lesson (`agents/memory/procedural.md`) and not a workspace-wide rule (`~/projects/AGENTS.md`). Committed; travels with every clone.
 
-The test for where a rule goes: is it about *this project's craft* (project.md), *this
-workspace in general* (AGENTS.md), *a learned lesson* (procedural.md), or *this person*
-(OPERATOR.md)?
+## `personal.md`
+
+Operator profile and preferences. Person-bound — never committed. The test: if a rule is about *this person's* working style, it goes here. If it's about *this project's craft*, it goes in `project.md`.

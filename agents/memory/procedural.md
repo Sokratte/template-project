@@ -1,2 +1,3 @@
-<!-- Procedural rules, loaded every session — see README. Add as `- always do X [2026-06-18 x1]`; each time a rule proves useful, set today's date and raise the xN count by one. -->
+# Procedural Memory · soft: 400 · hard: 800
 
+Add entries as `- always do X [YYYY-MM-DD x1]`; each time a rule proves useful, update the date and increment the count.

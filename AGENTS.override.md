@@ -1,4 +1,4 @@
-# AGENTS.override.md — project-specific overrides
+# AGENTS.override.md
 
 This file overrides the canonical `AGENTS.md` for this project. On any conflict, this file wins.
 
