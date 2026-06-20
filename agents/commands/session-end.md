@@ -2,7 +2,7 @@
 
 Closing procedure. Do all of it before you say "done." No step is optional, none deferred to "next session." **Execute these steps — do not merely read them.**
 
-Report one line per step, mark first so the lines stack: `✓` checked and clean, `✗` needs attention. Each step names what is worth a `✗`; routine mechanics (a file was updated) never count beyond the `✓`.
+Report one line per step, mark first so the lines stack: ✅ checked and clean, ❌ needs attention. Each step names what is worth a ❌; routine mechanics (a file was updated) never count beyond the ✅.
 
 1. **Specs** — `docs/specs/`
    If any spec changed or was created this session, verify it reflects what was actually built or decided.
