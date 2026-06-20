@@ -16,6 +16,10 @@
 
 **session-end.md overhauled** in two passes: (1) removed prune-at-red step (covered by AGENTS.md file-limits on every read), all `§10`/`ADR-002` dead references, and operational.md over-explanation; (2) collapsed git step — rules already in AGENTS.md, session-end only needs the call-to-action.
 
+**session-end.md restructured (this pass):** steps renumbered cleanly 1–8 (Specs → CHANGELOG → Session log → Work ledger → Memory → Scratchpad → Commit/push → Report); Scratchpad moved to last — the "what remains" step, filled only after ledger/memory have drained matured items. Added a per-step report model: each step emits one line, mark-first (`✓` clean / `✗` needs attention); steps 1–6 are criterion-based, each naming a `*Flag if:*` threshold; steps 7–8 unconditional ("always"). Bottom checklist removed (duplicated the eight steps). Intro trimmed to two sentences. Ordering rationale: memory artefacts describe end-of-session state, so they follow content artefacts; scratchpad last to honour write-first-delete-second.
+
+**SPEC-002 found untracked:** `docs/specs/SPEC-002-dev-mcp-server.md` (Active, project-scoped dev MCP server, 5 tools) sits untracked — belongs to this session's MCP thread but was never committed. Committed separately from the session-end.md change.
+
 ## Open / carry-forward
 
 - [ ] CREATE_PROJECT.md: persona step, work-backlog/log table, OPERATOR.md doku
