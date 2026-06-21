@@ -24,7 +24,7 @@ Report one line per step, mark first so the lines stack: ✅ checked and clean, 
 5. **Memory** — `agents/memory/procedural.md` / `agents/memory/operational.md`
    - *Strengthen on recall:* used an entry and it helped → patch its tag (today's date, counter +1: `[YYYY-MM-DD xN]`).
    - *New gotchas:* add to `operational.md` only — recurring, non-obvious from the error, not reachable by nearby docs. Start at `x1`, today's date.
-   - *Operator observations:* record in `~/projects/OPERATOR.md` — NEVER in the project tree.
+   - *Operator observations:* record in `~/projects/LOCAL.md` — NEVER in the project tree.
    *Flag if:* a new gotcha changes how future sessions should work.
 
 6. **Scratchpad** — `agents/notes/scratchpad.md`

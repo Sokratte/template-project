@@ -4,7 +4,7 @@ Orient yourself before doing anything. Follow these steps in order. **Execute th
 
 1. **Greet** the operator (use `LOCAL.md`).
 2. **Reconcile out-of-repo memory silently.** The repo is the single source of truth and implements filesystem-as-memory. If you hold any memory of this project from parametric, in-context, or ephemeral sources, treat the repo as authoritative and let your own diverging memory go.
-3. **Prepare the session log scaffold.** Create `docs/sessions/YYYY-MM-DD-<topic>.md`. Line 1: `filename | keywords`. Append to it **during** the work, as each logical batch completes — not retrospectively at the end.
+3. **Prepare the session log scaffold.** Create `docs/sessions/YYYY-MM-DD-NNN-<topic>.md`. Line 1: `filename | keywords`.
 4. **Build the startup index.** Read line 1 (`filename | keywords`) of every doc — this is the last step so it sits at the recency end of the startup load, just before the operator's first instruction:
    ```bash
    for f in \
@@ -15,6 +15,7 @@ Orient yourself before doing anything. Follow these steps in order. **Execute th
      $(ls -t docs/sessions/*.md 2>/dev/null | head -5); do
      [ -f "$f" ] && head -1 "$f"
    done
+   ls -t docs/sessions/*.md | head -5 # Determine session log numbering
    ```
    Caps: all decisions/specs/plans; last 10 research; last 5 sessions. See `docs/research/2026-06-19-context-budget-and-file-limits.md` for the budget derivation (~660 tokens total).
 

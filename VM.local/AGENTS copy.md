@@ -1,6 +1,8 @@
+# AGENTS
+
 ## Who we are
 
-The operator (see OPERATOR.md) and you (the agent) build together. You build *with* him, not for him.
+The operator (see LOCAL.md) and you (the agent) build together. You build *with* him, not for him.
 
 ## Where you are
 
@@ -15,31 +17,24 @@ Read and write only inside `~/projects/`. Stay inside your active project — do
 
 ## How you work
 
+**Autonomy:** governed in `LOCAL.md`.
+- `reviewer` — run everything past the operator first; do not execute before explicit approval.
+- `checkpoint` — describe before acting; execute on clear instruction (default).
+- `operator` — full autonomy within scope; report after, not before.
+
 These four principles govern every task. The workflow and laws below are how they play out in practice — when in doubt, return to these.
 
 ### 1. Think before acting
 
-Before implementing anything: state your assumptions explicitly. If multiple interpretations
-exist, present them — do not pick silently. If a simpler approach exists, say so and push
-back. If something is unclear, stop, name what is confusing, and ask. One question at a
-time; wait for the answer.
+Before implementing anything: state your assumptions explicitly. If multiple interpretations exist, present them — do not pick silently. If a simpler approach exists, say so and push back. If something is unclear, stop, name what is confusing, and ask. One question at a time; wait for the answer.
 
 ### 2. Simplicity first
 
-Minimum code that solves the problem. Nothing speculative. No features beyond what was
-asked. No abstractions for single-use code. No flexibility or configurability that was not
-requested. No error handling for impossible scenarios. If you write 200 lines and it could
-be 50, rewrite it. Ask: "Would a senior engineer say this is overcomplicated?" If yes,
-simplify.
+Minimum code that solves the problem. Nothing speculative. No features beyond what was asked. No abstractions for single-use code. No flexibility or configurability that was not requested. No error handling for impossible scenarios. If you write 200 lines and it could be 50, rewrite it. Ask: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
 
 ### 3. Surgical changes
 
-Touch only what you must. Clean up only your own mess. When editing existing code or files:
-do not improve adjacent code, comments, or formatting; do not refactor things that are not
-broken; match existing style even if you would do it differently; if you notice unrelated
-dead code, mention it — do not delete it. When your changes create orphans (imports,
-variables, functions your edit made unused), remove them. Every changed line must trace
-directly to the operator's request.
+Touch only what you must. Clean up only your own mess. When editing existing code or files: do not improve adjacent code, comments, or formatting; do not refactor things that are not broken; match existing style even if you would do it differently; if you notice unrelated dead code, mention it — do not delete it. When your changes create orphans (imports, variables, functions your edit made unused), remove them. Every changed line must trace directly to the operator's request.
 
 ### 4. Goal-driven execution
 
@@ -56,10 +51,9 @@ Every task is **Spec → Plan → Build → Test**, expanded:
 
 ## Laws
 
-1. **Read before write.** Never edit without reading current state first.
+1. **Never hard-delete files.** Move them to `.trash/` at the project root.
 2. **Write boundaries.** Never write outside your declared scope. If undeclared, ask.
 3. **No silent changes.** Every modification appears in the changelog.
-4. **Surgical edits only.** (See principle 3, "Surgical changes," above.)
 5. **Verify after.** Grep for old patterns — zero hits before declaring done.
 6. **Dry-run first.** Bulk operations: script → dry run → show output → approval → apply.
 7. **Stop on breakage.** If a fix breaks something unrelated, stop and restore first.
@@ -67,12 +61,9 @@ Every task is **Spec → Plan → Build → Test**, expanded:
 
 ## Quality standards
 
-These exist because every one of them was violated and caused real damage.
-
 1. **Test the real code.** A test imports and exercises the real module. Copy-pasting logic into a test is theatre, not testing.
-2. **Verify before claiming.** "This API doesn't exist" requires proof. If you have not checked, say "I'm not sure" — do not assert.
 3. **Surface assumptions.** State assumptions explicitly before implementing. Do not pick an interpretation silently when multiple exist.
-4. **Design first, implement once.** If a task touches more than one file or security- relevant logic, write the module decomposition and get approval before writing code.
+4. **Design first, implement once.** If a task touches more than one file or security-relevant logic, write the module decomposition and get approval before writing code.
 5. **Never leak secrets.** Do not print tokens, keys, or credentials to stdout, logs, scrollback, or chat.
 6. **Put things where they belong.** Config, state, and secrets each have one canonical location, self-documenting from its path alone.
 7. **"Done" means done.** Do not say done while known blockers, untested paths, or open questions exist. List what remains. If the list is empty, then say done.
@@ -87,8 +78,6 @@ These exist because every one of them was violated and caused real damage.
 
 **On a git-diff guard failure** (overwrite rejected because uncommitted changes exist): show the diff to the operator, ask how to proceed. Do not ask for permission to bypass.
 
-**Never hard-delete files.** Move them to `.trash/` at the project root.
-
 **Never use `overwrite_file` on a file you have not read this session.**
 
 ## File limits
@@ -99,15 +88,13 @@ Every file read returns the file's word count. When a file you read exceeds its 
 
 ## Documents
 
-The content of a project lives in five kinds of file: **decisions** (why), **specs**
-(what we want), **plans** (how / implementation), **session logs** (what happened),
-**research** (prior art).
+The content of a project lives in five kinds of file: **decisions** (why), **specs** (what we want), **plans** (how / implementation), **session logs** (what happened), **research** (prior art).
 
 ## Session log discipline (non-negotiable)
 
 Session logs are the operator's only durable record of what happened. Without them, work is invisible and unverifiable.
 
-1. Create the session log **before the first change** — not after, not at the end of the session. File naming: `docs/sessions/YYYY-MM-DD-NNN-<slug>.md`. Line 1: `filename | keywords`.
+1. Create the session log **before the first change** — not after, not at the end of the session.¥
 2. Update after every logical batch of work: a commit, a deploy, a test run, a design decision, a significant finding.
 3. Include what you did, what you found, what broke, and what is next. Not just "fixed X" — include the reasoning, the verification, the open items.
 4. The changelog is separate. The session log is the narrative; the changelog is the structured record. Both are required.
@@ -115,13 +102,12 @@ Session logs are the operator's only durable record of what happened. Without th
 
 ## Git
 
-**Staging:** always `git add <explicit paths>`. Never `git add -A` or `git add .` —
-parallel uncommitted work by the operator or another session would be swept into your commit.
+**Staging:** always `git add <explicit paths>`. Never `git add -A` or `git add .` — parallel uncommitted work by the operator or another session would be swept into your commit.
 
 **Commit messages:** Conventional Commits — `<type>(<scope>): <description>`.
 Examples: `docs(agents): update git rules`, `chore(repo): remove global.md`.
 
-**Push:** governed by `push:` in `AGENTS.override.md`.
+**Push:** governed in `LOCAL.md`.
 - `on` — push after every session-end commit without prompting.
 - `confirm` — show the commit summary, ask once, push only on explicit yes.
 - `off` — never push; operator pushes manually.
@@ -132,20 +118,14 @@ Examples: `docs(agents): update git rules`, `chore(repo): remove global.md`.
 
 **Index lock:** if `git add` or `git commit` fails with `Unable to create '.git/index.lock'`, stop immediately. Do not retry. Report to the operator — another session may be mid-commit. The operator clears the lock manually (`rm .git/index.lock`) only after confirming no other session is writing.
 
-## Startup
+## Session Startup - Step 3 & 4
 
-Select the project: 1 → pick; >1 and prompt >50% clear → pick; unclear → if the 3 recent
-sessions agree, pick, else stop and ask; none/new → run `CREATE_PROJECT.md`.
+The session-setup instruction (delivered when the MCP server is loaded) drives
+the startup sequence and issues the two exec calls. This section is the
+reference for the one decision that instruction delegates here: which project.
 
-Then enter the project and load its startup set in one call — rules first, procedure last —
-and execute the steps in `agents/commands/session-start.md`:
+Select the project: 1 → pick; >1 and prompt >50% clear → pick; unclear → if the
+3 recent sessions agree, pick, else stop and ask; none/new → run `CREATE_PROJECT.md`.
 
-```bash
-cd ~/projects/<project-name>/ \
-  && cat AGENTS.override.md agents/rules/project.md agents/memory/procedural.md \
-         agents/notes/scratchpad.md agents/commands/session-start.md \
-  && echo "=== ROADMAP ===" && awk '/^## /&&++n==2{exit} 1' ROADMAP.md \
-  && echo "=== WORK-BACKLOG ===" && cat agents/notes/work-backlog.md
-```
-
-<!-- We need to look trough **all** files and standardise the first line, maybe then we can skip on those: echo "=== ROADMAP ===" && -->
+Once the project is known, the setup instruction loads its startup set
+(rules first, procedure last) and runs `agents/commands/session-start.md`.
