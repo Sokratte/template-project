@@ -1,6 +1,6 @@
 # agents/rules/ — working rules
 
-Two files, two scopes. Both loaded at every session start.
+Every files has a different scope. personal and project are both loaded at every session start. Other rules are loaded as needed. Exact implementation details still open.
 
 | File | Scope | Committed |
 |------|-------|-----------|
