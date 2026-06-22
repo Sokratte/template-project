@@ -31,4 +31,4 @@ Started on four small items (operational.md searchability, a stale README quotin
 - Stray `VM.local/README copy.md` looks like cruft. -> backlog.
 - ADR-002 body still names historical.md (lines ~52, 68) -- intentional point-in-time record.
 
-Committed: COMMIT_HASH_PENDING
+Committed: 5d6694d
