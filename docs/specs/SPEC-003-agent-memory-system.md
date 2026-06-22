@@ -1,9 +1,9 @@
-SPEC-003-agent-memory-system.md | agent memory, session lifecycle, file-based memory, procedural, operational, historical, work-backlog, work-log, scratchpad, session-start, session-end, traffic-light, PLAN-001, PLAN-002
+SPEC-003-agent-memory-system.md | agent memory, session lifecycle, file-based memory, procedural, operational (no-limit index floor), autonomous memory lifecycle, per-session usefulness, promotion demotion, memory_cutoff, work-backlog, work-log, scratchpad, session-start, session-end, traffic-light, PLAN-001, PLAN-002
 
 # SPEC-003 — Agent Memory & Session System
 
 **Status:** Active
-**Created:** 2026-06-17 · **Updated:** 2026-06-18
+**Created:** 2026-06-17 · **Updated:** 2026-06-22
 
 Defines a file-based memory and session-lifecycle system that lets an AI agent
 work across many sessions without losing context — and without relying on the
@@ -72,9 +72,8 @@ if it's missing). Running both creates two diverging sources of truth.
       work-log.md          ← done items, append-only history
       scratchpad.md        ← carry-forward + working space
     memory/
-      procedural.md        ← procedural RULES — what the agent DOES (no operator profile)
-      operational.md       ← gotchas — what the agent KNOWS
-      historical.md        ← retired — what the agent WAS
+      procedural.md        ← procedural RULES — what the agent DOES (loaded, size-limited)
+      operational.md       ← gotchas + demoted rules — what the agent KNOWS (no limit, indexed)
     README.md              ← index of the above
   ROADMAP.md               ← project direction, milestones, active plans
   docs/specs/              ← what the project builds — the target
@@ -120,8 +119,8 @@ something fundamental changes. **Never a scratchpad.**
 5. Specifications — the instruction to check for a spec before any
    non-trivial work.
 6. Tools — every MCP server / tool and what it is for.
-7. Memory system — the file tables, the traffic-light governance,
-   strengthen-on-recall, pointer to this spec.
+7. Memory system — the file tables, the autonomous lifecycle (promotion /
+   demotion, §8), strengthen-on-recall, pointer to this spec.
 8. Where Things Live — the index: one row per kind of question, one answer.
 9. Document system — the two size classes and the traffic-light (§10).
 10. Git — the automation choices and the never-force-push rule.
@@ -261,64 +260,46 @@ memory (facts recalled when needed).
 
 ### 8.1 procedural.md — what the agent DOES
 
-**Always loaded fully at session start.** Procedural rules: constraints
-applied proactively every session, regardless of topic. The admission bar is
-high — only things that apply to *every* session, every kind of work.
-Domain-specific how-to belongs in operational memory.
+**Always loaded fully at session start**, and the only size-limited memory file — its limit is the prune trigger (§8.5). Procedural rules: constraints applied proactively every session, regardless of topic. The admission bar is high — only things that apply to *every* session, every kind of work. Domain-specific how-to belongs in operational memory.
 
-This file is **procedural rules only.** It carries no operator profile (that
-is `~/projects/OPERATOR.md`). The separation matters: rules are project-bound
-and committed with the repo; the operator profile is person-bound, PII, and
-must never be committed.
+This file is **procedural rules only.** It carries no operator profile (that is `~/projects/LOCAL.md`). The separation matters: rules are project-bound and committed with the repo; the operator profile is person-bound, PII, and must never be committed.
 
-Never decays. Operator-only changes. Promotion of an operational fact to a
-procedural rule is a deliberate human act, never automatic.
+Entries arrive **by autonomous promotion** from operational memory (§8.5) or by direct operator addition; they leave **by autonomous demotion** back to operational memory when a size-triggered prune finds them below cutoff. Nothing here is ever deleted.
 
 ### 8.2 operational.md — what the agent KNOWS
 
-Counter-intuitive gotchas. **Never loaded fully.** Grepped only when stuck.
+Gotchas, plus rules demoted from procedural memory. **Never loaded fully**; grepped when stuck. **No size limit** — it is the floor and the archive, navigated by a **section index**: every `## heading` carries a keyword list, so a grep on a keyword (or a scan of the headers) finds the right section without loading the file.
 
-Admission threshold: recurring (not a one-off), not obvious from the error
-message, not reachable by reading the nearby docs or config. If the fix is
-in the config or the code, it doesn't belong here. Decisions go in
-`docs/decisions/`.
+Admission threshold: recurring (not a one-off), not obvious from the error message, not reachable by reading the nearby docs or config. If the fix is in the config or the code, it doesn’t belong here. Decisions go in `docs/decisions/`.
 
-**Size:** governed by the traffic-light (§10, ADR-002), not a hard cap.
-`operational.md` is read by grep, never loaded whole, so its size does not
-cost tokens at session start — but it is kept reviewable so grep hits stay
-relevant. Yellow → the agent flags it; red → the agent forces a clean-up-or-
-defer decision at the next session start. Pruning is a human act (move stale
-entries to `historical.md` by hand); no algorithm moves them automatically.
+Never pruned, never write-capped — kept usable by the section index, not by a limit. Entries are still scored (§8.3), so a future operational-forgetting policy is a switch to flip, not a migration.
 
-### 8.3 historical.md — what the agent WAS
+### 8.3 The usefulness metric
 
-Never loaded automatically. Two sections with stable headings:
-`## retired procedures` (procedural rules the operator retired) and
-`## stale operations` (operational gotchas pruned by hand when a file hit its
-red signal). Append-only, never deleted — the past is auditable.
+Every entry carries `[sNN xM]` — born in session `NN`, useful `M` times. Its value is
 
-### 8.4 Strengthen on recall
+    value = M / sessions_alive,  where sessions_alive = current_session - NN + 1
 
-Every memory entry carries `[YYYY-MM-DD xN]` — date last used, recall
-counter. When an entry helps, the agent patches the tag: today's date,
-counter +1. The counter is a **reading aid for the human**: when the operator
-prunes a file by hand (§8.5), "used 8× / never used" is the signal that shows
-what is safe to retire. It is no longer the input to any automatic procedure.
+A same-session newborn is `1 / 1 = 1.00`, the maximum. The clock is **sessions, not days** — calendar gaps never count against an entry, only sessions where it could have helped and didn’t. **Strengthen on recall:** when an entry earns its keep in a session, bump `M`; its value jumps back up. Left unused, it drifts down session by session. The value is both the promotion signal (proven entries rise) and the prune signal (unused entries fall).
 
-### 8.5 Pruning — human-decided (ADR-002)
+### 8.4 Cutoff
 
-There is no automatic decay sweep. Operational memory is governed by the
-same yellow/red traffic-light as every skeleton file (§10, ADR-002), but
-because it is grepped rather than loaded whole, its size is about keeping
-grep hits relevant, not about start-up token cost.
+One threshold, `memory_cutoff`, in `AGENTS.override.md`, default `0.01`. An entry is prunable when `value < cutoff`. Floor, default, and cutoff are the same number: raise it to forget more aggressively, lower it to keep almost everything. At `0.01` a newborn takes ~100 unused sessions to become prunable, so nothing is lost lightly.
 
-When `operational.md` reaches its red signal, the agent stops at session
-start and forces a decision: prune now, or defer to the next session (where
-the question returns). Pruning is a **human act** — the operator decides which
-entries are stale, using the recall counters as a guide, and the agent moves
-the chosen lines to `historical.md` under `## stale operations`. Nothing is
-moved without an explicit operator yes. `procedural.md` is never pruned this
-way — retiring a procedural rule is a separate, deliberate operator decision.
+### 8.5 The lifecycle — autonomous (amends ADR-002)
+
+All of this runs at **session end, with no operator prompt** (ADR-002 amendment, 2026-06-22). It is safe to automate because nothing is ever lost: a prune is a reversible demotion into the unlimited `operational.md`, and the metric is session-time, so newborns (value 1.00) are never mistaken for stale.
+
+**Promotion (operational → procedural).** An operational entry that is topic-independent (applies every session, any subject), proven (`M ≥ 3`), and currently useful (`value ≥ cutoff`) is moved to `procedural.md`, tag intact. The “currently useful” condition stops a just-demoted rule from bouncing straight back.
+
+**Pruning / demotion (procedural → operational), size-triggered, two stages.** `procedural.md` is the only file with a limit, because it is the only one loaded every session. The prune fires only when it crosses that limit:
+
+- Over the **soft** limit → demote only entries with `value < cutoff`; spare everything at or above cutoff even if that leaves the file over soft.
+- Over the **hard** limit → demote all entries below cutoff, then the lowest-valued survivors (entries of equal value move as a whole group, all or none) until back under hard; stop the moment you are under.
+
+Demote means **move the line into `operational.md`** under its topical section (extend that section’s keywords), never delete. Since operational memory has no limit, a demotion always lands. A wrongly promoted rule self-corrects: it stops earning recalls, its value falls, and a future prune demotes it back — the test of time, enforced mechanically rather than by operator vigilance.
+
+`historical.md` no longer exists; `operational.md` is the floor.
 
 ---
 
@@ -370,11 +351,14 @@ NOT load `operational.md`.
    (append-only) and remove their lines from `work-backlog.md`; add any new
    open items to the backlog.
 3. Reconcile scratchpad (keep carry-forward tight; prune working space).
-4. Update long-term memory: strengthen-on-recall; new gotchas to operational
-   memory; new procedural rules are operator decisions only. Operator-profile
-   observations go to `~/projects/OPERATOR.md`, never into the project tree.
-5. If any skeleton file is at its red signal, prune it with the operator
-   (human-decided, §8.5) — no automatic sweep.
+4. Memory maintenance (autonomous, §8.5): strengthen-on-recall; new gotchas to
+   operational memory; promote proven topic-independent operational entries to
+   procedural; demote procedural entries below cutoff when it is over its size
+   limit. No operator prompt. Operator-profile observations go to
+   `~/projects/LOCAL.md`, never into the project tree.
+5. Other skeleton files (scratchpad, work-backlog, AGENTS.override): if any is at
+   its red signal, prune it with the operator (human-decided, §10). The two memory
+   files self-manage in step 4 and need no red-signal prompt.
 6. Verify specs are accurate against what was actually built.
 7. Update CHANGELOG.md for user-visible changes.
 8. Commit specific files + push per project settings. Never force-push.
@@ -414,17 +398,15 @@ model.
   deal with it now, or defer (the question returns next session, and the one
   after, until resolved). Pressure rises with size because the prompt recurs.
 
-No script deletes or moves content. Pruning is always a human act; the recall
-counters (§8.4) are the operator's guide to what is safe to retire.
+No script deletes or moves content **for the human-governed skeleton files** — pruning those is always a human act, and the usefulness tags (§8.3) are the operator’s guide. The two memory files (`procedural.md`, `operational.md`) are the exception: they self-manage autonomously (§8.5, ADR-002 amendment).
 
 | Document | Class | Governance |
 |----------|-------|------------|
-| `agents/memory/procedural.md` | skeleton | traffic-light |
+| `agents/memory/procedural.md` | skeleton | size limit = prune trigger; autonomous demotion to operational (§8.5) |
 | `agents/notes/scratchpad.md` | skeleton | traffic-light (carry-forward stays tight) |
 | `agents/notes/work-backlog.md` | skeleton | traffic-light + item-count alarm (>20 = backlog problem, not size) |
 | `AGENTS.override.md` | skeleton | traffic-light |
-| `agents/memory/operational.md` | grepped | traffic-light — keeps grep hits relevant, not a token concern (§8.5) |
-| `agents/memory/historical.md` | never loaded | none |
+| `agents/memory/operational.md` | grepped | none — no size limit; section-indexed floor (§8.2) |
 | `agents/notes/work-log.md` | never loaded | none (append-only) |
 | Session / Research / Decision / Plan / Spec | content | none — as long as needed |
 

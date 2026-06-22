@@ -33,9 +33,8 @@ template-project/
 │   │   ├── session-start.md   # orientation procedure — execute at session start
 │   │   └── session-end.md     # closing procedure — execute at session end
 │   ├── memory/
-│   │   ├── procedural.md      # rules applied every session (no operator profile)
-│   │   ├── operational.md     # gotchas, grepped when stuck
-│   │   └── historical.md      # retired entries
+│   │   ├── procedural.md      # rules every session — loaded, size-limited
+│   │   └── operational.md     # gotchas + demoted rules — no limit, indexed by section
 │   ├── notes/
 │   │   ├── work-backlog.md    # open items (pruned living list; alarm at >20)
 │   │   ├── work-log.md        # done items (append-only)

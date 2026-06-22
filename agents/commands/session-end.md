@@ -21,11 +21,17 @@ Report one line per step, mark first so the lines stack: ✅ checked and clean, 
    - New open items: add to `work-backlog.md` as `[OPEN]`/`[ACTIVE]`/`[FIND]`.
    *Flag if:* a new `[FIND]` was filed, or an item is now blocking.
 
-5. **Memory** — `agents/memory/procedural.md` / `agents/memory/operational.md`
-   - *Strengthen on recall:* used an entry and it helped → patch its tag (today's date, counter +1: `[YYYY-MM-DD xN]`).
-   - *New gotchas:* add to `operational.md` only — recurring, non-obvious from the error, not reachable by nearby docs. Start at `x1`, today's date.
+5. **Memory maintenance** — `agents/memory/{procedural,operational}.md`
+   Autonomous: do it, do not prompt the operator, report what moved in step 8. Full model: `agents/memory/README.md`.
+   - *Strengthen on recall:* an entry you used this session earned its keep → bump its tag (`[sNN xM]` → `M+1`). One edit.
+   - *New gotchas → `operational.md`:* recurring, non-obvious from the error, not reachable by nearby docs. Born `[s<current> x1]`, filed under the right keyworded section (extend the section keywords if the entry adds a new term).
+   - *Promote `operational` → `procedural`:* an operational entry that is **topic-independent** (applies every session, any subject), **proven** (`M ≥ 3`), and **currently useful** (value ≥ cutoff) → move the whole line to `procedural.md`, tag unchanged. The "currently useful" test stops a just-demoted rule from bouncing straight back.
+   - *Prune `procedural` (size-triggered only, two stages):* for each entry compute `value = M / (current_session − NN + 1)`. Cutoff = `memory_cutoff` from `AGENTS.override.md` (default 0.01).
+     - Over **soft** limit → demote only entries with `value < cutoff`; spare everything at or above cutoff even if still over soft.
+     - Over **hard** limit → demote all `value < cutoff`, then keep demoting the lowest-valued survivors (whole tie-groups, all-or-none, lowest first) until back under hard. Stop as soon as you are under.
+     - *Demote* = move the line into `operational.md` under its topical section (extend that section's keywords). Never delete. `operational.md` has no size limit, so a demotion always lands.
    - *Operator observations:* record in `~/projects/LOCAL.md` — NEVER in the project tree.
-   *Flag if:* a new gotcha changes how future sessions should work.
+   *Flag if:* anything was promoted or demoted (name it), or a new gotcha changes how future sessions should work.
 
 6. **Scratchpad** — `agents/notes/scratchpad.md`
    Carry-forward: drop what is resolved or captured elsewhere, add what the next session must know, keep it tight. Move matured threads to the backlog or a plan.

@@ -7,8 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- `agents/memory/historical.md` — removed (moved to `.trash/`); `operational.md` is now the unlimited, section-indexed floor that absorbs demoted and stale knowledge
+
 ### Changed
 
+- **Agent memory system redesigned to a two-file autonomous lifecycle** (supersedes the 3-file model; ADR-002 amended). `procedural.md` (loaded, word-limited) and `operational.md` (no limit, section-indexed) self-manage at session end with no operator prompt: entries carry `[sNN xM]`, `value = M / sessions_alive`; proven topic-independent operational entries are promoted to procedural, and procedural entries below `memory_cutoff` (default 0.01) are demoted back when the file exceeds its size limit. Rewrote `agents/memory/README.md`, `agents/commands/session-end.md` §5, `SPEC-003` §8, `CREATE_PROJECT.md`, root `README.md`
+- `agents/memory/operational.md`: line-1 declares no size limit; `## headings` carry keyword lists (section index); entry tags migrated to `[sNN xM]`
+- `AGENTS.override.md`: added `memory_cutoff` (default 0.01)
 - `agents/rules/README.md` rewritten: documents `project.md` (committed) and `personal.md` (person-bound, gitignored); removes stale `global.md` reference
 - `agents/rules/project.md` stripped to skeleton: H1 + `## Rules` placeholder only
 - All skeleton files (`AGENTS.override.md`, `agents/rules/personal.md`, `agents/memory/procedural.md`, `agents/notes/scratchpad.md`, `agents/notes/work-backlog.md`, `agents/commands/session-start.md`): new H1 headers with word limits where applicable, HTML comments removed, hard line breaks fixed

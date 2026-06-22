@@ -266,19 +266,19 @@ The operator profile is NOT in this repo — it lives in `~/projects/OPERATOR.md
 
 | File | Role | Loaded |
 |------|------|--------|
-| `agents/memory/procedural.md` | Procedural rules — what the agent DOES | Fully, every session |
-| `agents/memory/operational.md` | Gotchas — what the agent KNOWS | Grep only when stuck |
-| `agents/memory/historical.md` | Retired — what the agent WAS | Never automatically |
+| `agents/memory/procedural.md` | Rules — what the agent DOES | Fully, every session (size-limited) |
+| `agents/memory/operational.md` | Gotchas + demoted rules — what the agent KNOWS | Grep when stuck (no limit, indexed) |
 
-`operational.md` soft limit: ~35 lines → flag to operator.
-Hard limit: 50 lines → run decay sweep before adding new entries.
+`procedural.md` carries a word limit (line 1); `operational.md` has none — it is the
+unlimited, section-indexed floor where demoted and stale knowledge lives, found by grep.
 
-**Strengthen on recall:** when a memory entry prevents a mistake or solves a
-problem, bump its `[YYYY-MM-DD xN]` tag (today's date, counter +1).
+**Tag & value:** every entry is `[sNN xM]` — born session NN, useful M times;
+`value = M / sessions_alive`. **Strengthen on recall:** when an entry helps, bump M.
 
-**Decay:** the session-end decay sweep (a deterministic agent procedure, no
-script) moves least-recalled entries from `operational.md` to `historical.md`.
-Operator-gated — the list is shown before moving. Never touches `procedural.md`.
+**Autonomous lifecycle (session-end, no prompt):** proven, topic-independent operational
+entries are *promoted* to procedural; when procedural exceeds its size limit, its lowest-
+value entries are *demoted* back to operational (never deleted). Cutoff `memory_cutoff`
+(default 0.01) in `AGENTS.override.md`. Full model: SPEC-003 §8.
 
 
 ## Where Things Live

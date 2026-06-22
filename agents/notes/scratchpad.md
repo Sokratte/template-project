@@ -2,8 +2,9 @@
 
 ## Carry-forward
 
-- Git rules + universal craft live ONLY in canonical `~/projects/AGENTS.md`. File read/write protocol + MCP-server design settled — see docs/research/2026-06-19-mcp-file-tool-design.md.
-- **macbook-mcp `exec` output:** revisit `truncated` flag vs. `output_length` — current flag signals file-completeness but creates confusion when response is truncated in chat context; clarify with byte/char count or alternative signal.
+- **Memory system redesigned (session 18):** 2-file autonomous lifecycle — `procedural.md` (loaded, word-limited) + `operational.md` (no-limit, section-indexed floor); tag `[sNN xM]`, `value = M / sessions_alive`; promote/demote at session-end, no prompt; `memory_cutoff` 0.01 in override. Model: `agents/memory/README.md`; spec: SPEC-003 §8 + ADR-002 amendment. Done & committed.
+- **NEXT opener:** `OPERATOR.md` → `LOCAL.md` repo-wide rename (~19 files; docs now mix both names). See backlog.
+- **macbook-mcp `exec` output:** revisit `truncated` flag vs. byte/char count — flag signals file-completeness but confuses when chat truncates. (open)
 
 ---
 

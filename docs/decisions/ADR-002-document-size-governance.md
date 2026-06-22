@@ -1,9 +1,9 @@
-ADR-002-document-size-governance.md | document size, traffic-light, yellow red alarm, no automation, human decides, recall counter, skeleton vs content, token budget, supersedes decay sweep
+ADR-002-document-size-governance.md | document size, traffic-light, yellow red alarm, human decides, skeleton vs content, token budget, recall counter; AMENDED 2026-06-22: autonomous memory lifecycle, per-session usefulness M/sessions_alive, operational.md no-limit index floor, promotion demotion, memory_cutoff
 
 # ADR-002: Document size governance — traffic-light, human-decided
 
-**Status:** Accepted
-**Created:** 2026-06-18 · **Updated:** 2026-06-18
+**Status:** Accepted (amended 2026-06-22)
+**Created:** 2026-06-18 · **Updated:** 2026-06-22
 
 We split project documents into two classes by load behaviour and govern
 their size differently. **Skeleton files** (loaded in full at every session
@@ -15,6 +15,23 @@ level — the agent warns (yellow) or stops and forces a decision (red) at
 session start. There is no deterministic algorithm that deletes or moves
 content automatically. This supersedes the operational-memory decay sweep
 defined in SPEC-003 §8.5.
+
+## Amendment — 2026-06-22: autonomous memory lifecycle (supersedes the no-automatism rule for the two memory files)
+
+The no-automatism rule below is **superseded for `procedural.md` and `operational.md` only.** Memory now self-manages at session end with no operator prompt: entries are promoted operational→procedural and demoted procedural→operational by a deterministic, session-based metric. The traffic-light + human-decided governance in the rest of this ADR remains in force for every other skeleton file (`scratchpad.md`, `work-backlog.md`, `AGENTS.override.md`, the ROADMAP abstract).
+
+**What changed in the model:**
+- `historical.md` is removed. `operational.md` becomes the unlimited, section-indexed floor — every `## heading` carries a keyword list and the file is navigated by grep / the header index. Demoted and stale knowledge lives there, greppable, with its value shown beside it.
+- Tag is `[sNN xM]` — born session NN, useful M times. `value = M / sessions_alive` (sessions, not days). A newborn is born at the maximum, `1.00`.
+- Cutoff `memory_cutoff` (default `0.01`) lives in `AGENTS.override.md`. Prune when `value < cutoff`; only `procedural.md` (the loaded file) is size-triggered.
+
+**Why automation is safe now — answering this ADR’s own two objections:**
+1. *“Assessment needs time; twenty rules found in one day cannot be judged that day.”* The metric **is** time, counted in sessions. A newborn is born at the maximum value (1.00), so the twenty-rules-in-one-day case cannot misfire — new entries are the highest-valued, never the prune target. Time does the assessing, exactly as this ADR demanded; the original mistake was the wall-clock-and-lines mechanism, not the principle.
+2. *“An algorithm will eventually move the wrong thing.”* It no longer matters, because a move is now **reversible**: a prune is a demotion into the unlimited `operational.md`, not a deletion and not a one-way trip to a terminal file. A wrongly demoted rule stays greppable and re-promotes itself the moment it proves useful again. The risk this ADR guarded against — losing the right thing — cannot occur when nothing is lost.
+
+The recall counter therefore returns to being **algorithm input** for these two files (its 2026-06-18 demotion to “human reading-aid only” is reversed here), while staying a reading aid for the human-governed files.
+
+Full model: `agents/memory/README.md`. Executable form: `agents/commands/session-end.md` §5. SPEC-003 §8 is updated to match.
 
 ## Context
 

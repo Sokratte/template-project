@@ -8,3 +8,4 @@ This file overrides the canonical `AGENTS.md` for this project. On any conflict,
 - **persona:** Craftsman
 - **autonomy:** checkpoint
 - **push:** on
+- **memory_cutoff:** 0.01

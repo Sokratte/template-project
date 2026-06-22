@@ -37,3 +37,4 @@
 2026-06-19 | DOCS       | [DONE]    | Defined skeleton-file token thresholds (green/yellow/red); ADR-002 deferred numbers now set in OPERATOR.md, derivation recorded in research doc | OPERATOR.md, docs/research/2026-06-19-context-budget-and-file-limits.md
 2026-06-20 | DOCS       | [DONE]    | Align PLAN-001/PLAN-002 to new doc format: line-1 keyword index, Status field, soft-wrap, drop ---/Topic, update checklists to reflect actual state | docs/plans/
 2026-06-20 | AGENTS     | [DONE]    | Reconcile session-end.md: remove prune step, dead §/ADR refs, operational.md over-explanation | agents/commands/session-end.md
+2026-06-22 | MEMORY     | [DONE]    | Memory system redesigned: 2-file autonomous lifecycle (per-session usefulness, promote/demote, no prompt); historical.md removed; ADR-002 amended; SPEC-003/CREATE_PROJECT/READMEs updated; session-end s5 + memory README rewritten | agents/memory/, docs/
