@@ -43,3 +43,4 @@
 2026-06-23 | DOCS       | [DONE]    | Skeleton-file limits written into all 6 missing files (AGENTS.override.md, project.md, session-start.md, ROADMAP.md, AGENTS.md, LOCAL.md). All files well under limits; AGENTS.md at 1519w is over soft 1200 — noted, no prune pressure. | session 022
 2026-06-24 | REPO       | [DONE]    | VM.local/ refreshed: stale copy-files trashed, current ~/projects files copied in and committed. | VM.local/
 2026-06-24 | DOCS       | [DONE]    | Ripple-edit session logs 01-11 to line-1 kw+filename format. | docs/sessions/
+2026-06-24 | DOCS       | [DONE]    | README documentation pass complete: docs/decisions, specs, plans, sessions, research, philosophy, tests, runbooks; src/, tools/. | docs/, src/, tools/
