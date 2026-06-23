@@ -9,7 +9,7 @@ Each subfolder has its own README with the full detail. This page is just the ma
 | `memory/` | Procedural rules, operational gotchas, retired history | The three-tier memory model, decay, the recall-counter system |
 | `notes/` | Scratchpad + the work ledger (backlog / log) | The backlog/log split, line format, the 20-item alarm, scratchpad limits |
 | `commands/` | `session-start.md`, `session-end.md` — executable procedures | When each runs and why every step is non-negotiable |
-| `rules/` | `global.md` — workspace-wide working rules | How the craft rules relate to the override and the operator profile |
+| `rules/` | `personal.md` (operator profile, gitignored), `project.md` (project-specific rules) | When to add a rule here vs. in the override or AGENTS.md |
 
 ## Naming: `agents/` vs `AGENTS.md`
 

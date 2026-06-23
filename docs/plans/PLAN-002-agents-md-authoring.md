@@ -33,7 +33,7 @@ Produce the canonical `~/projects/AGENTS.md` (PLAN-001 file 1) — lean, under i
 |---|---|---|---|
 | Load whole | `AGENTS.override.md`, `agents/memory/procedural.md`, `agents/commands/session-start.md` | `cat` | every startup (exec-2) |
 | Load partial | `ROADMAP.md` (abstract + active section), `agents/notes/work-backlog.md` (complete — bounded by design) | `awk` / `cat` | every startup (exec-2) |
-| Orient on demand | `agents/rules/global.md` + SPECS (heading-grep); PLANS, RESEARCH, last 3 SESSIONS (abstract) | `grep` / `awk` / `head` | only when the task needs it |
+| Orient on demand | `~/projects/AGENTS.md` + SPECS (heading-grep); PLANS, RESEARCH, last 3 SESSIONS (abstract) | `grep` / `awk` / `head` | only when the task needs it |
 
 exec-2 contains ONLY files every project is guaranteed to have. `.project` is gone, so it is no longer in the set. Operator identity is loaded in exec-1 (`LOCAL.md`), not exec-2, because it is VM-scoped not project-scoped.
 
