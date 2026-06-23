@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Line-1 format for all docs changed to HTML comment + bare filename** (`<!-- kw: keywords -->` on line 1, filename on line 2). Uniform across all doc types; hidden in Markdown renderers, greppable in source. Migrated: ADR-001/002, SPEC-001/002/003, PLAN-001/002, sessions 011-017+019, all research docs. Sessions 001-010 and session-018 grandfathered.
+- **`docs/README.md` rewritten** as single source of truth for document conventions: section-level keywords (`<!-- kw: -->` on every heading), status master vocabulary table with per-type subsets, structural vs. content heading distinction, section matrix (required/optional/n/a per type), implications palette, Design Philosophy (DP) type added, anti-drift rule, `Adding a new doc type` section, all inline templates updated.
+- **Skeleton-file soft/hard limits moved from H1 text into HTML comments** (`<!-- soft: N · hard: M -->` on line after H1). Invisible in Obsidian/MkDocs/GitHub, greppable in source. Applies to all 10 skeleton files.
+- **`AGENTS.md` file-limits section** updated to document the HTML-comment format.
+- **`OPERATOR.md` renamed to `LOCAL.md`** repo-wide (73 replacements across 11 living files: README, CREATE_PROJECT, SPEC-003, PLAN-001/002, agents READMEs, research, scratchpad, backlog, session-017). Historical logs untouched.
+- **Stale `global.md` pointer removed** from `agents/README.md` (rules/ table) and `PLAN-002` (three-tier read table); `AGENTS.md` itself was already clean.
+
+### Added
+
+- **`docs/philosophy/`** directory with `DP-000-template.md` skeleton — Design Philosophy document type now part of the scaffold.
+- **Soft/hard word limits added** to all skeleton files that were missing them: `AGENTS.override.md` (150/300), `agents/rules/project.md` (400/800), `agents/commands/session-start.md` (400/600), `ROADMAP.md` (600/1200), `~/projects/AGENTS.md` (1200/2000), `~/projects/LOCAL.md` (200/400).
+
+
 ### Removed
 
 - `agents/memory/historical.md` — removed (moved to `.trash/`); `operational.md` is now the unlimited, section-indexed floor that absorbs demoted and stale knowledge
