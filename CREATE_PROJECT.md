@@ -311,7 +311,7 @@ When to use which artifact:
 | Document | Soft limit | Hard limit |
 |----------|-----------|------------|
 | `agents/notes/scratchpad.md` | 30 lines | 60 lines |
-| `agents/memory/operational.md` | 35 lines | 50 lines |
+| `agents/memory/operational.md` | — (no limit; grep on demand) | — |
 | `agents/notes/work-backlog.md` | 15 items | 20 items |
 | `agents/notes/work-log.md` | — (append-only) | — |
 | `AGENTS.md` | 150 lines | 250 lines |

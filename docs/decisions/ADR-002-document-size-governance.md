@@ -66,7 +66,7 @@ moves on fixed criteria will eventually move the wrong thing.
   governed; the metric is **tokens** (the honest unit for load cost).
 - **Content** — read by index/abstract/section, never loaded whole: the five
   document types (session, research, decision, plan, spec), plus
-  `operational.md`, `historical.md`, and `work-log.md`. **No size limit** —
+  `operational.md` and `work-log.md`. **No size limit** —
   as long as needed.
 
 **The traffic-light, for skeleton files only:**

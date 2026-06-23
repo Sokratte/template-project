@@ -97,7 +97,7 @@ Two separate knobs, both in `AGENTS.override.md`; defined in AGENTS.md / CREATE_
 - [x] SPEC-003: rename refs; append-only → `work-log.md`; backlog as pruned open-items list; >20-item alarm; decay folded into session-end; Claude symlink section removed; file-map paths fixed to disk (session 10)
 - [x] SPEC-003 (follow-up): add `LOCAL.md` to file map; rewrite §8.1 to remove operator profile (→ LOCAL.md), procedural-rules-only; update startup to load LOCAL.md in exec-1; drop `.project` from exec-2
 - [x] `agents/commands/session-start.md`: rewrite as executable steps for the new world; new file names; `docs/sessions/` path; LOCAL.md loaded in exec-1; on-demand grep/abstract tier lives here
-- [ ] `agents/commands/session-end.md`: backlog/log refs; completion-moves-to-work-log step; decay-sweep instruction folded in
+- [x] `agents/commands/session-end.md`: backlog/log refs; completion-moves-to-work-log step; decay-sweep instruction folded in
 - [x] `agents/README.md`: file inventory rename; drop phantom `daily-digest.md`
 - [x] `agents/memory/procedural.md`: REMOVE operator-profile section (→ LOCAL.md); keep procedural rules only
 - [x] `agents/memory/operational.md`: fix sweep-script reference (decay is now a session-end instruction)

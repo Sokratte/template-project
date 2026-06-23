@@ -248,7 +248,7 @@ git the protocol ≠ the host. The agent pushes to whatever `origin` is set to i
 - [x] No stored `remote_url`/`provider`/`repo_name`/`key_path` — all derived
 - [x] SSH keys in `~/.ssh/`, named by convention, never in tree
 - [x] Project registry folder-derived, never stored
-- [x] Startup: exec-1 (sync+read AGENTS+OPERATOR+list+recent) and exec-2 (project set) documented
+- [x] Startup: exec-1 (sync+read AGENTS+LOCAL+list+recent) and exec-2 (project set) documented
 - [x] Git behavior keyed on `.git/config` + `LOCAL.md backup` + override `push`; `none` path never mentions git
 - [ ] Operator setup checklist: key gen, remote add, public-key registration, deploy-key write-enable
 - [x] Autonomy + persona defined in `AGENTS.md`/CREATE_PROJECT; override selects; Custom asks once

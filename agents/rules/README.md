@@ -1,6 +1,6 @@
 # agents/rules/ — working rules
 
-Every files has a different scope. personal and project are both loaded at every session start. Other rules are loaded as needed. Exact implementation details still open.
+Every file has a different scope. `personal.md` and `project.md` are both loaded at every session start. Other rules are loaded as needed.
 
 | File | Scope | Committed |
 |------|-------|-----------|
