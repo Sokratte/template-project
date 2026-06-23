@@ -1,4 +1,5 @@
-2026-04-17-project-structure-standards.md | AGENTS.md, conventional commits, keep a changelog, semver, spec-driven development, ADR, pointer pattern, context window, tribal knowledge, agentic coding
+<!-- kw: AGENTS.md, conventional commits, keep a changelog, semver, spec-driven development, ADR, pointer pattern, context window, tribal knowledge, agentic coding -->
+2026-04-17-project-structure-standards.md
 
 # Research: Project Structure Standards for AI-Agent Workflows
 

@@ -1,4 +1,5 @@
-2026-06-18-session-12-document-conventions.md | document templates, line-1 index, head -qn1, abstract convention, keywords as relationship graph, no Related fields, ADR-002, traffic-light, decay sweep removed, recent_sessions project name
+<!-- kw: document templates, line-1 index, head -qn1, abstract convention, keywords as relationship graph, no Related fields, ADR-002, traffic-light, decay sweep removed, recent_sessions project name -->
+2026-06-18-012-document-conventions.md
 
 # Session 12 — Document conventions + size governance
 

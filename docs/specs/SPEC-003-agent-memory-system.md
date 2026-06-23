@@ -1,4 +1,5 @@
-SPEC-003-agent-memory-system.md | agent memory, session lifecycle, file-based memory, procedural, operational (no-limit index floor), autonomous memory lifecycle, per-session usefulness, promotion demotion, memory_cutoff, work-backlog, work-log, scratchpad, session-start, session-end, traffic-light, PLAN-001, PLAN-002
+<!-- kw: agent memory, session lifecycle, file-based memory, procedural, operational, no-limit index floor, autonomous memory lifecycle, per-session usefulness, promotion demotion, memory_cutoff, work-backlog, work-log, scratchpad, session-start, session-end, PLAN-001, PLAN-002 -->
+SPEC-003-agent-memory-system.md
 
 # SPEC-003 — Agent Memory & Session System
 

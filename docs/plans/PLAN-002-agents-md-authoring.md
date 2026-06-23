@@ -1,4 +1,5 @@
-PLAN-002-agents-md-authoring.md | canonical AGENTS.md, startup sequence, three-tier read model, abstract convention, awk, persona, autonomy, work-backlog, session-start
+<!-- kw: canonical AGENTS.md, startup sequence, three-tier read model, abstract convention, awk, persona, autonomy, work-backlog, session-start -->
+PLAN-002-agents-md-authoring.md
 
 # PLAN-002: AGENTS.md Authoring
 

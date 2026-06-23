@@ -1,4 +1,5 @@
-ADR-002-document-size-governance.md | document size, traffic-light, yellow red alarm, human decides, skeleton vs content, token budget, recall counter; AMENDED 2026-06-22: autonomous memory lifecycle, per-session usefulness M/sessions_alive, operational.md no-limit index floor, promotion demotion, memory_cutoff
+<!-- kw: document size, traffic-light, skeleton vs content, token budget, autonomous memory lifecycle, per-session usefulness M/sessions_alive, operational.md no-limit index floor, promotion demotion, memory_cutoff -->
+ADR-002-document-size-governance.md
 
 # ADR-002: Document size governance — traffic-light, human-decided
 

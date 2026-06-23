@@ -1,4 +1,5 @@
-SPEC-001-template-standard.md | workspace template, project structure, AGENTS.md, setup flow, agent orientation, cp -r, ADR-001
+<!-- kw: workspace template, project structure, AGENTS.md, setup flow, agent orientation, cp -r, ADR-001 -->
+SPEC-001-template-standard.md
 
 # SPEC-001: Workspace Project Template Standard
 

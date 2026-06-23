@@ -1,4 +1,5 @@
-2026-06-20-session-17-skeleton-headers-agents-cleanup.md | skeleton files, H1 headers, soft-wrap, AGENTS.md, local.md, gitignore
+<!-- kw: skeleton files, H1 headers, soft-wrap, AGENTS.md, local.md, gitignore -->
+2026-06-20-017-skeleton-headers-agents-cleanup.md
 
 # Session 17 — Skeleton file headers, AGENTS.md cleanup, load order fix
 

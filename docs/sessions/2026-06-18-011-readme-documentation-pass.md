@@ -1,4 +1,5 @@
-2026-06-18 | template-project | Stripped comment-headers from skeleton files into per-directory READMEs; soft-wrap rule applied; moved exec bootstrap into AGENTS.md/workspace README; relocated SPEC-002
+<!-- kw: template-project | Stripped comment-headers from skeleton files into per-directory READMEs; soft-wrap rule applied; moved exec bootstrap into AGENTS.md/workspace README; relocated SPEC-002 -->
+2026-06-18-011-readme-documentation-pass.md
 
 # Session 11 — README documentation pass + skeleton-file slimming
 

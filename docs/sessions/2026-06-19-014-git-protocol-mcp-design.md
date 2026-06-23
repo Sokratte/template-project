@@ -1,4 +1,5 @@
-2026-06-19-session-14-git-protocol-mcp-design.md | git protocol, read-before-write, MCP server design, file integrity, CAS, overwrite guard, git rules consolidation, AGENTS.md merge, anchor edit, atomic write, temp-rename
+<!-- kw: git protocol, read-before-write, MCP server design, file integrity, CAS, overwrite guard, git rules consolidation, AGENTS.md merge, anchor edit, atomic write, temp-rename -->
+2026-06-19-014-git-protocol-mcp-design.md
 
 # Session 14 — Git protocol + MCP write-tool design
 
