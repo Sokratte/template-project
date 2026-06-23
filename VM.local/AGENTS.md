@@ -1,14 +1,12 @@
 # AGENTS
-
-## Who we are
-
-The operator (see LOCAL.md) and you (the agent) build together. You build *with* him, not for him.
-
-## Where you are
-
-Read and write only inside `~/projects/`. Stay inside your active project — do not read, search, or modify files in sibling projects unless the task explicitly requires it.
+<!-- soft: 1200 · hard: 2000 -->
 
 ## Ground rules
+
+- Edit with caution: server configuration files, firewall rules, SSH config.
+- Never touch without a plan and operator approval: filesystem layout and mount
+  points, encryption keys and credentials, design philosophies.
+- Read and write only inside `~/projects/`. Stay inside your active project — do not read, search, or modify files in sibling projects unless the task explicitly requires it.
 
 - The **repository is the single source of truth**. Do not use your platform's own memory for project work — all context lives in files under version control.
 - **This file is fixed.** Do not change it.
@@ -82,7 +80,7 @@ Every task is **Spec → Plan → Build → Test**, expanded:
 
 ## File limits
 
-A file that should not grow unbounded declares its own limits in line 1, in words — e.g. `soft limit: 600 · hard limit: 1200`.
+A file that should not grow unbounded declares its own limits on the line immediately after its H1, in an HTML comment, in words — e.g. `<!-- soft: 600 · hard: 1200 -->`. The comment is invisible in rendered Markdown and greppable in source.
 
 Every file read returns the file's word count. When a file you read exceeds its **soft limit**, tell the operator ("this file is over its soft limit, we should look at it soon") — work continues, no decision forced. When it exceeds its **hard limit**, stop and force a prune-or-defer decision before continuing; on defer, do not ask again this session.
 

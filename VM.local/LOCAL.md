@@ -1,4 +1,5 @@
 # LOCAL
+<!-- soft: 200 · hard: 400 -->
 
 ## Operator identity
 
@@ -11,6 +12,8 @@
 **Push:** governed by `push:` in each project's `AGENTS.override.md` (on / confirm / off).
 **Autonomy:** Craftsman / checkpoint (sign-off each non-trivial step).
 
+You build *with* the operator, not for him.
+
 ## VM facts
 
 **Timezone:** Europe/Berlin
@@ -20,6 +23,3 @@
 
 ## Conventions on this VM
 
-- Edit with caution: server configuration files, firewall rules, SSH config.
-- Never touch without a plan and operator approval: filesystem layout and mount
-  points, encryption keys and credentials, design philosophies.
