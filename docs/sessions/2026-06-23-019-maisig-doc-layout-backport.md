@@ -26,7 +26,7 @@ All changes in a single commit (4150db1).
 - [x] Design philosophy (DP) document type — implemented
 - [x] line-1 format migrated to `<!-- kw: -->` for all migrateable docs
 - [ ] Sessions 001–010 + session-018 line-1 migration (existing backlog item)
-- [ ] `OPERATOR.md → LOCAL.md` rename (existing backlog item)
+- [x] `OPERATOR.md → LOCAL.md` rename — done session 020
 
 ## Git <!-- kw: -->
 

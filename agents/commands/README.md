@@ -9,7 +9,7 @@ Two procedures the agent **runs**, not just reads: one to open a session, one to
 
 ## Where the startup sequence is defined
 
-These files are only the *project-level* half of a session. The two-call bootstrap that loads them — exec-1 (VM level: sync, read `AGENTS.md` + `OPERATOR.md`, list projects, pick one) and exec-2 (project level: load the guaranteed set including `session-start.md`) — is documented in `~/projects/README.md` and `~/projects/AGENTS.md`, because it runs *before* these files are read and cannot describe its own loading. `session-start.md` picks up right after exec-2, at its first numbered step.
+These files are only the *project-level* half of a session. The two-call bootstrap that loads them — exec-1 (VM level: sync, read `AGENTS.md` + `LOCAL.md`, list projects, pick one) and exec-2 (project level: load the guaranteed set including `session-start.md`) — is documented in `~/projects/README.md` and `~/projects/AGENTS.md`, because it runs *before* these files are read and cannot describe its own loading. `session-start.md` picks up right after exec-2, at its first numbered step.
 
 `session-end.md` is the mirror at the other end. It is not loaded at start; the agent opens and follows it when wrapping up. Every step is mandatory and none is deferred to "next session" — the closing discipline is what makes a session auditable and lets the next one resume cleanly.
 

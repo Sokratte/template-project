@@ -95,14 +95,14 @@ everything else aims at.
 
 ---
 
-## Step 5 — Ensure OPERATOR.md exists (once per VM, not per project)
+## Step 5 — Ensure LOCAL.md exists (once per VM, not per project)
 
 The operator profile — who you are working with and how — lives in
-`~/projects/OPERATOR.md`. It is **per-operator and per-VM, never committed,
+`~/projects/LOCAL.md`. It is **per-operator and per-VM, never committed,
 never cloned** (it is personal observation about a named human: PII). It is
 created once per machine, so a second project on the same VM reuses it.
 
-If `~/projects/OPERATOR.md` does not exist yet, create it with the user:
+If `~/projects/LOCAL.md` does not exist yet, create it with the user:
 their name, communication style, how they like to work, the backup provider
 they use (`backup: none` or `backup: <provider>`), and the SSH key naming
 convention (`~/.ssh/<project>`). Do NOT put any of this in the project tree.
@@ -111,7 +111,7 @@ convention (`~/.ssh/<project>`). Do NOT put any of this in the project tree.
 
 ## Step 6 — Git and backup
 
-Backup behavior is keyed on `~/projects/OPERATOR.md` (`backup:`) and the
+Backup behavior is keyed on `~/projects/LOCAL.md` (`backup:`) and the
 per-project `push:` toggle in `AGENTS.override.md`. The remote URL is git's
 own (`.git/config`) — never store it separately.
 
@@ -251,7 +251,7 @@ the operator's explicit approval before implementation.
 Context persists across sessions through files in the repo — not through
 the AI platform's server-side memory, which is deliberately disabled (Step 8).
 Full specification: `docs/specs/SPEC-003-agent-memory-system.md`.
-The operator profile is NOT in this repo — it lives in `~/projects/OPERATOR.md`
+The operator profile is NOT in this repo — it lives in `~/projects/LOCAL.md`
 (per-VM, never committed; it is PII).
 
 **Session memory** — what is happening now:
@@ -295,7 +295,7 @@ value entries are *demoted* back to operational (never deleted). Cutoff `memory_
 | Task plans (short-lived) | `docs/plans/` (archive when done) |
 | Research / domain knowledge | `docs/research/` (optional) |
 | Operations guides | `docs/runbooks/` (optional) |
-| Who the operator is | `~/projects/OPERATOR.md` (per-VM, never committed) |
+| Who the operator is | `~/projects/LOCAL.md` (per-VM, never committed) |
 | How the agent works here | `agents/` — see `agents/README.md` |
 
 When to use which artifact:
@@ -332,7 +332,7 @@ not a knowledge base.
 ## Git
 
 One canonical repo. Check `.git/config` for the remote URL (git owns it;
-never store it separately). Backup is keyed on `~/projects/OPERATOR.md`
+never store it separately). Backup is keyed on `~/projects/LOCAL.md`
 (`backup:`) and the `push:` toggle in `AGENTS.override.md`.
 
 - `git add` (specific files only): never `git add -A`

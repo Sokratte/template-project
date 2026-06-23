@@ -6,7 +6,7 @@ PLAN-002-agents-md-authoring.md
 **Status:** Implementation in progress
 **Created:** 2026-06-17 · **Updated:** 2026-06-18
 
-PLAN-001 locked the multi-VM *architecture* (layout, sync script, the `OPERATOR.md` identity file, git keyed on git+override) but deferred *what the canonical file says and how it reads*. This plan captures those content decisions across sessions 09–10: the exec-1/exec-2 startup sequence, which files are read whole vs. partially vs. on-demand, a `##`-terminated greppable abstract convention, awk-based section reading so large docs need no splitting, the persona/autonomy model, and the work-backlog / work-log rename that fixes buried TODOs. It also lists the ripple edits these decisions force in existing docs. This plan is the spec the AGENTS.md draft follows.
+PLAN-001 locked the multi-VM *architecture* (layout, sync script, the `LOCAL.md` identity file, git keyed on git+override) but deferred *what the canonical file says and how it reads*. This plan captures those content decisions across sessions 09–10: the exec-1/exec-2 startup sequence, which files are read whole vs. partially vs. on-demand, a `##`-terminated greppable abstract convention, awk-based section reading so large docs need no splitting, the persona/autonomy model, and the work-backlog / work-log rename that fixes buried TODOs. It also lists the ripple edits these decisions force in existing docs. This plan is the spec the AGENTS.md draft follows.
 
 ## Goal
 
@@ -14,7 +14,7 @@ Produce the canonical `~/projects/AGENTS.md` (PLAN-001 file 1) — lean, under i
 
 ## Non-goals
 
-- NOT re-deciding PLAN-001 architecture — that is locked (incl. the session-10 revision: no `.project`/`.projects`, `OPERATOR.md` introduced).
+- NOT re-deciding PLAN-001 architecture — that is locked (incl. the session-10 revision: no `.project`/`.projects`, `LOCAL.md` introduced).
 - NOT the sync mechanism itself (`agents_sync.sh`) — PLAN-001 owns it; the copy command must never appear in AGENTS.md content (PLAN-001 Decision 7).
 - NOT rewriting CREATE_PROJECT.md in full — its own later task; this plan adds the persona-selection step and the budgets-table fix.
 
@@ -22,7 +22,7 @@ Produce the canonical `~/projects/AGENTS.md` (PLAN-001 file 1) — lean, under i
 
 ### 1. Startup is two exec calls, project list folder-derived
 
-1. **Exec 1:** `agents_sync.sh && cat AGENTS.md OPERATOR.md && bash projects_list.sh`. The sync script self-enumerates folders, so it needs nothing from AGENTS.md first. Project registry is derived from folders, never stored (PLAN-001 Decision 9). `OPERATOR.md` is read here (VM/operator identity); if absent, the agent prompts to create one.
+1. **Exec 1:** `agents_sync.sh && cat AGENTS.md LOCAL.md && bash projects_list.sh`. The sync script self-enumerates folders, so it needs nothing from AGENTS.md first. Project registry is derived from folders, never stored (PLAN-001 Decision 9). `LOCAL.md` is read here (VM/operator identity); if absent, the agent prompts to create one.
 2. **Agent selects:** 1 project → pick; >1 and prompt >50% clear → pick; unclear → if the 3 `projects_list.sh` recent-session lines point to one project pick it, else **stop and ask**. None / new → project setup, stop here.
 3. **Exec 2:** one call that reads the project's guaranteed startup set (below).
 4. Work from the operator's prompt.
@@ -35,7 +35,7 @@ Produce the canonical `~/projects/AGENTS.md` (PLAN-001 file 1) — lean, under i
 | Load partial | `ROADMAP.md` (abstract + active section), `agents/notes/work-backlog.md` (complete — bounded by design) | `awk` / `cat` | every startup (exec-2) |
 | Orient on demand | `agents/rules/global.md` + SPECS (heading-grep); PLANS, RESEARCH, last 3 SESSIONS (abstract) | `grep` / `awk` / `head` | only when the task needs it |
 
-exec-2 contains ONLY files every project is guaranteed to have. `.project` is gone, so it is no longer in the set. Operator identity is loaded in exec-1 (`OPERATOR.md`), not exec-2, because it is VM-scoped not project-scoped.
+exec-2 contains ONLY files every project is guaranteed to have. `.project` is gone, so it is no longer in the set. Operator identity is loaded in exec-1 (`LOCAL.md`), not exec-2, because it is VM-scoped not project-scoped.
 
 Candidate exec-2 pipeline:
 ```bash
@@ -84,10 +84,10 @@ Two separate knobs, both in `AGENTS.override.md`; defined in AGENTS.md / CREATE_
 - **Name:** operator-chosen, independent of persona, default **Tinkerbuddy**.
 - New-project defaults: Craftsman / checkpoint / Tinkerbuddy.
 
-### 7. OPERATOR.md + config elimination (session 10)
+### 7. LOCAL.md + config elimination (session 10)
 
 - `.project` and `.projects` both removed (PLAN-001 session-10 revision).
-- Operator profile has ONE home, `~/projects/OPERATOR.md`, NEVER committed (privacy: PII must not enter a backed-up, possibly public repo). It is REMOVED from `procedural.md`, which becomes procedural-rules-only.
+- Operator profile has ONE home, `~/projects/LOCAL.md`, NEVER committed (privacy: PII must not enter a backed-up, possibly public repo). It is REMOVED from `procedural.md`, which becomes procedural-rules-only.
 - The two real per-project toggles (`push`, `autonomy`) live in the override.
 - `remote_url`/`provider`/`repo_name`/`key_path` are not stored — derived from `.git/config` and a key naming convention.
 
@@ -95,15 +95,15 @@ Two separate knobs, both in `AGENTS.override.md`; defined in AGENTS.md / CREATE_
 
 - [x] `git mv worklog.md → work-backlog.md`, `worklog-archive.md → work-log.md` (session 10, committed `4a00939`)
 - [x] SPEC-003: rename refs; append-only → `work-log.md`; backlog as pruned open-items list; >20-item alarm; decay folded into session-end; Claude symlink section removed; file-map paths fixed to disk (session 10)
-- [x] SPEC-003 (follow-up): add `OPERATOR.md` to file map; rewrite §8.1 to remove operator profile (→ OPERATOR.md), procedural-rules-only; update startup to load OPERATOR.md in exec-1; drop `.project` from exec-2
-- [x] `agents/commands/session-start.md`: rewrite as executable steps for the new world; new file names; `docs/sessions/` path; OPERATOR.md loaded in exec-1; on-demand grep/abstract tier lives here
+- [x] SPEC-003 (follow-up): add `LOCAL.md` to file map; rewrite §8.1 to remove operator profile (→ LOCAL.md), procedural-rules-only; update startup to load LOCAL.md in exec-1; drop `.project` from exec-2
+- [x] `agents/commands/session-start.md`: rewrite as executable steps for the new world; new file names; `docs/sessions/` path; LOCAL.md loaded in exec-1; on-demand grep/abstract tier lives here
 - [ ] `agents/commands/session-end.md`: backlog/log refs; completion-moves-to-work-log step; decay-sweep instruction folded in
 - [x] `agents/README.md`: file inventory rename; drop phantom `daily-digest.md`
-- [x] `agents/memory/procedural.md`: REMOVE operator-profile section (→ OPERATOR.md); keep procedural rules only
+- [x] `agents/memory/procedural.md`: REMOVE operator-profile section (→ LOCAL.md); keep procedural rules only
 - [x] `agents/memory/operational.md`: fix sweep-script reference (decay is now a session-end instruction)
 - [x] Remove `tools/scripts/sweep-knowledge.py` (needs `git rm` from operator)
 - [x] `.gitignore`: remove the `.project` line (file no longer exists)
-- [ ] CREATE_PROJECT.md: budgets table → `work-backlog` (>20 items) + `work-log` (append-only); add persona-selection step (table + Custom + name default Tinkerbuddy); document OPERATOR.md creation; key convention
+- [ ] CREATE_PROJECT.md: budgets table → `work-backlog` (>20 items) + `work-log` (append-only); add persona-selection step (table + Custom + name default Tinkerbuddy); document LOCAL.md creation; key convention
 - [ ] Author canonical `~/projects/AGENTS.md` (the main deliverable) — last, against the now-consistent codebase
 
 ## session-start.md rewrite (target shape)
@@ -121,7 +121,7 @@ AGENTS.md (exec) does the *reading*; session-start.md is the *steps to execute* 
 
 ## Acceptance criteria
 
-- [ ] Canonical AGENTS.md drafted: identity + persona model, ground truth, folder-derived selection, two-call startup (exec-1 loads OPERATOR.md), three-tier read model, document conventions, memory model, git-keyed-on-git+override — under line budget.
+- [ ] Canonical AGENTS.md drafted: identity + persona model, ground truth, folder-derived selection, two-call startup (exec-1 loads LOCAL.md), three-tier read model, document conventions, memory model, git-keyed-on-git+override — under line budget.
 - [ ] Copy/sync command absent from AGENTS.md content (PLAN-001 Decision 7).
 - [x] Abstract convention (`##`-terminated) documented once; session-log line 1 is `filename | keywords`.
 - [x] awk three-move retrieval documented as the habit for large docs.
@@ -129,4 +129,4 @@ AGENTS.md (exec) does the *reading*; session-start.md is the *steps to execute* 
 - [ ] All other docs reference new names; no doc asserts superseded contracts ("append-only worklog", `~/workspace`, `.project`/`.projects`, operator profile in procedural.md).
 - [ ] >20-item backlog alarm specified in AGENTS.md + session procedures.
 - [x] session-start.md rewritten as executable steps for the new world.
-- [ ] OPERATOR.md documented; operator profile single-homed; CREATE_PROJECT persona step added. *(partial: single-homed ✓, CREATE_PROJECT persona step still open)*
+- [ ] LOCAL.md documented; operator profile single-homed; CREATE_PROJECT persona step added. *(partial: single-homed ✓, CREATE_PROJECT persona step still open)*

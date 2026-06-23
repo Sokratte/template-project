@@ -38,3 +38,4 @@
 2026-06-20 | DOCS       | [DONE]    | Align PLAN-001/PLAN-002 to new doc format: line-1 keyword index, Status field, soft-wrap, drop ---/Topic, update checklists to reflect actual state | docs/plans/
 2026-06-20 | AGENTS     | [DONE]    | Reconcile session-end.md: remove prune step, dead §/ADR refs, operational.md over-explanation | agents/commands/session-end.md
 2026-06-22 | MEMORY     | [DONE]    | Memory system redesigned: 2-file autonomous lifecycle (per-session usefulness, promote/demote, no prompt); historical.md removed; ADR-002 amended; SPEC-003/CREATE_PROJECT/READMEs updated; session-end s5 + memory README rewritten | agents/memory/, docs/
+2026-06-23 | DOCS       | [DONE]    | OPERATOR.md -> LOCAL.md rename, repo-wide (73 hits across README, CREATE_PROJECT, SPEC-003, PLAN-001/002, agents READMEs, research, scratchpad, backlog, session-017). Historical logs untouched. | session 020

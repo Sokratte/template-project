@@ -12,7 +12,7 @@ This document derives the green/yellow/red thresholds used by the traffic-light
 in `AGENTS.md`, from two facts: the usable context window is smaller than the
 advertised one, and the start of the context is the most reliable position.
 The thresholds it produces are a first baseline, to be tuned from practice.
-The applied values live in `OPERATOR.md`; this document is the record of how
+The applied values live in `LOCAL.md`; this document is the record of how
 they were derived, so that changing the applied numbers never erases the
 reasoning.
 

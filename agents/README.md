@@ -17,8 +17,8 @@ Each subfolder has its own README with the full detail. This page is just the ma
 
 ## What is deliberately NOT here
 
-The **operator profile** — who the operator is and how they like to work — is not in this tree at all. It lives in `~/projects/OPERATOR.md`: per-operator, per-VM, never committed, because it is PII. `memory/procedural.md` holds procedural rules only.
+The **operator profile** — who the operator is and how they like to work — is not in this tree at all. It lives in `~/projects/LOCAL.md`: per-operator, per-VM, never committed, because it is PII. `memory/procedural.md` holds procedural rules only.
 
 ## Full specification
 
-The complete definition of this system — every file, limit, and procedure, and the reasoning behind them — is the system spec in `docs/specs/` (SPEC-003). The multi-VM file model (the canonical `AGENTS.md`, the override, `OPERATOR.md`, the sync script) is described there and in `~/projects/README.md`. Read the spec for the durable picture; the plans under `docs/plans/` are short-lived task records, not the reference.
+The complete definition of this system — every file, limit, and procedure, and the reasoning behind them — is the system spec in `docs/specs/` (SPEC-003). The multi-VM file model (the canonical `AGENTS.md`, the override, `LOCAL.md`, the sync script) is described there and in `~/projects/README.md`. Read the spec for the durable picture; the plans under `docs/plans/` are short-lived task records, not the reference.

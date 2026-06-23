@@ -6,7 +6,7 @@ Reusable AI agent scaffold for all projects on this machine. Copy it to start a 
 
 A meta-structure template: how work is tracked, how agents orient themselves, how decisions are recorded, how knowledge is preserved across sessions. Not opinionated about language, framework, or domain — that is the project's concern, not the template's.
 
-The canonical agent instructions live in `~/projects/AGENTS.md` and are synced into every template-derived project via `agents_sync.sh`. Per-project differences go in `AGENTS.override.md`. Who the operator is and what this machine is like lives in `~/projects/OPERATOR.md` (never committed — PII).
+The canonical agent instructions live in `~/projects/AGENTS.md` and are synced into every template-derived project via `agents_sync.sh`. Per-project differences go in `AGENTS.override.md`. Who the operator is and what this machine is like lives in `~/projects/LOCAL.md` (never committed — PII).
 
 ## How to use
 

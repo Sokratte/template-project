@@ -59,7 +59,7 @@ if it's missing). Running both creates two diverging sources of truth.
 ```
 ~/projects/
   AGENTS.md                ← canonical agent instructions (synced; see PLAN-001)
-  OPERATOR.md              ← operator + VM identity (PII) — NEVER committed/cloned
+  LOCAL.md              ← operator + VM identity (PII) — NEVER committed/cloned
 
 <project>/
   AGENTS.md                ← synced copy of canonical (read-only artifact)
@@ -90,7 +90,7 @@ Optional (add if the project needs them):
 ```
 
 **Where the operator profile lives.** Not in this project tree. It is in
-`~/projects/OPERATOR.md` — a per-operator, per-VM file that is never committed
+`~/projects/LOCAL.md` — a per-operator, per-VM file that is never committed
 and never cloned, because it contains personal observations about a named
 human (PII) that must not enter a backed-up, possibly public repo. See
 PLAN-001 for the full multi-VM file model. `procedural.md` holds procedural
@@ -134,7 +134,7 @@ Open work items → `agents/notes/work-backlog.md`.
 Completed history → `agents/notes/work-log.md`.
 Loose notes → `agents/notes/scratchpad.md`.
 Procedural rules → `agents/memory/procedural.md`.
-Operator profile → `~/projects/OPERATOR.md` (never in the tree).
+Operator profile → `~/projects/LOCAL.md` (never in the tree).
 Operational gotchas → `agents/memory/operational.md`.
 Project direction → `ROADMAP.md`.
 Founding reasoning → `docs/specs/SPEC-001-*`.
@@ -256,7 +256,7 @@ memory (facts recalled when needed).
 > The third member of the classic trio — the *operator profile* ("who I work
 > with and how") — deliberately does NOT live here. It is per-operator and
 > per-VM, not per-project, and it is PII, so it lives in the non-committed
-> `~/projects/OPERATOR.md` (PLAN-001 / §3). Keeping it out of the project tree
+> `~/projects/LOCAL.md` (PLAN-001 / §3). Keeping it out of the project tree
 > is both a privacy guarantee and a single-home guarantee.
 
 ### 8.1 procedural.md — what the agent DOES
@@ -313,13 +313,13 @@ exec-2 is project-level; the steps below run after exec-2 has loaded the
 guaranteed set.
 
 **Exec-1 (VM level, before a project is chosen):** run the sync script, then
-`cat ~/projects/AGENTS.md ~/projects/OPERATOR.md`, list project folders, and
+`cat ~/projects/AGENTS.md ~/projects/LOCAL.md`, list project folders, and
 run `recent_sessions.sh` — which prints the *project name* (from the path) of
 the 3 most-recently-touched session logs across all projects. If all three
 name the same project, that is the obvious resume target; otherwise ask the
 operator or take the project from the prompt. ("What happened last" is not
 derived here — the agent reads the newest session log itself once a project
-is chosen.) `OPERATOR.md` carries the operator profile + VM facts; if it is
+is chosen.) `LOCAL.md` carries the operator profile + VM facts; if it is
 absent (fresh clone / new VM), prompt to create one. Select the project.
 
 **Exec-2 (project level):** `cat` the guaranteed set — `AGENTS.override.md`,
@@ -328,7 +328,7 @@ plus the ROADMAP abstract+active section and the full `work-backlog.md`. Do
 NOT load `operational.md`.
 
 **Then execute:**
-1. Greet operator; identify speaker if unclear (use OPERATOR.md).
+1. Greet operator; identify speaker if unclear (use LOCAL.md).
 2. Confirm platform memory is disabled for this project (remind if missing).
 3. Check `scratchpad.md` against the traffic-light; on yellow inform, on red
    force a prune-or-defer decision before proceeding.
@@ -419,14 +419,14 @@ is authored (the canonical `~/projects/AGENTS.md`, PLAN-001/002), not here.
 ## 11. Git automation
 
 Set during project setup, recorded in `AGENTS.override.md` (`push`) and
-`~/projects/OPERATOR.md` (`backup`), applied by session-end. Remote URL and
+`~/projects/LOCAL.md` (`backup`), applied by session-end. Remote URL and
 provider come from `.git/config`, not from any config file of ours.
 
 | Operation | Default | Notes |
 |-----------|---------|-------|
 | `git add` (specific files) | Automatic | Only files worked on — never blind `-A`. |
 | `git commit` | Automatic | Session end, Conventional Commits message. |
-| `git push` | **Off — set per project (`push:` in override)** | On for solo/one-machine work; requires `OPERATOR.md backup` ≠ none and an `origin` remote. |
+| `git push` | **Off — set per project (`push:` in override)** | On for solo/one-machine work; requires `LOCAL.md backup` ≠ none and an `origin` remote. |
 
 Never force-push. A non-fast-forward rejection is a safety net.
 
@@ -437,7 +437,7 @@ Never force-push. A non-fast-forward rejection is a safety net.
 1. Files ship with the template — already in place.
 2. Fill AGENTS.override.md: identity diffs, persona + name, `autonomy`, `push`.
 3. Create the founding spec (`SPEC-001-<name>.md`) and get operator approval.
-4. Ensure `~/projects/OPERATOR.md` exists (operator profile + VM facts); it is
+4. Ensure `~/projects/LOCAL.md` exists (operator profile + VM facts); it is
    per-VM, not per-project, so it is created once per machine, not per project.
 5. Choose the work-ledger MODULE set for the project.
 6. Set the platform-memory-disable edit in the AI client.
