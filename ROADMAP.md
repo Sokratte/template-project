@@ -1,4 +1,5 @@
-# Roadmap · soft: 600 · hard: 1200 (loaded slice only)
+# Roadmap
+<!-- soft: 600 · hard: 1200 (loaded slice only) -->
 
 > The volatile counterpart to AGENTS.md. Where the project is going —
 > current priority, tracks, milestones, active plans. Read at session start

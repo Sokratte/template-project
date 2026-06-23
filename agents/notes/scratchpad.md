@@ -1,4 +1,5 @@
-# Scratchpad · soft: 300 · hard: 600
+# Scratchpad
+<!-- soft: 300 · hard: 600 -->
 
 ## Carry-forward
 

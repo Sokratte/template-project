@@ -1,4 +1,5 @@
-# Project rules · soft: 400 · hard: 800
+# Project rules
+<!-- soft: 400 · hard: 800 -->
 
 ## Topic
 

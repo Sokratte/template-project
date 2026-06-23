@@ -1,4 +1,5 @@
-# AGENTS.override.md · soft: 150 · hard: 300
+# AGENTS.override.md
+<!-- soft: 150 · hard: 300 -->
 
 This file overrides the canonical `AGENTS.md` for this project. On any conflict, this file wins.
 

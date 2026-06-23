@@ -1,4 +1,5 @@
-# Work Backlog · soft: 500 · hard: 1000
+# Work Backlog
+<!-- soft: 500 · hard: 1000 -->
 
 One line per item: `YYYY-MM-DD | MODULE | [TAG] | description | file-ref`; TAG is `[OPEN]`, `[ACTIVE]`, or `[FIND]`. When done, move the line to `work-log.md`. Alarm if over 20 items.
 
