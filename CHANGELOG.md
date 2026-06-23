@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **`VM.local/`** refreshed: stale copy-files trashed, current `~/projects/` files (`AGENTS.md`, `LOCAL.md`, `README.md`, `agents_sync.sh`, `projects_list.sh`) copied in and committed under correct names.
+- **READMEs added** to all scaffold directories missing one: `docs/decisions/`, `docs/specs/`, `docs/plans/`, `docs/sessions/`, `docs/research/`, `docs/philosophy/`, `src/`, `tools/`. Each follows the line-1 `<!-- kw: -->` + bare-filename convention.
+- **Session logs 01-11 converted** to line-1 format (`<!-- kw: ... -->` + bare filename on line 2).
 - **`docs/philosophy/`** directory with `DP-000-template.md` skeleton — Design Philosophy document type now part of the scaffold.
 - **Soft/hard word limits added** to all skeleton files that were missing them: `AGENTS.override.md` (150/300), `agents/rules/project.md` (400/800), `agents/commands/session-start.md` (400/600), `ROADMAP.md` (600/1200), `~/projects/AGENTS.md` (1200/2000), `~/projects/LOCAL.md` (200/400).
 

@@ -1,12 +1,19 @@
-2026-06-24-025-vm-local-cleanup-soft-wrap.md | session, vm-local, cleanup, soft-wrap, readme-pass
+<!-- kw: session, vm-local, cleanup, soft-wrap, readme-pass -->
+2026-06-24-025-vm-local-cleanup-soft-wrap.md
 
-# Session 025 — VM.local cleanup + soft-wrap
+# Session 025 — VM.local cleanup + README pass
 
-## Goal
+**Status:** Completed
+**Goal:** Trash stale VM.local copy-files; copy current ~/projects files in; write missing READMEs for docs/*, src/, tools/.
 
-1. Trash all stale `VM.local/` copy-files.
-2. Soft-wrap fix (option A): convert templates + skeleton files to genuine soft-wrap.
+## VM.local refreshed
 
-## Log
+All stale `copy`-named files moved to `.trash/VM.local/`. Current `~/projects/` files (`AGENTS.md`, `LOCAL.md`, `README.md`, `agents_sync.sh`, `projects_list.sh`) copied into `VM.local/` under correct names. Committed and pushed.
 
-<!-- entries appended as work progresses -->
+## README pass
+
+Written: `docs/decisions/`, `docs/specs/`, `docs/plans/`, `docs/sessions/`, `docs/research/`, `src/`, `tools/`. All follow line-1 `<!-- kw: -->` + bare-filename convention. `docs/philosophy/` discovered and written in session 027.
+
+## Git
+
+Commits: df91a6a (VM.local), 138d27b (READMEs). Status: clean, pushed.

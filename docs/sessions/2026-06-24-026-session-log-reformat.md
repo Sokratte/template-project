@@ -3,9 +3,17 @@
 
 # Session 026 — Session log reformat
 
-**Status:** In Progress
-**Goal:** Convert session logs 02–11 to current line-1 format (HTML keyword comment + bare filename on line 2) and add `<!-- kw: -->` section headings where appropriate.
+**Status:** Completed
+**Goal:** Convert session logs 01–11 to current line-1 format.
 
-## Log
+## Session logs 01–11 reformatted
 
-<!-- entries appended as work progresses -->
+Python script prepended `<!-- kw: … -->`  + bare filename to all 11 files. Session 11 had an old variant that was stripped and replaced. Keywords derived from filename slugs and H1 titles. Committed c80f746, pushed.
+
+## Backlog
+
+Ripple-edit backlog item closed and moved to work-log.
+
+## Git
+
+Commit: c80f746. Status: clean, pushed.
