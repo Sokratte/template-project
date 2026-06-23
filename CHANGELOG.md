@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Audit fixes (session 029):** `CREATE_PROJECT.md` operational.md budget row corrected to no-limit; `VM.local/README.md` OPERATOR.md → LOCAL.md (6 occurrences); `PLAN-001` checklist updated; `ADR-002` historical.md removed from Content class list; `PLAN-002` session-end.md item checked; `agents/rules/README.md` stale placeholder removed.
+
 - **Line-1 format for all docs changed to HTML comment + bare filename** (`<!-- kw: keywords -->` on line 1, filename on line 2). Uniform across all doc types; hidden in Markdown renderers, greppable in source. Migrated: ADR-001/002, SPEC-001/002/003, PLAN-001/002, sessions 011-017+019, all research docs. Sessions 001-010 and session-018 grandfathered.
 - **`docs/README.md` rewritten** as single source of truth for document conventions: section-level keywords (`<!-- kw: -->` on every heading), status master vocabulary table with per-type subsets, structural vs. content heading distinction, section matrix (required/optional/n/a per type), implications palette, Design Philosophy (DP) type added, anti-drift rule, `Adding a new doc type` section, all inline templates updated.
 - **Skeleton-file soft/hard limits moved from H1 text into HTML comments** (`<!-- soft: N · hard: M -->` on line after H1). Invisible in Obsidian/MkDocs/GitHub, greppable in source. Applies to all 10 skeleton files.
