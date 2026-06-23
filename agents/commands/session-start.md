@@ -1,4 +1,4 @@
-# Session Start
+# Session Start · soft: 400 · hard: 600
 
 Orient yourself before doing anything. Follow these steps in order. **Execute them — do not merely read them.** They run after the project's startup set has been loaded (see `AGENTS.md` for the loading call).
 
