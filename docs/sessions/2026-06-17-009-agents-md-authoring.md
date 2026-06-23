@@ -1,3 +1,6 @@
+<!-- kw: session, AGENTS.md, authoring, startup flow, document-read model, PLAN-001, PLAN-002 -->
+2026-06-17-009-agents-md-authoring.md
+
 # 2026-06-17 · template-project · session 09
 
 **Task:** Continue PLAN-001 follow-through: repair the uncommitted folder

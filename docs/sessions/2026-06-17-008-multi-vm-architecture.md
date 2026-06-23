@@ -1,3 +1,6 @@
+<!-- kw: session, multi-VM, architecture, PLAN-001, design -->
+2026-06-17-008-multi-vm-architecture.md
+
 # Session Log: Multi-VM Agent Architecture — design & PLAN-001
 
 **Date:** 2026-06-17
