@@ -10,4 +10,4 @@ One line per item: `YYYY-MM-DD | MODULE | [TAG] | description | file-ref`; TAG i
 2026-06-19 | DOCS       | [OPEN]    | Soft-wrap fix (option A): convert all templates + skeleton files to genuine soft-wrap (no hard line breaks mid-paragraph), so the agent imitates the right pattern. Root cause of the never-working soft-wrap rule is hard-wrapped examples, not weak wording. Option B (MCP rejects mid-paragraph \n) deferred. | templates/, agents/, docs/
 2026-06-19 | INFRA      | [OPEN]    | MCP file tools return word count on every read/write (len(content.split())) — feeds the soft/hard line-1 file-limit check in AGENTS.md. Cheap: content is already in hand. Words chosen over bytes (closer to tokens, model-independent). | MCP server
 2026-06-23 | MEMORY     | [OPEN]    | Revisit memory baselines: operational soft/hard 500/1000 words, promotion proof M>=3, cutoff 0.01. No practice data yet. Revisit at session 030. | agents/memory/
-2026-06-22 | REPO       | [FIND]    | Stray file VM.local/README copy.md looks like an accidental copy -- review, move to .trash if cruft. | VM.local/
+

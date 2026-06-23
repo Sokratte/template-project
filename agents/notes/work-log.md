@@ -41,3 +41,4 @@
 2026-06-23 | DOCS       | [DONE]    | OPERATOR.md -> LOCAL.md rename, repo-wide (73 hits across README, CREATE_PROJECT, SPEC-003, PLAN-001/002, agents READMEs, research, scratchpad, backlog, session-017). Historical logs untouched. | session 020
 2026-06-23 | AGENTS     | [DONE]    | AGENTS.md overhaul: global.md pointer removed from agents/README.md + PLAN-002 table; AGENTS.md itself already clean; tbh-era cruft: none found. | session 021
 2026-06-23 | DOCS       | [DONE]    | Skeleton-file limits written into all 6 missing files (AGENTS.override.md, project.md, session-start.md, ROADMAP.md, AGENTS.md, LOCAL.md). All files well under limits; AGENTS.md at 1519w is over soft 1200 — noted, no prune pressure. | session 022
+2026-06-24 | REPO       | [DONE]    | VM.local/ refreshed: stale copy-files trashed, current ~/projects files copied in and committed. | VM.local/
