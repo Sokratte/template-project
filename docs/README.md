@@ -88,6 +88,7 @@ One master set; each document type draws only the subset that makes sense for it
 | PLAN | Draft · Plan ready · In Progress · Completed · Cancelled |
 | Research | Draft · Completed · Superseded → |
 | Session | In Progress · Completed |
+| Test | Draft · Active · Superseded → |
 
 The status field tracks the *document*, never the implementation — implementation progress lives in ROADMAP / work-backlog (one fact, one home). The lone exception is PLAN, whose lifecycle *is* the execution it tracks.
 
@@ -161,6 +162,7 @@ Content documents are never loaded whole at session start. The read mechanism (i
 | Plan | `docs/plans/` | `PLAN-NNN-topic-slug.md` | see template below |
 | Research | `docs/research/` | `YYYY-MM-DD-topic-slug.md` | see template below |
 | Session log | `docs/sessions/` | `YYYY-MM-DD-NNN-topic-slug.md` | see template below |
+| Test | `docs/tests/` | `TEST-NNN-topic-slug.md` | see template below |
 
 ## Using the templates <!-- keywords: anti-drift, copy template, do not copy last file -->
 
@@ -372,4 +374,29 @@ Narrative of the work. Extract durable findings to their permanent home (spec, r
 ## Git <!-- keywords: -->
 
 Commits: abc1234 · Status: clean / pending push
+```
+
+### Test
+
+A test document registers an executable suite — it does not contain the tests. The suite lives in `tests/` as real code that reads live repo files; this document records what each check guarantees, why it exists, and how to run it. One file per suite.
+
+```
+<!-- keywords: keyword keyword keyword -->
+TEST-NNN-topic-slug.md
+
+# TEST-NNN: Title
+
+**Status:** Draft | Active | Superseded → X
+**Created:** YYYY-MM-DD · **Updated:** YYYY-MM-DD
+**Suite:** `tests/test_<name>.py` · **Run:** `python3 -m pytest tests/test_<name>.py`
+
+Abstract: what invariants this suite protects and why they keep breaking.
+
+## *What this check guarantees — write the guarantee* <!-- keywords: -->
+
+One content heading per check: the invariant in plain words, the rationale (what drift it catches), and the test function name in `tests/`. The prose carries the *why*; the code carries the *what*.
+
+## Last run <!-- keywords: -->
+
+Date · result (green / red) · who/what ran it.
 ```
