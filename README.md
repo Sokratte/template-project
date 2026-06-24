@@ -55,6 +55,35 @@ template-project/
 └── tests/                     # tests
 ```
 
+## Session lifecycle
+
+Every session is bracketed by two executable procedures in `agents/commands/`. They are **executed, not merely read** — the descriptions here are orientation; the command files are the source of truth.
+
+**`session-start.md`** orients the agent: greet the operator (from `LOCAL.md`), silently reconcile any out-of-repo memory against the repo (the repo wins), create the session-log scaffold, build a startup index (line 1 of every doc in scope, placed last for recency), run `git status`, and report what is open in the scratchpad and backlog.
+
+**`session-end.md`** closes it: fill the session log; move finished items from `work-backlog.md` to the append-only `work-log.md` and add any new open ones; reconcile the scratchpad; run autonomous memory maintenance (strengthen-on-recall, promote / demote per `agents/memory/README.md`); prune any red-signal skeleton file with the operator; verify specs against what was built; update `CHANGELOG.md`; and commit / push per project settings.
+
+On a closing phrase ("that's it", "thanks", "see you tomorrow"), the agent asks once whether to close, then runs `session-end.md`, noting any items left open.
+
+## Document size governance
+
+Size is governed by **load behaviour**, not document type (`docs/decisions/ADR-002`). Two classes:
+
+- **Skeleton** files are loaded in full at every session start, so their size costs tokens on every start forever. They are kept in check by a language-level traffic-light: **green** = no action; **yellow** = the agent informs the operator at start; **red** = the agent halts at start and forces a conscious deal-with-it-now-or-defer decision (the prompt recurs until resolved).
+- **Content** files (everything in `docs/`) are read by index, abstract, or section and never loaded whole, so they carry **no size limit** — a cap would force cutting material the read mechanism already handles section by section.
+
+| Document | Class | Governance |
+|----------|-------|------------|
+| `agents/memory/procedural.md` | skeleton | size limit = prune trigger; autonomous demotion to operational |
+| `agents/notes/scratchpad.md` | skeleton | traffic-light (carry-forward stays tight) |
+| `agents/notes/work-backlog.md` | skeleton | traffic-light + item-count alarm (>20 = backlog problem, not size) |
+| `AGENTS.override.md` | skeleton | traffic-light |
+| `agents/memory/operational.md` | grepped | none — no size limit; section-indexed floor |
+| `agents/notes/work-log.md` | never loaded | none (append-only) |
+| Session / Research / Decision / Plan / Spec | content | none — as long as needed |
+
+Pruning the human-governed skeleton files is always a human act; the two memory files are the exception and self-manage at session end (see `agents/memory/README.md`).
+
 ## Conventions
 
 | Convention | What it provides |

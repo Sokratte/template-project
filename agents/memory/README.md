@@ -44,7 +44,7 @@ Always loaded, short by design, the only size-limited memory file. **Admission t
 
 - **Entries arrive by promotion** from `operational.md` (topic-independent + `M ≥ 3` + useful). The operator may also add a rule directly.
 - **Entries leave by demotion** to `operational.md` when a size-triggered prune finds them below cutoff or among the lowest survivors at the hard limit. Nothing is deleted.
-- **No operator profile here.** Who the operator is and how to work with them lives in `~/projects/LOCAL.md` — per-VM, never committed, because it is personal observation about a named human (PII). This file is committed and travels with the repo; the profile must not. See SPEC-003 §8 and PLAN-001.
+- **No operator profile here.** Who the operator is and how to work with them lives in `~/projects/LOCAL.md` — per-VM, never committed, because it is personal observation about a named human (PII). This file is committed and travels with the repo; the profile must not. See PLAN-001.
 
 **Entry format:** `- rule text [sNN xM]`. **Strengthen on recall:** when it prevents a mistake, bump `M`. One edit.
 

@@ -94,8 +94,8 @@ Two separate knobs, both in `AGENTS.override.md`; defined in AGENTS.md / CREATE_
 ## Execution checklist
 
 - [x] `git mv worklog.md → work-backlog.md`, `worklog-archive.md → work-log.md` (session 10, committed `4a00939`)
-- [x] SPEC-003: rename refs; append-only → `work-log.md`; backlog as pruned open-items list; >20-item alarm; decay folded into session-end; Claude symlink section removed; file-map paths fixed to disk (session 10)
-- [x] SPEC-003 (follow-up): add `LOCAL.md` to file map; rewrite §8.1 to remove operator profile (→ LOCAL.md), procedural-rules-only; update startup to load LOCAL.md in exec-1; drop `.project` from exec-2
+- [x] append-only → `work-log.md`; backlog as pruned open-items list; >20-item alarm; decay folded into session-end; Claude symlink section removed; file-map paths fixed to disk (session 10)
+- [x] procedural-rules-only; update startup to load LOCAL.md in exec-1; drop `.project` from exec-2
 - [x] `agents/commands/session-start.md`: rewrite as executable steps for the new world; new file names; `docs/sessions/` path; LOCAL.md loaded in exec-1; on-demand grep/abstract tier lives here
 - [x] `agents/commands/session-end.md`: backlog/log refs; completion-moves-to-work-log step; decay-sweep instruction folded in
 - [x] `agents/README.md`: file inventory rename; drop phantom `daily-digest.md`
@@ -125,7 +125,7 @@ AGENTS.md (exec) does the *reading*; session-start.md is the *steps to execute* 
 - [ ] Copy/sync command absent from AGENTS.md content (PLAN-001 Decision 7).
 - [x] Abstract convention (`##`-terminated) documented once; session-log line 1 is `<!-- keywords: … -->` (bare filename on line 2).
 - [x] awk three-move retrieval documented as the habit for large docs.
-- [x] work-backlog/work-log renamed on disk with history preserved; SPEC-003 references new names; append-only on work-log only.
+- [x] work-backlog/work-log renamed on disk with history preserved; append-only on work-log only.
 - [ ] All other docs reference new names; no doc asserts superseded contracts ("append-only worklog", `~/workspace`, `.project`/`.projects`, operator profile in procedural.md).
 - [ ] >20-item backlog alarm specified in AGENTS.md + session procedures.
 - [x] session-start.md rewritten as executable steps for the new world.

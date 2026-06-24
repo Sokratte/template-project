@@ -4,7 +4,7 @@ Two procedures the agent **runs**, not just reads: one to open a session, one to
 
 | File | Role | When it runs | Triggered by |
 |------|------|--------------|--------------|
-| `session-start.md` | Orientation — check state, read the last session, look for a spec, scaffold today's session log | At the start of every session, after the project is loaded | The exec-2 startup call (defined in `~/projects/AGENTS.md`) loads this file; the agent then executes its steps |
+| `session-start.md` | Orientation — check state, read the last session, look for a spec, scaffold today's session log | At the start of every session, after the project is loaded | Loaded into context by exec-2; execution is triggered by the session-setup instruction in the system prompt |
 | `session-end.md` | Closing — write the session log, reconcile the ledger, prune the scratchpad, update memory, commit and push | Before the agent says "done" | The agent at wrap-up, or an explicit operator close signal |
 
 ## Where the startup sequence is defined

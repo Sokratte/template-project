@@ -250,7 +250,7 @@ the operator's explicit approval before implementation.
 
 Context persists across sessions through files in the repo — not through
 the AI platform's server-side memory, which is deliberately disabled (Step 8).
-Full specification: `docs/specs/SPEC-003-agent-memory-system.md`.
+Full model: `agents/memory/README.md`.
 The operator profile is NOT in this repo — it lives in `~/projects/LOCAL.md`
 (per-VM, never committed; it is PII).
 
@@ -278,7 +278,7 @@ unlimited, section-indexed floor where demoted and stale knowledge lives, found 
 **Autonomous lifecycle (session-end, no prompt):** proven, topic-independent operational
 entries are *promoted* to procedural; when procedural exceeds its size limit, its lowest-
 value entries are *demoted* back to operational (never deleted). Cutoff `memory_cutoff`
-(default 0.01) in `AGENTS.override.md`. Full model: SPEC-003 §8.
+(default 0.01) in `AGENTS.override.md`. Full model: `agents/memory/README.md`.
 
 
 ## Where Things Live

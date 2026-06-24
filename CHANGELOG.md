@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **SPEC-003 retired (session 030):** the agent-memory/session system spec (12 sections, ~3560 words) was almost entirely re-described in the agents READMEs, CREATE_PROJECT, and ADR-002. Moved to `.trash/` (not deleted from disk). Its exclusive content was rehomed: §4 (AGENTS.md anchor) + §11 (git automation) + §2 (why file-based) → `~/projects/README.md` (+ VM.local mirror); §9 (session lifecycle) + §10 (document size governance) → `template-project/README.md`. All living references deleted or repointed (ADR-002, CREATE_PROJECT, agents READMEs, docs/README.md, PLAN-001). `~/projects/README.md` also pulled from stale `OPERATOR.md` onto current `LOCAL.md`.
+- **agents/commands/README.md:** corrected the causally-wrong "Triggered by" cell for `session-start.md` — exec-2 loads the file into context; the session-setup instruction in the system prompt triggers execution.
+
 - **Audit fixes (session 029):** `CREATE_PROJECT.md` operational.md budget row corrected to no-limit; `VM.local/README.md` OPERATOR.md → LOCAL.md (6 occurrences); `PLAN-001` checklist updated; `ADR-002` historical.md removed from Content class list; `PLAN-002` session-end.md item checked; `agents/rules/README.md` stale placeholder removed.
 
 - **Line-1 format for all docs changed to HTML comment + bare filename** (`<!-- keywords: keywords -->` on line 1, filename on line 2). Uniform across all doc types; hidden in Markdown renderers, greppable in source. Migrated: ADR-001/002, SPEC-001/002/003, PLAN-001/002, sessions 011-017+019, all research docs. Sessions 001-010 and session-018 grandfathered.

@@ -1,4 +1,4 @@
-<!-- kw: document size, traffic-light, skeleton vs content, token budget, autonomous memory lifecycle, per-session usefulness M/sessions_alive, operational.md no-limit index floor, promotion demotion, memory_cutoff -->
+<!-- keywords: document size, traffic-light, skeleton vs content, token budget, autonomous memory lifecycle, per-session usefulness M/sessions_alive, operational.md no-limit index floor, promotion demotion, memory_cutoff -->
 ADR-002-document-size-governance.md
 
 # ADR-002: Document size governance — traffic-light, human-decided
@@ -15,7 +15,7 @@ governed by a yellow/red traffic-light that operates purely on the language
 level — the agent warns (yellow) or stops and forces a decision (red) at
 session start. There is no deterministic algorithm that deletes or moves
 content automatically. This supersedes the operational-memory decay sweep
-defined in SPEC-003 §8.5.
+defined in `agents/memory/README.md`.
 
 ## Amendment — 2026-06-22: autonomous memory lifecycle (supersedes the no-automatism rule for the two memory files)
 
@@ -32,7 +32,7 @@ The no-automatism rule below is **superseded for `procedural.md` and `operationa
 
 The recall counter therefore returns to being **algorithm input** for these two files (its 2026-06-18 demotion to “human reading-aid only” is reversed here), while staying a reading aid for the human-governed files.
 
-Full model: `agents/memory/README.md`. Executable form: `agents/commands/session-end.md` §5. SPEC-003 §8 is updated to match.
+Full model: `agents/memory/README.md`. Executable form: `agents/commands/session-end.md` §5.
 
 ## Context
 
@@ -49,7 +49,7 @@ window at every start is pure, permanent performance loss, multiplied by
 every session. The more we load, the worse the start performs.
 
 The earlier mechanism for keeping operational memory small was the decay
-sweep (SPEC-003 §8.5): a deterministic procedure that scored entries by
+sweep: a deterministic procedure that scored entries by
 recall rate and proposed moving the weakest to historical memory. The
 problem with any such automatism is the special case — find twenty new rules
 in one day and the file is suddenly large, but you cannot judge *that day*
@@ -93,7 +93,7 @@ to decide what goes.
 
 **Concrete thresholds are per-file and deferred.** This ADR fixes the
 principle. Each skeleton file will need its own metric and its own green/
-yellow/red token thresholds, worked out separately (see SPEC-003 §10).
+yellow/red token thresholds, worked out separately (see `agents/memory/README.md`).
 
 ## Consequences
 

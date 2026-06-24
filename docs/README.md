@@ -1,11 +1,11 @@
-<!-- kw: document conventions, line-1 index, section keywords, abstract, awk grep, skeleton vs content, word limits, status vocabulary, section matrix, structural content headings, implications palette, anti-drift, doc types, design philosophy, adding doc type -->
+<!-- keywords: document conventions, line-1 index, section keywords, abstract, awk grep, skeleton vs content, word limits, status vocabulary, section matrix, structural content headings, implications palette, anti-drift, doc types, design philosophy, adding doc type -->
 docs/README.md
 
 # docs/ — Document conventions
 
 Everything in this folder follows a single structure: **line 1 is the index entry, the abstract runs to the first `##`.** This is uniform across all document types — sessions, research, decisions, plans, specs, and design philosophies.
 
-## Reading conventions <!-- kw: index, abstract, section map, awk, grep, head -->
+## Reading conventions <!-- keywords: index, abstract, section map, awk, grep, head -->
 
 **Index a directory** (one line per file, no full reads):
 ```bash
@@ -15,17 +15,17 @@ for f in docs/decisions/*.md; do head -1 "$f"; done
 
 **Read a file's abstract** (everything before the first `##`):
 ```bash
-awk '/^## /{exit} 1' docs/specs/SPEC-003-agent-memory-system.md
+awk '/^## /{exit} 1' docs/specs/SPEC-NNN-topic-slug.md
 ```
 
 **Get a file's section map** (heading outline, keywords included):
 ```bash
-grep -n '^#\+ ' docs/specs/SPEC-003-agent-memory-system.md
+grep -n '^#\+ ' docs/specs/SPEC-NNN-topic-slug.md
 ```
 
 **Find the right section by keyword** (the section-level index):
 ```bash
-grep -rin 'kw:.*memory' docs/specs/
+grep -rin 'keywords:.*memory' docs/specs/
 ```
 
 **Read one section** (e.g. `## Design`):
@@ -35,10 +35,10 @@ awk '/^## Design/{f=1;print;next} f&&/^## /{exit} f' FILE.md
 
 These moves — index, abstract, section-map, keyword-grep, section-read — cover every read pattern. Documents are never split into files for size; they are sectioned at read-time and grow as large as they need to.
 
-## Line-1 format <!-- kw: line 1, filename, keywords, HTML comment, hidden, relationship graph -->
+## Line-1 format <!-- keywords: line 1, filename, keywords, HTML comment, hidden, relationship graph -->
 
 ```
-<!-- kw: keyword keyword keyword -->
+<!-- keywords: keyword keyword keyword -->
 filename.md
 ```
 
@@ -46,17 +46,17 @@ Line 1 is an HTML comment containing the keyword index. Line 2 is the bare filen
 
 Keywords are the relationship graph: no `Related:` fields, no bidirectional links. A keyword that appears in two files is the connection. If a directed relationship matters, write it as prose where it belongs.
 
-## Section-level keywords <!-- kw: section keywords, HTML comment, hidden, uniform rule, grep -->
+## Section-level keywords <!-- keywords: section keywords, HTML comment, hidden, uniform rule, grep -->
 
 Section headings carry their own keyword list so a grep can land on the right section of a long document without reading the whole file:
 
 ```
-## Section title <!-- kw: term, term, term -->
+## Section title <!-- keywords: term, term, term -->
 ```
 
-The keywords live inside an HTML comment. Every Markdown renderer drops HTML comments from the rendered page, so the reader sees a clean heading while the terms stay fully greppable in source. **This is the uniform rule: keywords are always hidden in `<!-- kw: … -->`, everywhere** — line 1 and every section heading. Keywords are noise for the human eye; hiding them costs nothing and keeps rendered docs clean.
+The keywords live inside an HTML comment. Every Markdown renderer drops HTML comments from the rendered page, so the reader sees a clean heading while the terms stay fully greppable in source. **This is the uniform rule: keywords are always hidden in `<!-- keywords: … -->`, everywhere** — line 1 and every section heading. Keywords are noise for the human eye; hiding them costs nothing and keeps rendered docs clean.
 
-## Abstract and head block <!-- kw: abstract, status, created, updated, head block -->
+## Abstract and head block <!-- keywords: abstract, status, created, updated, head block -->
 
 The abstract is everything from line 1 down to (not including) the first `##` heading. It must stand on its own in the index — one sentence is too little for a 1,000-line spec.
 
@@ -64,7 +64,7 @@ ADRs, specs, and plans open with the same head block in this order — `**Status
 
 Do not put a `##` heading inside an abstract.
 
-## Status vocabulary <!-- kw: status, draft, accepted, active, plan ready, in progress, completed, superseded, deprecated, cancelled -->
+## Status vocabulary <!-- keywords: status, draft, accepted, active, plan ready, in progress, completed, superseded, deprecated, cancelled -->
 
 One master set; each document type draws only the subset that makes sense for it.
 
@@ -91,7 +91,7 @@ One master set; each document type draws only the subset that makes sense for it
 
 The status field tracks the *document*, never the implementation — implementation progress lives in ROADMAP / work-backlog (one fact, one home). The lone exception is PLAN, whose lifecycle *is* the execution it tracks.
 
-## Structural vs. content headings <!-- kw: structural headings, content headings, descriptive, vocabulary -->
+## Structural vs. content headings <!-- keywords: structural headings, content headings, descriptive, vocabulary -->
 
 Two kinds of heading, two rules:
 
@@ -99,7 +99,7 @@ Two kinds of heading, two rules:
 
 **Content** headings *are* the summary — write the actual thing. A research question is the heading (`## Does gVisor RAM overhead scale with tenant count?`), not `## Question`. A session accomplishment is the heading (`## Conformed all six head blocks`), not `## What was done`. An ADR decision is the heading (`## Boot-start the auditor after reboot`), not `## Decision`. The descriptive heading carries information and doubles as the section keyword index.
 
-## Section matrix <!-- kw: section matrix, required, optional, context, design, implications, alternatives, references, sources, tenet, principle, horizon, anti-goals, goals -->
+## Section matrix <!-- keywords: section matrix, required, optional, context, design, implications, alternatives, references, sources, tenet, principle, horizon, anti-goals, goals -->
 
 Required ✓ · optional ○ · n/a — · *italic = content heading (write the actual thing).*
 
@@ -134,7 +134,7 @@ Section definitions where not obvious:
 - **Horizon** — DP only. What this philosophy opens, where it leads, what it becomes the foundation for.
 - **References** vs **Sources** — References are internal repo links; Sources are external prior art (papers, vendor docs). A DP carries no References (it never points down; other documents point up to it) but may carry external Sources.
 
-## Implications palette <!-- kw: implications, opportunities, risks, benefits, costs, trade-offs -->
+## Implications palette <!-- keywords: implications, opportunities, risks, benefits, costs, trade-offs -->
 
 No fixed layout — the author picks per document. Non-exhaustive palette:
 
@@ -142,7 +142,7 @@ Paired axes (suggestions, not a rule): Opportunities ↔ Risks · Benefits ↔ C
 
 Standalone terms: Trade-offs · Dependencies · Constraints · Assumptions · Requirements · Interactions · Consequences · Complications · Failure modes
 
-## Document classes and size governance <!-- kw: skeleton, content, word limits, never loaded whole -->
+## Document classes and size governance <!-- keywords: skeleton, content, word limits, never loaded whole -->
 
 | Class | Files | Size |
 |-------|-------|------|
@@ -151,7 +151,7 @@ Standalone terms: Trade-offs · Dependencies · Constraints · Assumptions · Re
 
 Content documents are never loaded whole at session start. The read mechanism (index, abstract, section) handles any size; a cap would force cutting material you need.
 
-## Document types — location and naming <!-- kw: naming, locations, NNN, dated, templates -->
+## Document types — location and naming <!-- keywords: naming, locations, NNN, dated, templates -->
 
 | Type | Location | Naming | Template |
 |------|----------|--------|----------|
@@ -162,11 +162,11 @@ Content documents are never loaded whole at session start. The read mechanism (i
 | Research | `docs/research/` | `YYYY-MM-DD-topic-slug.md` | see template below |
 | Session log | `docs/sessions/` | `YYYY-MM-DD-NNN-topic-slug.md` | see template below |
 
-## Using the templates <!-- kw: anti-drift, copy template, do not copy last file -->
+## Using the templates <!-- keywords: anti-drift, copy template, do not copy last file -->
 
 To create a new document, copy the template block below for that type. **Never orient off the most recent file of that type.** Copying the latest file lets the format drift one small, invisible change at a time; over many sessions the result no longer resembles the template. The template is the single source of *shape*; this README is the single source of *rules*.
 
-## Lifecycle notes <!-- kw: lifecycle, supersede, archive, amend, immutable, append-only -->
+## Lifecycle notes <!-- keywords: lifecycle, supersede, archive, amend, immutable, append-only -->
 
 **Design philosophy (DP)** — ratified DPs (Status: Accepted) are immutable. To change one, supersede and archive: move the old file to `docs/philosophy/archive/` under its dated name, write a fresh same-numbered DP in the current format, and port the intent. Drafts are revisable until ratified. A DP never references specs, ADRs, or plans — it never points down; other documents point up to it.
 
@@ -180,18 +180,18 @@ To create a new document, copy the template block below for that type. **Never o
 
 **Session log** — created at session start, filled during the work, closed at session end. The technical record: what was done, what broke, what is next.
 
-## Adding a new document type <!-- kw: extend, new type, flexibility -->
+## Adding a new document type <!-- keywords: extend, new type, flexibility -->
 
 Pick a location and naming pattern (numbered `XXX-NNN` or dated `YYYY-MM-DD-NNN`), choose the status subset from the master vocabulary above, choose sections from the matrix (or add a new structural section here first), write a template block in this file following the line-1 and hidden-keyword rules, and register the type in the table above.
 
-## Templates <!-- kw: templates, ADR, SPEC, PLAN, research, session, DP -->
+## Templates <!-- keywords: templates, ADR, SPEC, PLAN, research, session, DP -->
 
 The canonical shape of each type — copy the block, keep the structure. **Never copy from the most recent file of that type — always copy from here.**
 
 ### Design philosophy (DP)
 
 ```
-<!-- kw: keyword keyword keyword -->
+<!-- keywords: keyword keyword keyword -->
 DP-NNN-topic-slug.md
 
 # DP-NNN: Title
@@ -203,23 +203,23 @@ Abstract: the principle in one paragraph — what it holds, why it matters.
 
 > Tenet: one-line pull-quote.
 
-## Context <!-- kw: -->
+## Context <!-- keywords: -->
 
 What situation or recurring problem this principle addresses.
 
-## Principle <!-- kw: -->
+## Principle <!-- keywords: -->
 
 The affirmative stance, held to. The load-bearing section.
 
-## Anti-Goals <!-- kw: -->
+## Anti-Goals <!-- keywords: -->
 
 - NOT: what this philosophy refuses to become.
 
-## Implications <!-- kw: -->
+## Implications <!-- keywords: -->
 
 What this principle makes possible and what it costs.
 
-## Horizon <!-- kw: -->
+## Horizon <!-- keywords: -->
 
 What this philosophy opens, where it leads, what it becomes the foundation for.
 ```
@@ -227,7 +227,7 @@ What this philosophy opens, where it leads, what it becomes the foundation for.
 ### Decision (ADR)
 
 ```
-<!-- kw: keyword keyword keyword -->
+<!-- keywords: keyword keyword keyword -->
 ADR-NNN-topic-slug.md
 
 # Decision NNN: Title
@@ -237,20 +237,20 @@ ADR-NNN-topic-slug.md
 
 Abstract: the decision and why.
 
-## Context <!-- kw: -->
+## Context <!-- keywords: -->
 
 What forced this decision. What constraints exist.
 
-## *The decision title — write the actual decision* <!-- kw: -->
+## *The decision title — write the actual decision* <!-- keywords: -->
 
 We will use X because Y.
 
-## Implications <!-- kw: -->
+## Implications <!-- keywords: -->
 
 **Positive:** what gets easier.
 **Negative:** what gets harder; new risks.
 
-## Alternatives considered <!-- kw: -->
+## Alternatives considered <!-- keywords: -->
 
 | Option | Why rejected |
 |--------|-------------|
@@ -260,7 +260,7 @@ We will use X because Y.
 ### Spec
 
 ```
-<!-- kw: keyword keyword keyword -->
+<!-- keywords: keyword keyword keyword -->
 SPEC-NNN-topic-slug.md
 
 # Specification NNN: Title
@@ -270,23 +270,23 @@ SPEC-NNN-topic-slug.md
 
 Abstract: what this builds and why.
 
-## Goals <!-- kw: -->
+## Goals <!-- keywords: -->
 
 What this spec delivers.
 
-## Non-goals <!-- kw: -->
+## Non-goals <!-- keywords: -->
 
 - NOT: …
 
-## Acceptance criteria <!-- kw: -->
+## Acceptance criteria <!-- keywords: -->
 
 - [ ] binary, yes/no, no subjectivity
 
-## Design <!-- kw: -->
+## Design <!-- keywords: -->
 
 What to build — modules, data flow, interfaces. Not line-by-line instructions.
 
-## Open questions <!-- kw: -->
+## Open questions <!-- keywords: -->
 
 - [ ] …
 ```
@@ -294,7 +294,7 @@ What to build — modules, data flow, interfaces. Not line-by-line instructions.
 ### Plan
 
 ```
-<!-- kw: keyword keyword keyword -->
+<!-- keywords: keyword keyword keyword -->
 PLAN-NNN-topic-slug.md
 
 # PLAN NNN: Title
@@ -304,20 +304,20 @@ PLAN-NNN-topic-slug.md
 
 Abstract: what's missing, what this achieves, why it matters now.
 
-## Non-goals <!-- kw: -->
+## Non-goals <!-- keywords: -->
 
 - NOT: …
 
-## Decisions locked <!-- kw: -->
+## Decisions locked <!-- keywords: -->
 
 ### 1. Title
 The decision, 2–4 lines.
 
-## Execution checklist <!-- kw: -->
+## Execution checklist <!-- keywords: -->
 
 - [ ] step | file-ref
 
-## Acceptance criteria <!-- kw: -->
+## Acceptance criteria <!-- keywords: -->
 
 - [ ] …
 ```
@@ -325,7 +325,7 @@ The decision, 2–4 lines.
 ### Research
 
 ```
-<!-- kw: keyword keyword keyword -->
+<!-- keywords: keyword keyword keyword -->
 YYYY-MM-DD-topic-slug.md
 
 # Research: Topic title
@@ -334,15 +334,15 @@ YYYY-MM-DD-topic-slug.md
 
 Abstract: short summary of findings and answer.
 
-## *The question — write the actual question* <!-- kw: -->
+## *The question — write the actual question* <!-- keywords: -->
 
 What was asked.
 
-## *Findings — write what was found* <!-- kw: -->
+## *Findings — write what was found* <!-- keywords: -->
 
 The findings, structured to fit.
 
-## Sources <!-- kw: -->
+## Sources <!-- keywords: -->
 
 - URL / citation
 ```
@@ -350,7 +350,7 @@ The findings, structured to fit.
 ### Session log
 
 ```
-<!-- kw: keyword keyword keyword -->
+<!-- keywords: keyword keyword keyword -->
 YYYY-MM-DD-NNN-topic-slug.md
 
 # Session NNN — Title
@@ -360,16 +360,16 @@ YYYY-MM-DD-NNN-topic-slug.md
 
 Abstract: a sentence or two on the session's purpose.
 
-## *What was accomplished — write the accomplishment* <!-- kw: -->
+## *What was accomplished — write the accomplishment* <!-- keywords: -->
 
 Narrative of the work. Extract durable findings to their permanent home (spec, research, operational memory) and leave a pointer here, not the full finding.
 
-## Open / carry-forward <!-- kw: -->
+## Open / carry-forward <!-- keywords: -->
 
 - [ ] still open
 - [x] resolved this session
 
-## Git <!-- kw: -->
+## Git <!-- keywords: -->
 
 Commits: abc1234 · Status: clean / pending push
 ```

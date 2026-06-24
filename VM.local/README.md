@@ -42,9 +42,31 @@ bash ~/projects/agents_sync.sh \
 
 The per-project override (`AGENTS.override.md`) carries the project's persona, the agent's name, the `autonomy` level, and the `push` toggle, plus any project-specific instruction differences; on conflict it wins over the canonical `AGENTS.md`.
 
+## What belongs in AGENTS.md
+
+`AGENTS.md` is loaded first, every session, and is **stable by design** — it changes only when something fundamental does, and it is **never a scratchpad**. The per-project copy is a synced, read-only artifact of this canonical file; project-specific differences (persona, name, `autonomy`, `push`) go in each project's `AGENTS.override.md`, not here.
+
+**Must be in it:** project identity (two sentences); explicit anti-goals ("this project is NOT…"); the stability / never-a-scratchpad rule; the session lifecycle (EXECUTE session-start and session-end, not merely read — plus closing-signal behaviour); the instruction to check for a spec before non-trivial work; the tools (every MCP server and its purpose); the memory system (file tables, autonomous promotion / demotion, strengthen-on-recall); a "Where Things Live" index; document size governance (the two classes and the traffic-light); and git (the automation choices and never-force-push). Optional sections — environment, testing, conventions, write boundaries, error handling, services — only when they apply.
+
+**Must NOT be in it** (each fact has one home): open work → `work-backlog.md`; completed history → `work-log.md`; loose notes → `scratchpad.md`; procedural rules → `procedural.md`; operational gotchas → `operational.md`; the operator profile → `LOCAL.md` (never in any tree); project direction → `ROADMAP.md`; founding reasoning → the founding `SPEC-001`. The test: if a fact has a home in another file, it lives there.
+
+This is the whole reason memory is file-based rather than the AI platform's server-side memory: platform memory is an opaque, unversioned blob that lives off the machine and drifts from the repo over time. File-based memory is versioned, diffable, structured by purpose, and travels with the code — so the repo stays the single source of truth. Each project therefore **disables** platform memory in the AI client; session-start reminds you if that edit is missing.
+
+## Git automation
+
+Set during project setup, recorded in `AGENTS.override.md` (`push`) and `LOCAL.md` (`backup`), applied at session end. The remote URL and provider come from `.git/config`, never from a config file of ours.
+
+| Operation | Default | Notes |
+|-----------|---------|-------|
+| `git add` (specific files) | automatic | only files worked on — never blind `-A` |
+| `git commit` | automatic | session end, Conventional Commits message |
+| `git push` | off — set per project (`push:` in override) | on for solo / one-machine work; needs `LOCAL.md backup` ≠ none and an `origin` remote |
+
+Never force-push — a non-fast-forward rejection is a safety net, not an obstacle.
+
 ## Where to read more
 
 - **`AGENTS.md`** — the canonical agent instructions, including the exec-2 command.
 - **`LOCAL.md`** — you and this machine.
 - **`template-project/`** — the scaffold; its `agents/*/README.md` files explain the memory, notes, and command machinery every project carries.
-- **The system specification** in `template-project/docs/specs/` — how the whole agent/memory/session system works and why it is built this way. Read the spec, not the plans; plans are short-lived task records, the spec is the durable definition.
+- **`template-project/README.md`** — the session lifecycle and document-size governance every project carries; its `docs/decisions/` ADRs record why the architecture is built this way, and `docs/README.md` covers the document conventions.
