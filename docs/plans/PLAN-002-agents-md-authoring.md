@@ -1,5 +1,4 @@
-<!-- keywords: canonical AGENTS.md, startup sequence, three-tier read model, abstract convention, awk, persona, autonomy, work-backlog, session-start -->
-PLAN-002-agents-md-authoring.md
+<!-- file: PLAN-002-agents-md-authoring.md · keywords: canonical AGENTS.md, startup sequence, three-tier read model, abstract convention, awk, persona, autonomy, work-backlog, session-start -->
 
 # PLAN-002: AGENTS.md Authoring
 

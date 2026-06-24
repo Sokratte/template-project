@@ -1,5 +1,4 @@
-<!-- keywords: tools, scripts, utilities, one-time, non-persistent -->
-tools/README.md
+<!-- file: tools/README.md · keywords: tools, scripts, utilities, one-time, non-persistent -->
 
 # tools/ — Tools and scripts
 

@@ -1,5 +1,4 @@
-<!-- keywords: session, vm-local, cleanup, soft-wrap, readme-pass -->
-2026-06-24-025-vm-local-cleanup-soft-wrap.md
+<!-- file: 2026-06-24-025-vm-local-cleanup-soft-wrap.md · keywords: session, vm-local, cleanup, soft-wrap, readme-pass -->
 
 # Session 025 — VM.local cleanup + README pass
 

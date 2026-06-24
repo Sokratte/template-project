@@ -1,5 +1,4 @@
-<!-- keywords: design philosophy template, tenet, context, principle, anti-goals, implications, horizon -->
-DP-000-template.md
+<!-- file: DP-000-template.md · keywords: design philosophy template, tenet, context, principle, anti-goals, implications, horizon -->
 
 # DP-NNN: Title
 

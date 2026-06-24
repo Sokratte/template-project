@@ -1,5 +1,4 @@
-<!-- keywords: memory system redesign, two-file model, per-session usefulness M/sessions_alive, autonomous promotion demotion, operational.md no-limit section index, historical.md removed, ADR-002 amendment, SPEC-003 update, memory_cutoff -->
-2026-06-22-018-memory-lifecycle-redesign.md
+<!-- file: 2026-06-22-018-memory-lifecycle-redesign.md · keywords: memory system redesign, two-file model, per-session usefulness M/sessions_alive, autonomous promotion demotion, operational.md no-limit section index, historical.md removed, ADR-002 amendment, SPEC-003 update, memory_cutoff -->
 
 ## Session log
 

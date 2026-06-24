@@ -1,5 +1,4 @@
-<!-- keywords: philosophy, design philosophy, DP, accepted, immutable, ratified, tenet -->
-docs/philosophy/README.md
+<!-- file: docs/philosophy/README.md · keywords: philosophy, design philosophy, DP, accepted, immutable, ratified, tenet -->
 
 # docs/philosophy/ — Design philosophies
 

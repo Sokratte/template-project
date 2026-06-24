@@ -1,5 +1,4 @@
-<!-- keywords: skeleton file limits, word limits, soft hard, AGENTS.md LOCAL.md, AGENTS.override, session-start, project.md, ROADMAP -->
-2026-06-23-022-skeleton-limits.md
+<!-- file: 2026-06-23-022-skeleton-limits.md · keywords: skeleton file limits, word limits, soft hard, AGENTS.md LOCAL.md, AGENTS.override, session-start, project.md, ROADMAP -->
 
 # Session 022 — Skeleton-file word limits
 

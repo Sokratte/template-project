@@ -1,5 +1,4 @@
-<!-- keywords: skeleton files, H1 headers, soft-wrap, AGENTS.md, local.md, gitignore -->
-2026-06-20-017-skeleton-headers-agents-cleanup.md
+<!-- file: 2026-06-20-017-skeleton-headers-agents-cleanup.md · keywords: skeleton files, H1 headers, soft-wrap, AGENTS.md, local.md, gitignore -->
 
 # Session 17 — Skeleton file headers, AGENTS.md cleanup, load order fix
 

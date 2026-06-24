@@ -1,5 +1,4 @@
-<!-- keywords: src, source code, modules, project code -->
-src/README.md
+<!-- file: src/README.md · keywords: src, source code, modules, project code -->
 
 # src/ — Source code
 

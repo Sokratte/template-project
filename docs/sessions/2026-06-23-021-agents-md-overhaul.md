@@ -1,5 +1,4 @@
-<!-- keywords: AGENTS.md overhaul, tbh-era cruft, global.md stale pointer, pointer pattern, agents README -->
-2026-06-23-021-agents-md-overhaul.md
+<!-- file: 2026-06-23-021-agents-md-overhaul.md · keywords: AGENTS.md overhaul, tbh-era cruft, global.md stale pointer, pointer pattern, agents README -->
 
 # Session 021 — AGENTS.md Overhaul: stale pointers & tbh-era cruft
 

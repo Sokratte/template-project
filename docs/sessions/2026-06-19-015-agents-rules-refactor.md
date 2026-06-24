@@ -1,5 +1,4 @@
-<!-- keywords: AGENTS.md refactor, four principles Karpathy, workflow consolidation, file limits soft hard, words not tokens, startup index, lost in the middle, recency, doc-type caps, v2 files, soft-wrap -->
-2026-06-19-015-agents-rules-refactor.md
+<!-- file: 2026-06-19-015-agents-rules-refactor.md · keywords: AGENTS.md refactor, four principles Karpathy, workflow consolidation, file limits soft hard, words not tokens, startup index, lost in the middle, recency, doc-type caps, v2 files, soft-wrap -->
 
 # 2026-06-19 · template-project · session 15 — AGENTS.md + session-start refactor (v2)
 

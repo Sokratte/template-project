@@ -1,5 +1,4 @@
-<!-- keywords: OPERATOR.md rename, LOCAL.md, repo-wide, grep, sed, bulk edit -->
-2026-06-23-020-operator-to-local-rename.md
+<!-- file: 2026-06-23-020-operator-to-local-rename.md · keywords: OPERATOR.md rename, LOCAL.md, repo-wide, grep, sed, bulk edit -->
 
 # Session 020 — OPERATOR.md → LOCAL.md rename
 

@@ -1,5 +1,4 @@
-<!-- keywords: document conventions, line-1 index, section keywords, abstract, awk grep, skeleton vs content, word limits, status vocabulary, section matrix, structural content headings, implications palette, anti-drift, doc types, design philosophy, adding doc type -->
-docs/README.md
+<!-- file: docs/README.md · keywords: document conventions, line-1 index, section keywords, abstract, awk grep, skeleton vs content, word limits, status vocabulary, section matrix, structural content headings, implications palette, anti-drift, doc types, design philosophy, adding doc type -->
 
 # docs/ — Document conventions
 
@@ -35,14 +34,15 @@ awk '/^## Design/{f=1;print;next} f&&/^## /{exit} f' FILE.md
 
 These moves — index, abstract, section-map, keyword-grep, section-read — cover every read pattern. Documents are never split into files for size; they are sectioned at read-time and grow as large as they need to.
 
-## Line-1 format <!-- keywords: line 1, filename, keywords, HTML comment, hidden, relationship graph -->
+## Line-1 format <!-- keywords: line 1, filename, keywords, HTML comment, hidden, self-identifying, relationship graph -->
 
 ```
-<!-- keywords: keyword keyword keyword -->
-filename.md
+<!-- file: filename.md · keywords: keyword keyword keyword -->
 ```
 
-Line 1 is an HTML comment containing the keyword index. Line 2 is the bare filename. The comment is invisible in rendered Markdown and fully greppable in source. The filename sits on line 2 so the index loop (`head -1`) retrieves keywords without headers — a bare keyword line cannot be traced back to its file, so the filename anchors it on the next line.
+Line 1 is a single HTML comment carrying both the filename and the keyword index. The comment is invisible in rendered Markdown and fully greppable in source. The filename lives inside the line itself, so one harvested line (`head -1`) is self-identifying: it traces back to its file without depending on the reading tool to emit the path. This works whether the index is built by an exec-run loop, a path-less read tool, or an agent given no exec at all — the line carries its own identity.
+
+The `file:` value is the **bare filename** when that name is unique across the repo (`ADR-001-project-standard.md`, `SPEC-002-dev-mcp-server.md`). When the basename is **not** unique — every directory has its own `README.md` — use the **repo-relative path** instead (`docs/decisions/README.md`, `src/README.md`) so the harvested line still resolves to exactly one file. Uniqueness is the rule; the path is how you buy it where the basename can't.
 
 Keywords are the relationship graph: no `Related:` fields, no bidirectional links. A keyword that appears in two files is the connection. If a directed relationship matters, write it as prose where it belongs.
 
@@ -191,8 +191,7 @@ The canonical shape of each type — copy the block, keep the structure. **Never
 ### Design philosophy (DP)
 
 ```
-<!-- keywords: keyword keyword keyword -->
-DP-NNN-topic-slug.md
+<!-- file: DP-NNN-topic-slug.md · keywords: keyword keyword keyword -->
 
 # DP-NNN: Title
 
@@ -227,8 +226,7 @@ What this philosophy opens, where it leads, what it becomes the foundation for.
 ### Decision (ADR)
 
 ```
-<!-- keywords: keyword keyword keyword -->
-ADR-NNN-topic-slug.md
+<!-- file: ADR-NNN-topic-slug.md · keywords: keyword keyword keyword -->
 
 # Decision NNN: Title
 
@@ -260,8 +258,7 @@ We will use X because Y.
 ### Spec
 
 ```
-<!-- keywords: keyword keyword keyword -->
-SPEC-NNN-topic-slug.md
+<!-- file: SPEC-NNN-topic-slug.md · keywords: keyword keyword keyword -->
 
 # Specification NNN: Title
 
@@ -294,8 +291,7 @@ What to build — modules, data flow, interfaces. Not line-by-line instructions.
 ### Plan
 
 ```
-<!-- keywords: keyword keyword keyword -->
-PLAN-NNN-topic-slug.md
+<!-- file: PLAN-NNN-topic-slug.md · keywords: keyword keyword keyword -->
 
 # PLAN NNN: Title
 
@@ -325,8 +321,7 @@ The decision, 2–4 lines.
 ### Research
 
 ```
-<!-- keywords: keyword keyword keyword -->
-YYYY-MM-DD-topic-slug.md
+<!-- file: YYYY-MM-DD-topic-slug.md · keywords: keyword keyword keyword -->
 
 # Research: Topic title
 
@@ -350,8 +345,7 @@ The findings, structured to fit.
 ### Session log
 
 ```
-<!-- keywords: keyword keyword keyword -->
-YYYY-MM-DD-NNN-topic-slug.md
+<!-- file: YYYY-MM-DD-NNN-topic-slug.md · keywords: keyword keyword keyword -->
 
 # Session NNN — Title
 

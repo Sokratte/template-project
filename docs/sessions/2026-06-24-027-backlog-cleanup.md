@@ -1,5 +1,4 @@
-<!-- keywords: session, backlog, cleanup, readme-pass, docs-philosophy, close items -->
-2026-06-24-027-backlog-cleanup.md
+<!-- file: 2026-06-24-027-backlog-cleanup.md · keywords: session, backlog, cleanup, readme-pass, docs-philosophy, close items -->
 
 # Session 027 — Backlog cleanup
 

@@ -1,5 +1,4 @@
-<!-- keywords: session, multi-VM, architecture, PLAN-001, design -->
-2026-06-17-008-multi-vm-architecture.md
+<!-- file: 2026-06-17-008-multi-vm-architecture.md · keywords: session, multi-VM, architecture, PLAN-001, design -->
 
 # Session Log: Multi-VM Agent Architecture — design & PLAN-001
 

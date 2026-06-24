@@ -1,5 +1,4 @@
-<!-- keywords: session, session-log, reformat, line-1, keyword, html-comment, section headings -->
-2026-06-24-026-session-log-reformat.md
+<!-- file: 2026-06-24-026-session-log-reformat.md · keywords: session, session-log, reformat, line-1, keyword, html-comment, section headings -->
 
 # Session 026 — Session log reformat
 

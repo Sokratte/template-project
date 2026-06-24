@@ -1,5 +1,4 @@
-<!-- keywords: MCP server, file tools, read-before-write, create, anchor-edit, overwrite, CAS, git-diff guard, atomic write, temp-rename, integrity, lost update, silent no-op, partial write -->
-2026-06-19-mcp-file-tool-design.md
+<!-- file: 2026-06-19-mcp-file-tool-design.md · keywords: MCP server, file tools, read-before-write, create, anchor-edit, overwrite, CAS, git-diff guard, atomic write, temp-rename, integrity, lost update, silent no-op, partial write -->
 
 # MCP File Tool Design — Read/Write Protocol
 

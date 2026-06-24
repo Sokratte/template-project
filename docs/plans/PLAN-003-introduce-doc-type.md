@@ -1,5 +1,4 @@
-<!-- keywords: new document type, introduce doc type, TEST, ADR SPEC PLAN TEST chain, docs README registration, template, status vocabulary, workflow integration -->
-PLAN-003-introduce-doc-type.md
+<!-- file: PLAN-003-introduce-doc-type.md · keywords: new document type, introduce doc type, TEST, ADR SPEC PLAN TEST chain, docs README registration, template, status vocabulary, workflow integration -->
 
 # PLAN-003: Introducing a New Document Type
 
@@ -33,7 +32,7 @@ A new type must state where in this chain (or beside it) it sits, so a reader kn
 
 1. **Decide the type is warranted.** One sentence on what question it answers that no existing type does. If an existing type covers it, stop — extend that type instead. (Structural economy: a type that overlaps another is drift waiting to happen.)
 2. **Register it in `docs/README.md`.** Add a row to the types/location table (location `docs/<plural>/`, naming `XXX-NNN-topic-slug.md` or dated), a row to the status-per-type table (the subset of the master status vocabulary that makes sense — e.g. TEST: Draft · Active · Superseded →), and an entry in the section matrix if it introduces structural sections.
-3. **Write the template block** in `docs/README.md` following the line-1 + hidden-keyword rules: line 1 `<!-- keywords: … -->`, line 2 the bare filename, the standard head block, content headings that *are* the summary. The template must read like a finished document — no instructional prose inside it.
+3. **Write the template block** in `docs/README.md` following the line-1 + hidden-keyword rules: line 1 `<!-- file: <filename> · keywords: … -->` (single self-identifying header), the standard head block, content headings that *are* the summary. The template must read like a finished document — no instructional prose inside it.
 4. **Create the directory and its README**, stating in two sentences what the directory holds and pointing to the type rules in `docs/README.md`. Add `-000-template.md` if the type benefits from a copyable skeleton.
 5. **State the workflow hook, if any.** Most types need none. If the type must be produced or checked at a defined moment (e.g. a TEST registered when a PLAN completes), name that hook here and raise it as a *separate* decision — do not wire it in as part of registration.
 6. **Record it.** CHANGELOG entry under Added; note the new type in the relevant ADR if it changes a standing convention.

@@ -1,5 +1,4 @@
-<!-- keywords: file limits, HTML comment, hidden metadata, soft hard, H1 cleanup -->
-2026-06-23-023-limits-into-comments.md
+<!-- file: 2026-06-23-023-limits-into-comments.md · keywords: file limits, HTML comment, hidden metadata, soft hard, H1 cleanup -->
 
 # Session 023 — Move file limits from H1 into HTML comments
 

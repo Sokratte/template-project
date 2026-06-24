@@ -1,5 +1,4 @@
-<!-- keywords: session, spec-003, session-start, readme, causal chain, documentation drift, audit follow-up, spec retirement, content transfer -->
-2026-06-24-030-doc-drift-reconcile.md
+<!-- file: 2026-06-24-030-doc-drift-reconcile.md · keywords: session, spec-003, session-start, readme, causal chain, documentation drift, audit follow-up, spec retirement, content transfer -->
 
 # Session 030 — Documentation drift reconciliation
 

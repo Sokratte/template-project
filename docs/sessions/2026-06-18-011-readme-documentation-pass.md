@@ -1,5 +1,4 @@
-<!-- keywords: session, README, documentation pass, skeleton files, soft-wrap, SPEC-002, bootstrap -->
-2026-06-18-011-readme-documentation-pass.md
+<!-- file: 2026-06-18-011-readme-documentation-pass.md · keywords: session, README, documentation pass, skeleton files, soft-wrap, SPEC-002, bootstrap -->
 
 # Session 11 — README documentation pass + skeleton-file slimming
 

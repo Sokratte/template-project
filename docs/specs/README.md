@@ -1,5 +1,4 @@
-<!-- keywords: specs, specification, active, acceptance criteria, design target -->
-docs/specs/README.md
+<!-- file: docs/specs/README.md · keywords: specs, specification, active, acceptance criteria, design target -->
 
 # docs/specs/ — Specifications
 

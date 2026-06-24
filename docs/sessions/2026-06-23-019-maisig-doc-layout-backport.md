@@ -1,5 +1,4 @@
-<!-- keywords: maisig doc layout review, docs README, templates, doc types, section matrix, implications palette, line-1 format -->
-2026-06-23-019-maisig-doc-layout-backport.md
+<!-- file: 2026-06-23-019-maisig-doc-layout-backport.md · keywords: maisig doc layout review, docs README, templates, doc types, section matrix, implications palette, line-1 format -->
 
 # Session 019 — MAISIG doc layout review & backport assessment
 

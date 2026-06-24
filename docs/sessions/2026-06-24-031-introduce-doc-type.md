@@ -1,5 +1,4 @@
-<!-- keywords: session, new document type, introduce doc type, TEST chain, ADR SPEC PLAN TEST, PLAN-003, kw rename, revert -->
-2026-06-24-031-introduce-doc-type.md
+<!-- file: 2026-06-24-031-introduce-doc-type.md · keywords: session, new document type, introduce doc type, TEST chain, ADR SPEC PLAN TEST, PLAN-003, kw rename, revert -->
 
 # Session 031 — Introduce doc type & kw rename
 

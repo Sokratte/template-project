@@ -1,5 +1,4 @@
-<!-- keywords: session, permanent sections, supporting files, structure -->
-2026-04-17-003-permanent-sections.md
+<!-- file: 2026-04-17-003-permanent-sections.md · keywords: session, permanent sections, supporting files, structure -->
 
 # Session Log: Permanent Sections and Supporting Files
 

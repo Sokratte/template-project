@@ -1,5 +1,4 @@
-<!-- keywords: MCP server, dev tools, file tools, create, edit, overwrite, git, read, project-scoped, stdio -->
-SPEC-002-dev-mcp-server.md
+<!-- file: SPEC-002-dev-mcp-server.md · keywords: MCP server, dev tools, file tools, create, edit, overwrite, git, read, project-scoped, stdio -->
 
 # SPEC-002 — Project-Scoped Dev MCP Server
 

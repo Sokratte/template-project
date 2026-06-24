@@ -1,5 +1,4 @@
-<!-- keywords: decisions, ADR, rationale, accepted, superseded, append-only -->
-docs/decisions/README.md
+<!-- file: docs/decisions/README.md · keywords: decisions, ADR, rationale, accepted, superseded, append-only -->
 
 # docs/decisions/ — Architecture Decision Records
 

@@ -1,5 +1,4 @@
-<!-- keywords: plans, implementation, checklist, execution, completed, archive -->
-docs/plans/README.md
+<!-- file: docs/plans/README.md · keywords: plans, implementation, checklist, execution, completed, archive -->
 
 # docs/plans/ — Plans
 
