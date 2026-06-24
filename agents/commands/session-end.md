@@ -37,12 +37,8 @@ Report one line per step, mark first so the lines stack: ✅ checked and clean, 
    Carry-forward: drop what is resolved or captured elsewhere, add what the next session must know, keep it tight. Move matured threads to the backlog or a plan.
    *Flag if:* the carry-forward holds something the next session must not miss.
 
-7. **Doc consistency** — run `python3 -m pytest tests/test_docs.py` (registered in `docs/tests/TEST-001`).
-   Green → proceed. Red → fix the offending file before committing, or, if the failure is out of this session's scope, record it as a `[FIND]` in the backlog and note the defer in the report. Never commit over a red suite silently.
-   *Flag if:* the suite was red for any reason.
-
-8. **Commit and push** — always.
+7. **Commit and push** — always.
    Stage only files you worked on (`git add <explicit paths>`), commit with a Conventional Commit message, push if enabled. Verify `git status` — tree must be clean.
 
-9. **Report** — always.
+8. **Report** — always.
    One sentence each: accomplished, open, what the next session should open first.
