@@ -3,9 +3,8 @@
 
 ## Carry-forward
 
-- **Doc-consistency suite is live** (`tests/test_docs.py`, TEST-001, session-end step 7). Next session: it runs at close automatically — fix red, don't commit over it.
-- **macbook-mcp `exec` output:** revisit `truncated` flag vs. byte/char count. (open)
-- **Porting the suite** to other projects once the template stabilises — it is repo-relative.
+- **macbook-mcp `exec` output:** revisit `truncated` flag vs. byte/char count — flag signals file-completeness but confuses when chat truncates. (open)
+- **Workspace README drift (found s030):** `~/projects/README.md` exec-1 still names `recent_sessions.sh` + `agents_sync.sh`; reality uses `projects_list.sh`. Backlogged. (open)
 
 ---
 
