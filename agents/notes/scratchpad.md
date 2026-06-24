@@ -3,9 +3,8 @@
 
 ## Carry-forward
 
-- **Scope discipline:** Operator said "write a plan". Stop at the plan. Do not build the thing the plan describes without sign-off. Revert pair this session is the cost of forgetting that.
-- **Memory baselines** revisit still open (was due session 030, now 031). Next session: check and update backlog item.
-- **`macbook-mcp:write_file` timeout** can hang ~4 min — operational entry already filed at s30. Fall back to `cat > f << 'EOF'` exec heredoc.
+- **Scope discipline:** Operator gives a clear directive → execute it; but a *plan* request stops at the plan. Verify before claiming a capability is missing (the exec/tool_search lesson is now in operational memory).
+- **Memory baselines** revisit still open (was due s030, now overdue). Backlog item `2026-06-23 | MEMORY`. Next session: check operational word count vs 500/1000, promotion proof M>=3, cutoff 0.01 against real data.
 
 ---
 
