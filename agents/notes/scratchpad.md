@@ -3,8 +3,9 @@
 
 ## Carry-forward
 
-- **macbook-mcp `exec` output:** revisit `truncated` flag vs. byte/char count — flag signals file-completeness but confuses when chat truncates. (open)
-- **Workspace README drift (found s030):** `~/projects/README.md` exec-1 still names `recent_sessions.sh` + `agents_sync.sh`; reality uses `projects_list.sh`. Backlogged. (open)
+- **Scope discipline:** Operator said "write a plan". Stop at the plan. Do not build the thing the plan describes without sign-off. Revert pair this session is the cost of forgetting that.
+- **Memory baselines** revisit still open (was due session 030, now 031). Next session: check and update backlog item.
+- **`macbook-mcp:write_file` timeout** can hang ~4 min — operational entry already filed at s30. Fall back to `cat > f << 'EOF'` exec heredoc.
 
 ---
 
