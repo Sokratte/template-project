@@ -1,4 +1,4 @@
-<!-- kw: AGENTS.md overhaul, tbh-era cruft, global.md stale pointer, pointer pattern, agents README -->
+<!-- keywords: AGENTS.md overhaul, tbh-era cruft, global.md stale pointer, pointer pattern, agents README -->
 2026-06-23-021-agents-md-overhaul.md
 
 # Session 021 — AGENTS.md Overhaul: stale pointers & tbh-era cruft
@@ -8,7 +8,7 @@
 
 Abstract: `global.md` was merged into `~/projects/AGENTS.md` in session 14 and moved to `.trash`. Two living files still reference it: `agents/README.md` (rules/ table row) and `docs/plans/PLAN-002` (three-tier read model table). Fix both surgically. AGENTS.md itself is already clean.
 
-## Stale global.md pointers removed <!-- kw: -->
+## Stale global.md pointers removed <!-- keywords: -->
 
 **AGENTS.md (`~/projects/AGENTS.md`):** already clean — no `global.md` refs, no tbh-era sections. No changes needed.
 
@@ -20,10 +20,10 @@ Abstract: `global.md` was merged into `~/projects/AGENTS.md` in session 14 and m
 
 **tbh-era cruft:** none found. Grep across living docs returned zero hits for `tbh`.
 
-## Open / carry-forward <!-- kw: -->
+## Open / carry-forward <!-- keywords: -->
 
 - [x] AGENTS.md overhaul complete
 
-## Git <!-- kw: -->
+## Git <!-- keywords: -->
 
 Commits: see below · Status: clean, pushed

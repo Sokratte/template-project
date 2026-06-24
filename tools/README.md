@@ -1,4 +1,4 @@
-<!-- kw: tools, scripts, utilities, one-time, non-persistent -->
+<!-- keywords: tools, scripts, utilities, one-time, non-persistent -->
 tools/README.md
 
 # tools/ — Tools and scripts

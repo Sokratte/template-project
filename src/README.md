@@ -1,4 +1,4 @@
-<!-- kw: src, source code, modules, project code -->
+<!-- keywords: src, source code, modules, project code -->
 src/README.md
 
 # src/ — Source code

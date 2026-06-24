@@ -1,4 +1,4 @@
-<!-- kw: sessions, log, narrative, completed, in progress, session-end -->
+<!-- keywords: sessions, log, narrative, completed, in progress, session-end -->
 docs/sessions/README.md
 
 # docs/sessions/ — Session logs

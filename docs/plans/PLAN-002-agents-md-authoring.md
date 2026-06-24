@@ -1,4 +1,4 @@
-<!-- kw: canonical AGENTS.md, startup sequence, three-tier read model, abstract convention, awk, persona, autonomy, work-backlog, session-start -->
+<!-- keywords: canonical AGENTS.md, startup sequence, three-tier read model, abstract convention, awk, persona, autonomy, work-backlog, session-start -->
 PLAN-002-agents-md-authoring.md
 
 # PLAN-002: AGENTS.md Authoring
@@ -52,7 +52,7 @@ cat AGENTS.override.md agents/memory/procedural.md \
 - Every SPEC, PLAN, research doc, and session log opens with an **abstract**: everything from the top of the file down to the **first `##` heading**.
 - **Terminator is the first `##`, NOT `---`.** Chosen on failure-cost: a forgotten `##` effectively never happens (structured docs have headings), whereas a forgotten `---` would make awk read the entire file by accident. Authoring rule: do not put a `##` inside an abstract.
 - **No fixed line count.** The delimiter bounds it, not a counter (a counter rots on edit).
-- **Session-log line 1 is `filename | keywords`** per the docs/README.md convention; `projects_list.sh` uses path-parsing (not file content) to derive the project name.
+- **Session-log line 1 is `<!-- keywords: … -->`** (bare filename on line 2) per the docs/README.md convention; `projects_list.sh` uses path-parsing (not file content) to derive the project name.
 
 ### 4. awk section-reading — large docs are NOT split into files
 
@@ -123,7 +123,7 @@ AGENTS.md (exec) does the *reading*; session-start.md is the *steps to execute* 
 
 - [ ] Canonical AGENTS.md drafted: identity + persona model, ground truth, folder-derived selection, two-call startup (exec-1 loads LOCAL.md), three-tier read model, document conventions, memory model, git-keyed-on-git+override — under line budget.
 - [ ] Copy/sync command absent from AGENTS.md content (PLAN-001 Decision 7).
-- [x] Abstract convention (`##`-terminated) documented once; session-log line 1 is `filename | keywords`.
+- [x] Abstract convention (`##`-terminated) documented once; session-log line 1 is `<!-- keywords: … -->` (bare filename on line 2).
 - [x] awk three-move retrieval documented as the habit for large docs.
 - [x] work-backlog/work-log renamed on disk with history preserved; SPEC-003 references new names; append-only on work-log only.
 - [ ] All other docs reference new names; no doc asserts superseded contracts ("append-only worklog", `~/workspace`, `.project`/`.projects`, operator profile in procedural.md).

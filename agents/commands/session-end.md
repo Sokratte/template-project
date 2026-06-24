@@ -13,7 +13,7 @@ Report one line per step, mark first so the lines stack: ✅ checked and clean, 
    *Flag if:* a user-visible change has no home in any category.
 
 3. **Session log** — `docs/sessions/YYYY-MM-DD-<topic>.md`
-   Fill the scaffold from session start: done, found, decided, open. Line 1 is the greppable index entry: `filename | keywords`. If work is unfinished, add a "State at close" section. Extract durable findings (specs, operational memory, research) and leave a pointer rather than burying them here.
+   Fill the scaffold from session start: done, found, decided, open. Line 1 is the greppable index entry: `<!-- keywords: … -->`, with the bare filename on line 2. If work is unfinished, add a "State at close" section. Extract durable findings (specs, operational memory, research) and leave a pointer rather than burying them here.
    *Flag if:* something important was left unfinished, or a finding emerged the next session must act on.
 
 4. **Work ledger** — `agents/notes/work-backlog.md` + `agents/notes/work-log.md`

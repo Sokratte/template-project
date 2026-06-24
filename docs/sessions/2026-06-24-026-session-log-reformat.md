@@ -1,4 +1,4 @@
-<!-- kw: session, session-log, reformat, line-1, keyword, html-comment, section headings -->
+<!-- keywords: session, session-log, reformat, line-1, keyword, html-comment, section headings -->
 2026-06-24-026-session-log-reformat.md
 
 # Session 026 — Session log reformat
@@ -8,7 +8,7 @@
 
 ## Session logs 01–11 reformatted
 
-Python script prepended `<!-- kw: … -->`  + bare filename to all 11 files. Session 11 had an old variant that was stripped and replaced. Keywords derived from filename slugs and H1 titles. Committed c80f746, pushed.
+Python script prepended `<!-- keywords: … -->`  + bare filename to all 11 files. Session 11 had an old variant that was stripped and replaced. Keywords derived from filename slugs and H1 titles. Committed c80f746, pushed.
 
 ## Backlog
 

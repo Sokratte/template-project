@@ -1,4 +1,4 @@
-<!-- kw: research, prior art, findings, keyword grep, archive, stale -->
+<!-- keywords: research, prior art, findings, keyword grep, archive, stale -->
 docs/research/README.md
 
 # docs/research/ — Research

@@ -1,4 +1,4 @@
-<!-- kw: canonical AGENTS.md, LOCAL.md, agents_sync.sh, deploy keys, AGENTS.override.md, marker file, persona, autonomy, startup sequence -->
+<!-- keywords: canonical AGENTS.md, LOCAL.md, agents_sync.sh, deploy keys, AGENTS.override.md, marker file, persona, autonomy, startup sequence -->
 PLAN-001-multi-vm-agent-architecture.md
 
 # PLAN-001: Multi-VM Agent Architecture

@@ -1,4 +1,4 @@
-<!-- kw: context window, context rot, lost in the middle, token budget, skeleton file limits, traffic-light, degradation, startup load, wc tokenizer, Sonnet 4.6, Chroma, U-curve, primacy recency -->
+<!-- keywords: context window, context rot, lost in the middle, token budget, skeleton file limits, traffic-light, degradation, startup load, wc tokenizer, Sonnet 4.6, Chroma, U-curve, primacy recency -->
 2026-06-19-context-budget-and-file-limits.md
 
 # Context Budget and Skeleton-File Size Limits

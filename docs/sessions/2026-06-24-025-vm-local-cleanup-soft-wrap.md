@@ -1,4 +1,4 @@
-<!-- kw: session, vm-local, cleanup, soft-wrap, readme-pass -->
+<!-- keywords: session, vm-local, cleanup, soft-wrap, readme-pass -->
 2026-06-24-025-vm-local-cleanup-soft-wrap.md
 
 # Session 025 — VM.local cleanup + README pass
@@ -12,7 +12,7 @@ All stale `copy`-named files moved to `.trash/VM.local/`. Current `~/projects/` 
 
 ## README pass
 
-Written: `docs/decisions/`, `docs/specs/`, `docs/plans/`, `docs/sessions/`, `docs/research/`, `src/`, `tools/`. All follow line-1 `<!-- kw: -->` + bare-filename convention. `docs/philosophy/` discovered and written in session 027.
+Written: `docs/decisions/`, `docs/specs/`, `docs/plans/`, `docs/sessions/`, `docs/research/`, `src/`, `tools/`. All follow line-1 `<!-- keywords: -->` + bare-filename convention. `docs/philosophy/` discovered and written in session 027.
 
 ## Git
 

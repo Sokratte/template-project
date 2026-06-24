@@ -1,4 +1,5 @@
-2026-06-24-024-find-entry-cleanup.md | session, find, cruft, vm-local, soft-wrap
+<!-- keywords: session, find, cruft, vm-local, soft-wrap -->
+2026-06-24-024-find-entry-cleanup.md
 
 # Session 024 — FIND entry cleanup
 

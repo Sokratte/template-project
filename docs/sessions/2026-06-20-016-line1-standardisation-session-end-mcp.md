@@ -1,4 +1,4 @@
-<!-- kw: PLAN-001, PLAN-002, session-end, README, projects_list.sh, doc format, soft-wrap -->
+<!-- keywords: PLAN-001, PLAN-002, session-end, README, projects_list.sh, doc format, soft-wrap -->
 2026-06-20-016-line1-standardisation-session-end-mcp.md
 
 # Session 16 — Doc format pass, session-end overhaul, README rewrite

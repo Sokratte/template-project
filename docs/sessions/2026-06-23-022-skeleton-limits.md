@@ -1,4 +1,4 @@
-<!-- kw: skeleton file limits, word limits, soft hard, AGENTS.md LOCAL.md, AGENTS.override, session-start, project.md, ROADMAP -->
+<!-- keywords: skeleton file limits, word limits, soft hard, AGENTS.md LOCAL.md, AGENTS.override, session-start, project.md, ROADMAP -->
 2026-06-23-022-skeleton-limits.md
 
 # Session 022 — Skeleton-file word limits
@@ -8,7 +8,7 @@
 
 Abstract: Derived from the token thresholds in research/2026-06-19-context-budget-and-file-limits.md (tokens / 1.3 → words). AGENTS.md and LOCAL.md were not in the original research scope; limits set from first principles matching their role.
 
-## Word limits written to all skeleton files <!-- kw: -->
+## Word limits written to all skeleton files <!-- keywords: -->
 
 Derived from `docs/research/2026-06-19-context-budget-and-file-limits.md` (token thresholds ÷ 1.3 → words, rounded). AGENTS.md and LOCAL.md were not in the original research scope; limits set from first principles.
 
@@ -25,12 +25,12 @@ AGENTS.md at 1519 words is over its soft limit of 1200 — flagged here, no acti
 
 Memory-baselines backlog item updated: no practice data yet, revisit trigger set to session 030.
 
-## Open / carry-forward <!-- kw: -->
+## Open / carry-forward <!-- keywords: -->
 
 - [x] Skeleton limits written to all missing files
 - [ ] AGENTS.md over soft (1519w / soft 1200) — address in future AGENTS.md overhaul
 - [ ] Memory baselines: revisit at session 030
 
-## Git <!-- kw: -->
+## Git <!-- keywords: -->
 
 Commits: see below · Status: clean, pushed

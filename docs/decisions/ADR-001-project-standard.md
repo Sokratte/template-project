@@ -1,4 +1,4 @@
-<!-- kw: workspace template, industry standards, conventional commits, semver, AGENTS.md, ADR, spec-driven development, pointer pattern, cp -r, agent orientation -->
+<!-- keywords: workspace template, industry standards, conventional commits, semver, AGENTS.md, ADR, spec-driven development, pointer pattern, cp -r, agent orientation -->
 ADR-001-project-standard.md
 
 # ADR-001: Adopt industry standards for workspace project structure

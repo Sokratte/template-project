@@ -1,4 +1,4 @@
-<!-- kw: session, architecture revision, autonomy, persona, PLAN-001, PLAN-002, agents_sync -->
+<!-- keywords: session, architecture revision, autonomy, persona, PLAN-001, PLAN-002, agents_sync -->
 2026-06-18-010-architecture-revision.md
 
 # 2026-06-18 · template-project · session 10 — architecture revision + doc propagation

@@ -1,4 +1,4 @@
-<!-- kw: doc format conversion, line-1 index, abstract, Created Updated Status, ADR not immutable, supersede in place, spec status Draft Active Superseded, docs README, templates -->
+<!-- keywords: doc format conversion, line-1 index, abstract, Created Updated Status, ADR not immutable, supersede in place, spec status Draft Active Superseded, docs README, templates -->
 2026-06-18-013-doc-format-conversion.md
 
 # Session 13 — Document format conversion + format refinements
